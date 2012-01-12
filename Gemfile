@@ -6,8 +6,10 @@ gem 'devise'
 gem 'bson_ext'
 gem 'mongoid'
 gem 'twitter_bootstrap_form_for'
+gem 'thin'
 
 group :assets do
+  gem 'coffee-rails'
   gem 'less-rails'
   gem 'less-rails-bootstrap'
 end
