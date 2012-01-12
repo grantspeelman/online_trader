@@ -10,31 +10,24 @@
 <body>
 <div class="topbar">
   <div class="fill">
-    <div class="container">
+    <div class="container-fluid">
       <%= render 'shared/navigation' %>
     </div>
   </div>
 </div>
 
-<div class="container">
+<br clear="all"/>
+
+<div class="container-fluid">
+
+  <div class="sidebar">
+  </div>
 
   <div class="content">
-    <div class="page-header">
-      <h1>Page name
-        <small>Supporting text or tagline</small>
-      </h1>
       <%- flash.each do |name, msg| -%>
           <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
       <%- end -%>
-    </div>
-    <div class="row">
-      <div class="span4">
-        <h3>Secondary content</h3>
-      </div>
-      <div class="span10">
-        <%= yield %>
-      </div>
-    </div>
+      <%= yield %>
   </div>
 
   <footer>
