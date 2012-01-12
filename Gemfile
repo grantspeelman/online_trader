@@ -3,14 +3,13 @@ HOST_OS = RbConfig::CONFIG['host_os']
 source 'http://rubygems.org'
 gem 'rails', '3.1.3'
 gem 'devise'
-# gem 'bson_ext'
+gem 'bson_ext'
 gem 'mongoid'
-gem 'simple_form'
+gem 'twitter_bootstrap_form_for'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.1.5'
-  gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'less-rails'
+  gem 'less-rails-bootstrap'
 end
 group :development do
   gem 'rails-footnotes'
