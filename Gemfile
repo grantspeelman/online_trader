@@ -9,6 +9,7 @@ gem 'twitter_bootstrap_form_for'
 gem 'thin'
 
 group :assets do
+  gem 'uglifier'
   gem 'coffee-rails'
   gem 'less-rails'
   gem 'less-rails-bootstrap'
