@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Yugioh Online Trader</title>
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
   <%= stylesheet_link_tag "application" %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <%= javascript_include_tag "application" %>
@@ -25,21 +26,21 @@
 
   <div class="content">
     <%- flash.each do |name, msg| -%>
-      <% name = 'error' if name.to_s == 'alert' %>
-      <div class="alert-message <%= name %> fade in" data-alert="alert">
-        <a class="close" href="#">×</a>
-        <%= msg.to_s %>
-      </div>
+        <% name = 'error' if name.to_s == 'alert' %>
+        <div class="alert-message <%= name %> fade in" data-alert="alert">
+          <a class="close" href="#">×</a>
+          <%= msg.to_s %>
+        </div>
     <%- end -%>
-    <%=  yield %>
+    <%= yield %>
   </div>
 
 </div>
 
 <div class="container-fluid">
-    <footer>
-      <p>&copy; Company 2011</p>
-    </footer>
+  <footer>
+    <p>&copy; Company 2011</p>
+  </footer>
 </div>
 <!-- /container -->
 
