@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   def create
     User.logger.info request.env['omniauth.auth'].inspect
     auth = {:provider => request.env['omniauth.auth']['provider'].to_s,
-            :uid => request.env['omniauth.auth'].to_s,
+            :uid => request.env['omniauth.auth']['uid'].to_s,
             :name => request.env['omniauth.auth']['user_info']['name'].to_s}
     unless @auth = Authorization.find_from_hash(auth)
       # Create a new user or add an auth to existing user, depending on
