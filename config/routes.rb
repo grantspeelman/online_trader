@@ -1,5 +1,12 @@
 YugiohOnlineTrader::Application.routes.draw do
-  devise_for :users
+
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure'
+
+  match '/login', :to => 'sessions#new'
+  match '/logout', :to => 'sessions#destroy'
+
+  match '/me', :to => 'home#me'
 
   root :to => "home#index"
 

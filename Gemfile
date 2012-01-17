@@ -1,10 +1,10 @@
-ENV['EXECJS_RUNTIME'] = 'JScript'
 require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 source 'http://rubygems.org'
 gem 'rails', '3.1.3'
-gem 'devise'
-# gem 'bson_ext'
+gem 'omniauth'
+gem 'oa-openid'
+gem 'bson_ext'
 gem 'mongoid'
 gem 'twitter_bootstrap_form_for'
 # gem 'thin'

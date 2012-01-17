@@ -1,0 +1,18 @@
+<h1>Login</h1>
+
+<p>You can login using on of the following services</p>
+
+<label>Twitter : </label>
+<%= link_to(image_tag("twitter_32.png"),
+                      '/auth/twitter',
+                      :title => 'Login with Twitter') %>
+<br/>
+<label>Facebook :</label>
+          <%= link_to(image_tag("facebook_32.png"),
+                      '/auth/facebook',
+                      :title => 'Login with Facebook') %>
+<br/>
+<label>Google :</label>
+          <%= link_to(image_tag("google_32.png"),
+                      '/auth/open_id?openid_url=gmail.com',
+                      :title => 'Login with Gmail') %>
