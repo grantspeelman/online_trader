@@ -1,6 +1,12 @@
 <ul class="nav">
     <% if user_signed_in? %>
       <li>
+        <%= link_to('My Account', me_path) %>
+      </li>
+      <li>
+        <%= link_to('Wants', wants_path) %>
+      </li>
+      <li>
       <%= link_to('Logout', logout_path, :method=>'delete') %>
       </li>
     <% else %>
@@ -9,8 +15,7 @@
       </li>
     <% end %>
     <% if user_signed_in? %>
-      <li>
-      <%= link_to('My Account', me_path) %>
-      </li>
+
+
     <% end %>
 </ul>

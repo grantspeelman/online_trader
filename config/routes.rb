@@ -1,5 +1,13 @@
 YugiohOnlineTrader::Application.routes.draw do
 
+  resources :cards do
+    collection do
+      get 'search'
+    end
+  end
+
+  resources :wants
+
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'
 
