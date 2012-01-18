@@ -1,10 +1,11 @@
 class WantsController < ApplicationController
   before_filter :login_required
-  load_and_authorize_resource
+  load_and_authorize_resource :except => 'index'
 
   # GET /wants
   # GET /wants.json
   def index
+    @wants = Want.page(params[:page]).accessible_by(current_ability)
 
     respond_to do |format|
       format.html # index.html.erb

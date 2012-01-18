@@ -8,7 +8,8 @@ gem 'bson_ext'
 gem 'mongoid'
 gem 'twitter_bootstrap_form_for'
 gem 'jquery-rails'
-gem "cancan"
+gem 'cancan'
+gem 'kaminari'
 # gem 'thin'
 
 group :assets do
