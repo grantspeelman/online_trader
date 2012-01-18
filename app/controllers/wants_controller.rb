@@ -1,10 +1,10 @@
 class WantsController < ApplicationController
   before_filter :login_required
+  load_and_authorize_resource
 
   # GET /wants
   # GET /wants.json
   def index
-    @wants = Want.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,6 @@ class WantsController < ApplicationController
   # GET /wants/1
   # GET /wants/1.json
   def show
-    @want = Want.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +25,7 @@ class WantsController < ApplicationController
   # GET /wants/new
   # GET /wants/new.json
   def new
-    @want = Want.new
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +35,12 @@ class WantsController < ApplicationController
 
   # GET /wants/1/edit
   def edit
-    @want = Want.find(params[:id])
+
   end
 
   # POST /wants
   # POST /wants.json
   def create
-    @want = Want.new(params[:want])
     @want.user = current_user
 
     respond_to do |format|
@@ -59,7 +57,6 @@ class WantsController < ApplicationController
   # PUT /wants/1
   # PUT /wants/1.json
   def update
-    @want = Want.find(params[:id])
 
     respond_to do |format|
       if @want.update_attributes(params[:want])
@@ -75,7 +72,6 @@ class WantsController < ApplicationController
   # DELETE /wants/1
   # DELETE /wants/1.json
   def destroy
-    @want = Want.find(params[:id])
     @want.destroy
 
     respond_to do |format|
