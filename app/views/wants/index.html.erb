@@ -6,7 +6,11 @@
 
 <% @wants.each do |want| %>
   <div class="item">
-    <%= image_tag("unknowncard.jpg", :height => "40") %>
+    <% if want.card && want.card.img_url %>
+        <%= image_tag(want.card.img_url, :height => "40") %>
+    <% else %>
+        <%= image_tag("unknowncard.jpg", :height => "40") %>
+    <% end %>
     <div>
         <span class="amount"><%= want.amount %></span>
         <span class="card_name"><%= want.card_name %></span>

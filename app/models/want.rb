@@ -12,5 +12,9 @@ class Want
 
   scope :by_card_name, ->(name) { where(:card_name => name) }
 
+  def card
+    Card.by_name(card_name).first
+  end
+
 end
 
