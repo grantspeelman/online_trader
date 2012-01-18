@@ -2,29 +2,23 @@
 
 <%= paginate @wants %>
 
-<table class="zebra-striped">
-  <tr>
-    <th>Card Name</th>
-    <th>Amount</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="listing">
 
 <% @wants.each do |want| %>
-  <tr>
-    <td>
-      <%= "<strong>".html_safe if want.priority > 2 %>
-      <%= want.card_name %>
-      <%= "</strong>".html_safe if want.priority > 2 %>
-    </td>
-    <td><%= want.amount %></td>
-    <td><%= link_to 'Show', want, :id => dom_id(want, :show) %></td>
-    <td><%= link_to 'Edit', edit_want_path(want), :id => dom_id(want, :edit) %></td>
-    <td><%= link_to 'Destroy', want, confirm: 'Are you sure?', method: :delete, :id => dom_id(want, :delete) %></td>
-  </tr>
+  <div class="item">
+    <%= image_tag("unknowncard.jpg", :height => "40") %>
+    <div>
+        <span class="amount"><%= want.amount %></span>
+        <span class="card_name"><%= want.card_name %></span>
+        </br>
+        <%= link_to 'Show', want, :id => dom_id(want, :show) %>
+        <%= link_to 'Edit', edit_want_path(want), :id => dom_id(want, :edit) %>
+        <%= link_to 'Destroy', want, confirm: 'Are you sure?', method: :delete, :id => dom_id(want, :delete) %>
+    </div>
+  </div>
 <% end %>
-</table>
+
+</div>
 
 <%= link_to 'New Want', new_want_path %>
 

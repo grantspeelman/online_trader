@@ -22,11 +22,19 @@ describe "Wants" do
       end
 
       it "should list wants" do
-        Want.create(:card_name => 'Card 1', :user => @auth.user)
-        Want.create(:card_name => 'Card 2', :user => @auth.user)
+        Want.create!(:card_name => 'Card 1', :user => @auth.user)
+        Want.create!(:card_name => 'Card 2', :user => @auth.user)
         click_link 'Wants'
         page.should have_content('Card 1')
         page.should have_content('Card 2')
+      end
+
+      it "should allow paging" do
+        (1..100).each do  |i|
+          Want.create!(:card_name => "Card #{i}", :user => @auth.user)
+        end
+        click_link 'Wants'
+        click_link 'Next'
       end
 
       it "should not list other user's wants" do
