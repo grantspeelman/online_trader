@@ -7,6 +7,7 @@ gem 'oa-openid'
 gem 'bson_ext'
 gem 'mongoid'
 gem 'twitter_bootstrap_form_for'
+gem 'jquery-rails'
 # gem 'thin'
 
 group :assets do

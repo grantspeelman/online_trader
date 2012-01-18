@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def login_required
-    return true if signed_in?
+    return true if user_signed_in?
     store_location
     access_denied
     false

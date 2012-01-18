@@ -1,9 +1,11 @@
 class WantsController < ApplicationController
+  before_filter :login_required
+
   # GET /wants
   # GET /wants.json
   def index
     @wants = Want.all
-    @want = Want.new
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @wants }
@@ -41,6 +43,7 @@ class WantsController < ApplicationController
   # POST /wants.json
   def create
     @want = Want.new(params[:want])
+    @want.user = current_user
 
     respond_to do |format|
       if @want.save
@@ -76,7 +79,7 @@ class WantsController < ApplicationController
     @want.destroy
 
     respond_to do |format|
-      format.html { redirect_to wants_url }
+      format.html { redirect_to wants_url, notice: 'Successfully deleted.' }
       format.json { head :ok }
     end
   end

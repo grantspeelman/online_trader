@@ -1,7 +1,9 @@
 <h1>Listing wants</h1>
 
-<table>
+<table class="zebra-striped">
   <tr>
+    <th>Card Name</th>
+    <th>Amount</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,6 +11,12 @@
 
 <% @wants.each do |want| %>
   <tr>
+    <td>
+      <%= "<strong>".html_safe if want.priority > 2 %>
+      <%= want.card_name %>
+      <%= "</strong>".html_safe if want.priority > 2 %>
+    </td>
+    <td><%= want.amount %></td>
     <td><%= link_to 'Show', want %></td>
     <td><%= link_to 'Edit', edit_want_path(want) %></td>
     <td><%= link_to 'Destroy', want, confirm: 'Are you sure?', method: :delete %></td>
@@ -16,7 +24,7 @@
 <% end %>
 </table>
 
-<%= text_field_tag 'card_name' %>
+<%= link_to 'New Want', new_want_path %>
 
 <br />
 
