@@ -16,9 +16,6 @@ group :assets do
   gem 'coffee-rails'
   gem 'sass-rails'
 end
-group :development do
-  gem 'rails-footnotes'
-end
 group :development, :test do
   gem 'capybara'
   gem 'rspec-rails'
