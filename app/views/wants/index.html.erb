@@ -17,9 +17,9 @@
       <%= "</strong>".html_safe if want.priority > 2 %>
     </td>
     <td><%= want.amount %></td>
-    <td><%= link_to 'Show', want %></td>
-    <td><%= link_to 'Edit', edit_want_path(want) %></td>
-    <td><%= link_to 'Destroy', want, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', want, :id => dom_id(want, :show) %></td>
+    <td><%= link_to 'Edit', edit_want_path(want), :id => dom_id(want, :edit) %></td>
+    <td><%= link_to 'Destroy', want, confirm: 'Are you sure?', method: :delete, :id => dom_id(want, :delete) %></td>
   </tr>
 <% end %>
 </table>
