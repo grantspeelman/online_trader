@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def store_location
-    session['return-to'] = request.request_uri
+    session['return-to'] = request.url
   end
 
   def redirect_back_or_default(default)

@@ -1,6 +1,9 @@
 class Authorization
   include Mongoid::Document
   belongs_to :user
+  field :uid
+  field :provider
+
   validates_presence_of :user_id, :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
 
