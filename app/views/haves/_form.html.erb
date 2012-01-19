@@ -1,0 +1,27 @@
+<%= twitter_bootstrap_form_for(@have) do |f| %>
+  <% if @have.errors.any? %>
+    <div class="alert-message block-message error">
+      <strong><%= pluralize(@have.errors.count, "error") %> prohibited this have from being saved:</strong>
+      <ul>
+      <% @have.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.inputs do %>
+
+    <%= f.text_field :card_name %>
+
+    <%= f.number_field :amount %>
+
+    <%= f.select :value, 'Personal Value', [['Very Low',1], ['Low',2],['Normal',3],['High',4],['Very High',5]] do %>
+        <span class="help-block">How value do you hold this card personally</span>
+        <span class="help-block">This will give other users an indication how easily you will part with this card</span>
+    <% end %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.submit %>
+  <% end %>
+<% end %>

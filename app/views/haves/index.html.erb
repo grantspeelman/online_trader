@@ -1,0 +1,40 @@
+<h1>Listing haves</h1>
+
+<%= paginate @haves %>
+
+<table>
+  <tr>
+
+    <th>Card name</th>
+
+    <th>Amount</th>
+
+    <th>Value</th>
+
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @haves.each do |have| %>
+  <tr>
+
+    <td><%= have.card_name %></td>
+
+    <td><%= have.amount %></td>
+
+    <td><%= have.value %></td>
+
+    <td><%= link_to 'Show', have, id: dom_id(have, :show) %></td>
+    <td><%= link_to 'Edit', edit_have_path(have), id: dom_id(have, :edit) if can? :update, have %></td>
+    <td><%= link_to 'Delete', have,
+                    confirm: 'Are you sure?',
+                    method: :delete,
+                    id: dom_id(have, :delete) if can? :destroy, have %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= side_nav_link_to 'Add Have', new_have_path if can? :create, Have  %>

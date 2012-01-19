@@ -2,6 +2,7 @@ class User
   include Mongoid::Document
   has_many :authorizations
   has_many :wants
+  has_many :haves
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
 

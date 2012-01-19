@@ -17,14 +17,14 @@ describe "Wants" do
 
       it "should load page" do
         # Run the generator again with the --webrat flag if you want to use webrat methods/
-        click_link 'Wants'
+        click_link 'My Wants'
         page.should have_content('Listing wants')
       end
 
       it "should list wants" do
         Want.create!(:card_name => 'Card 1', :user => @auth.user)
         Want.create!(:card_name => 'Card 2', :user => @auth.user)
-        click_link 'Wants'
+        click_link 'My Wants'
         page.should have_content('Card 1')
         page.should have_content('Card 2')
       end
@@ -33,7 +33,7 @@ describe "Wants" do
         (1..100).each do  |i|
           Want.create!(:card_name => "Card #{i}", :user => @auth.user)
         end
-        click_link 'Wants'
+        click_link 'My Wants'
         click_link 'Next'
       end
 
@@ -41,7 +41,7 @@ describe "Wants" do
         other_user = create(:admin_grant)
         Want.create(:card_name => 'Admin Card 1', :user => other_user)
         Want.create(:card_name => 'Admin Card 2', :user => other_user)
-        click_link 'Wants'
+        click_link 'My Wants'
         page.should_not have_content('Admin Card 1')
         page.should_not have_content('Admin Card 2')
       end
@@ -51,7 +51,7 @@ describe "Wants" do
     describe "create" do
 
       it "should create a want" do
-        click_link 'Wants'
+        click_link 'My Wants'
         click_link 'Add Want'
         fill_in 'Card name', :with => 'Test Card'
         current_user.wants.count.should == 0
@@ -62,7 +62,7 @@ describe "Wants" do
 
       it "should not allow duplicate creations" do
         current_user.wants.create!(:card_name => 'Duplicate')
-        click_link 'Wants'
+        click_link 'My Wants'
         click_link 'Add Want'
         fill_in 'Card name', :with => 'Duplicate'
         click_button 'Create Want'
@@ -75,7 +75,7 @@ describe "Wants" do
 
         it "should allow to edit" do
           want = current_user.wants.create!(:card_name => 'Duplicate')
-          click_link 'Wants'
+          click_link 'My Wants'
           click_link "edit_want_#{want.id}"
           fill_in 'Amount', :with => '2'
           click_button 'Update Want'
@@ -95,7 +95,7 @@ describe "Wants" do
 
       it "should allow to delete" do
         want = current_user.wants.create!(:card_name => 'Delete me')
-        click_link 'Wants'
+        click_link 'My Wants'
         page.should have_content('Delete me')
         click_link "delete_want_#{want.id}"
         page.driver.browser.switch_to.alert.accept
@@ -120,7 +120,7 @@ describe "Wants" do
         other_user = create(:user_billy)
         Want.create(:card_name => 'Card 1', :user => other_user)
         Want.create(:card_name => 'Card 2', :user => @auth.user)
-        click_link 'Wants'
+        click_link 'My Wants'
         page.should have_content('Card 1')
         page.should have_content('Card 2')
       end

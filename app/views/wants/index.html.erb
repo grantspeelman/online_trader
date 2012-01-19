@@ -15,9 +15,12 @@
         <span class="amount"><%= want.amount %></span>
         <span class="card_name"><%= want.card_name %></span>
         </br>
-        <%= link_to 'Show', want, :id => dom_id(want, :show)  %>
-        <%= link_to 'Edit', edit_want_path(want), :id => dom_id(want, :edit) if can? :update, want %>
-        <%= link_to 'Delete', want, confirm: 'Are you sure?', method: :delete, :id => dom_id(want, :delete) if can? :destroy, want %>
+        <%= link_to 'Show', want, id: dom_id(want, :show)  %>
+        <%= link_to 'Edit', edit_want_path(want), id: dom_id(want, :edit) if can? :update, want %>
+        <%= link_to 'Delete', want,
+                    confirm: 'Are you sure?',
+                    method: :delete,
+                    id: dom_id(want, :delete) if can? :destroy, want %>
     </div>
   </div>
 <% end %>

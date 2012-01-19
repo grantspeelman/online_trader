@@ -1,0 +1,22 @@
+
+<p>
+  <b>Card name:</b>
+  <%= @have.card_name %>
+</p>
+
+
+<p>
+  <b>Amount:</b>
+  <%= @have.amount %>
+</p>
+
+
+<p>
+  <b>Value:</b>
+  <%= @have.value %>
+</p>
+
+
+
+<%= side_nav_link_to 'Edit Have', edit_have_path(@have) if can? :update, @have %>
+<%= side_nav_link_to 'List Haves', haves_path %>

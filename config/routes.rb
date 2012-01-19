@@ -1,5 +1,7 @@
 YugiohOnlineTrader::Application.routes.draw do
 
+  resources :haves
+
   resources :users
 
   resources :cards do
