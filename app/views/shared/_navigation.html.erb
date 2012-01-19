@@ -1,27 +1,12 @@
 <ul class="nav">
-    <li>
-          <%= link_to('Home', root_path) %>
-    </li>
+    <%= main_nav_link('Home', root_path) %>
     <% if user_signed_in? %>
-      <li>
-        <%= link_to('My Account', user_path(current_user)) %>
-      </li>
-      <li>
-        <%= link_to('My Wants', wants_path) %>
-      </li>
-      <li>
-         <%= link_to('Users', users_path) %>
-      </li>
-      <li>
-      <%= link_to('Logout', logout_path, :method=>'delete') %>
-      </li>
+        <%= main_nav_link('My Account', user_path(current_user)) %>
+        <%= main_nav_link('My Wants', wants_path) %>
+        <%= main_nav_link('I Have', haves_path) %>
+        <%= main_nav_link('Users', users_path) %>
+        <%= main_nav_link('Logout', logout_path, :method=>'delete') %>
     <% else %>
-      <li>
-      <%= link_to('Login/Sign up', login_path)  %>
-      </li>
-    <% end %>
-    <% if user_signed_in? %>
-
-
+      <%= main_nav_link('Login/Sign up', login_path)  %>
     <% end %>
 </ul>
