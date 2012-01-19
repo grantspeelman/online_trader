@@ -1,5 +1,7 @@
 YugiohOnlineTrader::Application.routes.draw do
 
+  resources :users
+
   resources :cards do
     collection do
       get 'search'
