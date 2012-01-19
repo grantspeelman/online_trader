@@ -1,13 +1,16 @@
 <ul class="nav">
     <li>
-          <%= link_to('Home', me_path) %>
+          <%= link_to('Home', root_path) %>
     </li>
     <% if user_signed_in? %>
       <li>
-        <%= link_to('My Account', me_path) %>
+        <%= link_to('My Account', user_path(current_user)) %>
       </li>
       <li>
         <%= link_to('My Wants', wants_path) %>
+      </li>
+      <li>
+         <%= link_to('Users', users_path) %>
       </li>
       <li>
       <%= link_to('Logout', logout_path, :method=>'delete') %>

@@ -5,7 +5,7 @@
 <div class="listing">
 
 <% @wants.each do |want| %>
-  <div class="item">
+  <div class="item want">
     <% if want.card && want.card.img_url %>
         <%= image_tag(want.card.img_url, :height => "40") %>
     <% else %>

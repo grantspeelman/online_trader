@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe "Wants" do
 
-    def current_user
-      @auth.user
-    end
+  def current_user
+    @auth.user
+  end
 
   describe "user" do
 

@@ -23,3 +23,12 @@
     font-size: 12px;
     list-style: square; }
 }
+
+.listing {
+  .item {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    border: 1px black groove;
+  }
+}

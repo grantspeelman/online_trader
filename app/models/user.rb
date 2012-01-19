@@ -5,8 +5,10 @@ class User
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
 
-  field :name
+  field :name, :type => String
   field :role
+  field :ign, :type => String
+  field :timezone
   validates_presence_of :name
   attr_protected :role
 #  validates_uniqueness_of :name, :email, :case_sensitive => false
