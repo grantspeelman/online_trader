@@ -10,7 +10,7 @@
         <div>
           IGN : <%= user.ign %>
           <br/>
-          Wants : <%= user.wants.count %>
+          <%= link_to "Wants : #{user.wants.count}", user_wants_path(user), id: dom_id(user,:wants) %>
           <br/>
           Haves : <%= user.haves.count %>
         </div>

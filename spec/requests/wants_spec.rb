@@ -18,7 +18,7 @@ describe "Wants" do
       it "should load page" do
         # Run the generator again with the --webrat flag if you want to use webrat methods/
         click_link 'My Wants'
-        page.should have_content('Listing wants')
+        page.should have_content('My wants')
       end
 
       it "should list wants" do
@@ -44,6 +44,16 @@ describe "Wants" do
         click_link 'My Wants'
         page.should_not have_content('Admin Card 1')
         page.should_not have_content('Admin Card 2')
+      end
+
+      it "should allow to list other user's wants" do
+        other_user = create(:admin_grant)
+        Want.create(:card_name => 'Admin Card 1', :user => other_user)
+        Want.create(:card_name => 'Admin Card 2', :user => other_user)
+        click_link 'Users'
+        click_link "wants_user_#{other_user.id}"
+        page.should have_content('Admin Card 1')
+        page.should have_content('Admin Card 2')
       end
 
     end
@@ -85,7 +95,7 @@ describe "Wants" do
         it "should not allow to edit another user's wants" do
           other_user = create(:admin_grant)
           want = other_user.wants.create!(:card_name => 'Only for Admin')
-          visit "/wants/#{want.id}"
+          visit "/wants/#{want.id}/edit"
           page.should have_content('You are not authorized to access this page.')
         end
 
@@ -116,14 +126,14 @@ describe "Wants" do
 
     describe "index" do
 
-      it "should list everyones wants" do
-        other_user = create(:user_billy)
-        Want.create(:card_name => 'Card 1', :user => other_user)
-        Want.create(:card_name => 'Card 2', :user => @auth.user)
-        click_link 'My Wants'
-        page.should have_content('Card 1')
-        page.should have_content('Card 2')
-      end
+      #it "should list everyones wants" do
+      #  other_user = create(:user_billy)
+      #  Want.create!(:card_name => 'Card 1', :user => other_user)
+      #  Want.create!(:card_name => 'Card 2', :user => @auth.user)
+      #  click_link 'My Wants'
+      #  page.should have_content('Card 1')
+      #  page.should have_content('Card 2')
+      #end
 
     end
 

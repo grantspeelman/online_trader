@@ -1,4 +1,9 @@
-<h1>Listing wants</h1>
+<% if current_user == @user %>
+    <h1>My wants</h1>
+<% else %>
+    <h1><%= @user.name %> wants</h1>
+<% end %>
+
 
 <%= paginate @wants %>
 

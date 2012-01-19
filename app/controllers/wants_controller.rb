@@ -1,6 +1,8 @@
 class WantsController < ApplicationController
   before_filter :login_required
-  load_and_authorize_resource
+  load_and_authorize_resource :user
+  load_and_authorize_resource :through => :user, :only => 'index'
+  load_and_authorize_resource :except => 'index'
 
   # GET /wants
   # GET /wants.json

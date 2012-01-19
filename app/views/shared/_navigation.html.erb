@@ -2,8 +2,8 @@
     <%= main_nav_link('Home', root_path) %>
     <% if user_signed_in? %>
         <%= main_nav_link('My Account', user_path(current_user)) %>
-        <%= main_nav_link('My Wants', wants_path) %>
-        <%= main_nav_link('I Have', haves_path) %>
+        <%= main_nav_link('My Wants', user_wants_path(current_user)) %>
+        <%= main_nav_link('I Have', user_haves_path(current_user)) %>
         <%= main_nav_link('Users', users_path) %>
         <%= main_nav_link('Logout', logout_path, :method=>'delete') %>
     <% else %>
