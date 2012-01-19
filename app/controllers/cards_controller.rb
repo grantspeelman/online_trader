@@ -11,10 +11,12 @@ class CardsController < ApplicationController
   end
 
   def search
-    @card_names = Card.where(:name => /#{params[:term]}/i).limit(20).distinct(:name)
-
+    @card_names = Card.where(:name => /^#{params[:term]}/i).limit(20).distinct(:name)
+    if @card_names.size < 20
+      @card_names += Card.where(:name => /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:name)
+    end
     respond_to do |format|
-      format.json { render json: @card_names }
+      format.json { render json: @card_names.uniq }
     end
   end
 
