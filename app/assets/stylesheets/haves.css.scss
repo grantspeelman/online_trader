@@ -1,3 +1,18 @@
 // Place all the styles related to the Haves controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.listing {
+  .have {
+    max-height: 50px;
+    width: 220px;
+    background-color: #f0f0f0;
+    .amount {
+      color: #a52a2a;
+      font-weight: bold;
+    }
+    img {
+      float: left;
+      padding-right: 5px;
+    }
+  }
+}

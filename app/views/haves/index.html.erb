@@ -2,38 +2,30 @@
 
 <%= paginate @haves %>
 
-<table>
-  <tr>
-
-    <th>Card name</th>
-
-    <th>Amount</th>
-
-    <th>Value</th>
-
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="listing">
 
 <% @haves.each do |have| %>
-  <tr>
+  <div class="item have">
 
-    <td><%= have.card_name %></td>
-
-    <td><%= have.amount %></td>
-
-    <td><%= have.value %></td>
-
-    <td><%= link_to 'Show', have, id: dom_id(have, :show) %></td>
-    <td><%= link_to 'Edit', edit_have_path(have), id: dom_id(have, :edit) if can? :update, have %></td>
-    <td><%= link_to 'Delete', have,
-                    confirm: 'Are you sure?',
-                    method: :delete,
-                    id: dom_id(have, :delete) if can? :destroy, have %></td>
-  </tr>
+    <% if have.card && have.card.img_url %>
+        <%= image_tag(have.card.img_url, :height => "40") %>
+    <% else %>
+        <%= image_tag("unknowncard.jpg", :height => "40") %>
+    <% end %>
+    <div>
+      <span class="amount"><%= have.amount %></span>
+              <span class="card_name"><%= link_to have.card_name, have, id: dom_id(have, :show) %></span>
+              </br>
+              <%= link_to 'Edit', edit_have_path(have), id: dom_id(have, :edit) if can? :update, have %>
+              <%= link_to 'Delete', have,
+                          confirm: 'Are you sure?',
+                          method: :delete,
+                          id: dom_id(have, :delete) if can? :destroy, have %>
+    </div>
+  </div>
 <% end %>
-</table>
+
+</div>
 
 <br />
 

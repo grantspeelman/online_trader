@@ -1,3 +1,4 @@
+<h2><%= @have.card_name %></h2>
 
 <p>
   <b>Card name:</b>
@@ -6,17 +7,11 @@
 
 
 <p>
-  <b>Amount:</b>
+  <b>Amount for Trade:</b>
   <%= @have.amount %>
 </p>
 
 
-<p>
-  <b>Value:</b>
-  <%= @have.value %>
-</p>
-
-
-
+<%= side_nav_link_to 'Add Have', new_have_path if can? :create, Have %>
 <%= side_nav_link_to 'Edit Have', edit_have_path(@have) if can? :update, @have %>
 <%= side_nav_link_to 'List Haves', haves_path %>

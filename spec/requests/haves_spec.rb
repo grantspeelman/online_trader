@@ -79,6 +79,8 @@ describe "Haves" do
           fill_in 'Amount', :with => '2'
           click_button 'Update Have'
           page.should have_content('Have was successfully updated.')
+          have.reload
+          have.amount.should == 2
         end
 
         it "should not allow to edit another user's haves" do
