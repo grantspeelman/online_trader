@@ -52,7 +52,7 @@ describe "Wants" do
 
       it "should create a want" do
         click_link 'Wants'
-        click_link 'New Want'
+        click_link 'Add Want'
         fill_in 'Card name', :with => 'Test Card'
         current_user.wants.count.should == 0
         click_button 'Create Want'
@@ -63,7 +63,7 @@ describe "Wants" do
       it "should not allow duplicate creations" do
         current_user.wants.create!(:card_name => 'Duplicate')
         click_link 'Wants'
-        click_link 'New Want'
+        click_link 'Add Want'
         fill_in 'Card name', :with => 'Duplicate'
         click_button 'Create Want'
         page.should have_content('Card name is already taken')

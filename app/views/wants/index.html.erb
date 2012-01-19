@@ -17,15 +17,14 @@
         </br>
         <%= link_to 'Show', want, :id => dom_id(want, :show) %>
         <%= link_to 'Edit', edit_want_path(want), :id => dom_id(want, :edit) %>
-        <%= link_to 'Destroy', want, confirm: 'Are you sure?', method: :delete, :id => dom_id(want, :delete) %>
+        <%= link_to 'Delete', want, confirm: 'Are you sure?', method: :delete, :id => dom_id(want, :delete) %>
     </div>
   </div>
 <% end %>
 
 </div>
 
-<%= link_to 'New Want', new_want_path %>
-
-<br />
+<%= side_nav_link_to "Add Want", new_want_path %>
+<%= side_nav_link_to 'List Wants', wants_path %>
 
 

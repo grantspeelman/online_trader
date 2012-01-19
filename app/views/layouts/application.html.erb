@@ -22,7 +22,9 @@
 <div id="main-container" class="container-fluid">
 
   <div class="sidebar">
-
+    <ul class="pills pills-vertical">
+      <%= yield :side_nav %>
+    </ul>
   </div>
 
   <div class="content">
@@ -38,50 +40,50 @@
 
 </div>
 
-<div class="bottombar">
-  <div class="fill">
-    <div class="container-fluid">
-        <ul class="nav">
-          <li> &copy; Grant Speelman 2012</li>
-          <li>
-              <a href="http://www.ruby-lang.org/">
-                <%= image_tag("http://www.ruby-lang.org/images/logo.gif", :height => "25") %>
-              </a>
-          </li>
-          <li>
-              <a href="http://rubyonrails.org/">
-                <%= image_tag("http://rubyonrails.org/images/rails.png", :height => "25") %>
-              </a>
-          </li>
-          <li>
-            <a href="http://www.mongodb.org/">
-                <%= image_tag("http://media.mongodb.org/logo-mongodb.png", :height => "25") %>
-            </a>
-          </li>
-          <li>
-            <a href="http://mongoid.org/">
-                <%= image_tag("http://mongoid.org/images/mongoid-logo-small.png", :height => "25") %>
-            </a>
-          </li>
-          <li>
-            <a href="http://www.omniauth.org/">
-                <%= image_tag("http://www.omniauth.org/images/logo.png", :height => "25") %>
-            </a>
-          </li>
-          <li>
-            <a href="http://jquery.com/">
-                <%= image_tag("http://static.jquery.com/files/rocker/images/logo_jquery_215x53.gif", :height => "25") %>
-            </a>
-          </li>
-          <li>
-            <a href="http://www.heroku.com/">
-              <%= image_tag("https://nav.heroku.com/images/logos/logo.png", :height => "25") %>
-            </a>
-          </li>
-        </ul>
-    </div>
+<br/><br/><br/>
+
+<footer class="fotter">
+  <div class="container-fluid">
+    <ul class="nav">
+      <li> &copy; Grant Speelman 2012</li>
+      <li>
+        <a href="http://www.ruby-lang.org/">
+          <%= image_tag("http://www.ruby-lang.org/images/logo.gif", :height => "25") %>
+        </a>
+      </li>
+      <li>
+        <a href="http://rubyonrails.org/">
+          <%= image_tag("http://rubyonrails.org/images/rails.png", :height => "25") %>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.mongodb.org/">
+          <%= image_tag("http://media.mongodb.org/logo-mongodb.png", :height => "25") %>
+        </a>
+      </li>
+      <li>
+        <a href="http://mongoid.org/">
+          <%= image_tag("http://mongoid.org/images/mongoid-logo-small.png", :height => "25") %>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.omniauth.org/">
+          <%= image_tag("http://www.omniauth.org/images/logo.png", :height => "25") %>
+        </a>
+      </li>
+      <li>
+        <a href="http://jquery.com/">
+          <%= image_tag("http://static.jquery.com/files/rocker/images/logo_jquery_215x53.gif", :height => "25") %>
+        </a>
+      </li>
+      <li>
+        <a href="http://www.heroku.com/">
+          <%= image_tag("https://nav.heroku.com/images/logos/logo.png", :height => "25") %>
+        </a>
+      </li>
+    </ul>
   </div>
-</div>
+</footer>
 <!-- /container -->
 
 
