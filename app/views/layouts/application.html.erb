@@ -4,7 +4,6 @@
   <title>Yugioh Online Trader</title>
   <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
   <%= stylesheet_link_tag "application" %>
-  <script src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-alerts.js"></script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -45,6 +44,11 @@
   <div class="container-fluid">
     <ul class="nav">
       <li> &copy; Grant Speelman 2012</li>
+      <li>
+        <a href="http://www.yugioh-online.net">
+          <%= image_tag("http://www.yugioh-world.com/news/images/ygo_online_duel_accelerator_logo.png", :height => "25") %>
+        </a>
+      </li>
       <li>
         <a href="http://www.ruby-lang.org/">
           <%= image_tag("http://www.ruby-lang.org/images/logo.gif", :height => "25") %>
