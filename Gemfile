@@ -14,7 +14,6 @@ gem 'kaminari'
 
 group :assets do
   gem 'uglifier'
-  gem 'coffee-rails'
   gem 'sass-rails'
 end
 group :development, :test do
