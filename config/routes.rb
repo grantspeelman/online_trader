@@ -1,8 +1,14 @@
 YugiohOnlineTrader::Application.routes.draw do
 
-  resources :haves
 
-  resources :users
+
+  resources :users do |u|
+    resources :wants, :except => [:show, :edit, :update, :destroy]
+    resources :haves, :except => [:show, :edit, :update, :destroy]
+  end
+
+  resources :haves
+  resources :wants
 
   resources :cards do
     collection do
@@ -10,7 +16,7 @@ YugiohOnlineTrader::Application.routes.draw do
     end
   end
 
-  resources :wants
+
 
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure', :to => 'sessions#failure'

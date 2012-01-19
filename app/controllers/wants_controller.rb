@@ -1,6 +1,8 @@
 class WantsController < ApplicationController
   before_filter :login_required
-  load_and_authorize_resource
+  load_and_authorize_resource :user
+  load_and_authorize_resource :through => :user, :only => 'index'
+  load_and_authorize_resource :except => 'index'
 
   # GET /wants
   # GET /wants.json
@@ -76,7 +78,7 @@ class WantsController < ApplicationController
     @want.destroy
 
     respond_to do |format|
-      format.html { redirect_to wants_url, notice: 'Successfully deleted.' }
+      format.html { redirect_to user_wants_url(@want.user), notice: 'Successfully deleted.' }
       format.json { head :ok }
     end
   end
