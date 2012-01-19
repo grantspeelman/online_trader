@@ -14,7 +14,9 @@
 
     <%= f.text_field :card_name %>
 
-    <%= f.number_field :amount %>
+    <%= f.number_field :amount do %>
+        <span class="help-block">This is the amount you have available for trading</span>
+    <% end %>
 
     <%= f.select :value, 'Personal Value', [['Very Low',1], ['Low',2],['Normal',3],['High',4],['Very High',5]] do %>
         <span class="help-block">How value do you hold this card personally</span>
