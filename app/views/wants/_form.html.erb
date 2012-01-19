@@ -11,9 +11,9 @@
   <% end %>
 
   <%= f.inputs do %>
-    <%= f.text_field 'card_name', 'Card name', :class => 'ui-autocomplete-input', :autocomplete => false %>
-    <%= f.text_field 'amount' %>
-    <%= f.select 'priority', 'Priority', [['Low',1],['Normal',2],['High',3]] %>
+    <%= f.text_field :card_name, 'Card name', :class => 'ui-autocomplete-input', :autocomplete => false %>
+    <%= f.text_field :amount %>
+    <%= f.select :priority, 'Priority', [['Low',1],['Normal',2],['High',3]] %>
   <% end %>
   <%= f.actions do %>
     <%= f.submit %>

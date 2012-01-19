@@ -1,6 +1,6 @@
 <h2><%= @want.card_name %></h2>
 
 
-<%= side_nav_link_to 'Add Want', new_want_path %>
-<%= side_nav_link_to 'Edit Want', edit_want_path(@want) %>
+<%= side_nav_link_to 'Add Want', new_want_path if can? :create, Want %>
+<%= side_nav_link_to 'Edit Want', edit_want_path(@want) if can? :update, @want %>
 <%= side_nav_link_to 'List Wants', wants_path %>
