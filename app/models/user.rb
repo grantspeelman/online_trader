@@ -22,5 +22,13 @@ class User
     self.authorizations.where(:provider => provider.to_s).exists?
   end
 
+  def to_s
+    if ign.blank?
+      name
+    else
+      "#{name} (#{ign})"
+    end
+  end
+
 end
 

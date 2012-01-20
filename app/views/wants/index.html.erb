@@ -24,6 +24,7 @@
         </br>
         <% if current_user != want.user %>
             <%= link_to 'Make Offer', '', class: 'btn info small' %>
+            <%= link_to 'The User', user_path(want.user), class: 'btn info small', title: "#{want.user}" %>
         <% end %>
         <% if current_user == want.user %>
           <%= link_to 'Find Traders', '', class: 'btn info small'  %>

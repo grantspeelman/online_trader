@@ -45,6 +45,16 @@ describe "Haves" do
         page.should_not have_content('Admin Card 2')
       end
 
+      it "should allow to list other user's haves" do
+        other_user = create(:admin_grant)
+        ::Have.create(:card_name => 'Admin Card 1', :user => other_user)
+        ::Have.create(:card_name => 'Admin Card 2', :user => other_user)
+        click_link 'Users'
+        click_link "haves_user_#{other_user.id}"
+        page.should have_content('Admin Card 1')
+        page.should have_content('Admin Card 2')
+      end
+
     end
 
     describe "create" do
