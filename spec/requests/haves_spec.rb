@@ -70,6 +70,7 @@ describe "Haves" do
         end
         click_link 'Users'
         click_link "haves_user_#{other_user.id}"
+        sleep 100
         click_link 'Next'
         page.should have_content("#{other_user} Cards")
       end

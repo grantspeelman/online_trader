@@ -15,6 +15,8 @@ class Have
 
   scope :by_card_name, ->(name) { where(:card_name => name) }
 
+  index "card_name", background: true
+
   def card
     Card.by_name(card_name).first
   end

@@ -15,6 +15,12 @@ class CardsController < ApplicationController
     if @card_names.size < 20
       @card_names += Card.where(:name => /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:name)
     end
+    if @card_names.size < 20
+      @card_names += Have.where(:card_name => /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:card_name)
+    end
+    if @card_names.size < 20
+      @card_names += Want.where(:card_name => /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:card_name)
+    end
     respond_to do |format|
       format.json { render json: @card_names.uniq }
     end
