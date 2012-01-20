@@ -12,10 +12,12 @@
   <%= @want.amount %>
 </p>
 
+<% unless current_user == @want.user %>
 <p>
   <b>User :</b>
   <%= link_to @want.user, user_path(@want.user) %>
 </p>
+<% end %>
 
 <%= side_nav_link_to 'Add Want', new_want_path if can? :create, Want %>
 <%= side_nav_link_to 'Edit Want', edit_want_path(@want) if can? :update, @want %>
