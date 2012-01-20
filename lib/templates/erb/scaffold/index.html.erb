@@ -19,7 +19,7 @@
 <% end -%>
     <td><%%= link_to 'Show', <%= singular_table_name %>, <%= key_value :id, "dom_id(#{singular_table_name}, :show)" %> %></td>
     <td><%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), <%= key_value :id, "dom_id(#{singular_table_name}, :edit)" %> if can? :update, <%= singular_table_name %> %></td>
-    <td><%%= link_to 'Delete', <%= singular_table_name %>, <%= key_value :confirm, "'Are you sure?'" %>, <%= key_value :method, ":delete" %> <%= key_value :id, "dom_id(#{singular_table_name}, :delete)" %> if can? :destroy, <%= singular_table_name %> %></td>
+    <td><%%= link_to 'Delete', <%= singular_table_name %>, <%= key_value :confirm, "'Are you sure?'" %>, <%= key_value :method, ":delete" %>, <%= key_value :id, "dom_id(#{singular_table_name}, :delete)" %> if can? :destroy, <%= singular_table_name %> %></td>
   </tr>
 <%% end %>
 </table>
