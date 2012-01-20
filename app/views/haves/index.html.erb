@@ -1,4 +1,10 @@
-<h1>Listing haves</h1>
+<% if current_user == @user %>
+    <h1>I Have</h1>
+<% elsif @user %>
+    <h1><%= @user %> Cards</h1>
+<% else %>
+    <h1>Tradable Cards</h1>
+<% end %>
 
 <%= paginate @haves %>
 
@@ -16,11 +22,21 @@
       <span class="amount"><%= have.amount %></span>
               <span class="card_name"><%= link_to have.card_name, have, id: dom_id(have, :show) %></span>
               </br>
-              <%= link_to 'Edit', edit_have_path(have), id: dom_id(have, :edit) if can? :update, have %>
+              <% if current_user != have.user %>
+                  <%= link_to 'Make Offer', '', class: 'btn info small' %>
+                  <%= link_to 'The User', user_path(have.user), class: 'btn info small', title: "#{have.user}" %>
+              <% end %>
+              <% if current_user == have.user %>
+                <%= link_to 'Find Traders', '', class: 'btn info small'  %>
+              <% end %>
+              <%= link_to 'Edit', edit_have_path(have),
+                          id: dom_id(have, :edit),
+                          class: 'btn small' if can? :update, have %>
               <%= link_to 'Delete', have,
                           confirm: 'Are you sure?',
                           method: :delete,
-                          id: dom_id(have, :delete) if can? :destroy, have %>
+                          id: dom_id(have, :delete),
+                          class: 'btn small' if can? :destroy, have %>
     </div>
   </div>
 <% end %>

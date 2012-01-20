@@ -7,7 +7,7 @@ class Ability
     else
       can :read, Want
       can :manage, Want, :user_id => user.id
-#      can :read, Have
+      can :read, Have
       can :manage, Have, :user_id => user.id
       can :read, User
       can :update, User, :id => user.id

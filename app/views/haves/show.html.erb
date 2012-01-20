@@ -11,6 +11,13 @@
   <%= @have.amount %>
 </p>
 
+<% unless current_user == @have.user %>
+<p>
+  <b>User :</b>
+  <%= link_to @have.user, user_path(@have.user) %>
+</p>
+<% end %>
+
 
 <%= side_nav_link_to 'Add Have', new_have_path if can? :create, Have %>
 <%= side_nav_link_to 'Edit Have', edit_have_path(@have) if can? :update, @have %>

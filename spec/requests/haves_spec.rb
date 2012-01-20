@@ -17,7 +17,7 @@ describe "Haves" do
 
       it "should load page" do
         click_link 'I Have'
-        page.should have_content('Listing haves')
+        page.should have_content('I Have')
       end
 
       it "should list haves" do
@@ -53,6 +53,17 @@ describe "Haves" do
         click_link "haves_user_#{other_user.id}"
         page.should have_content('Admin Card 1')
         page.should have_content('Admin Card 2')
+      end
+
+      it "should allow paging of other user's haves" do
+        other_user = create(:admin_grant)
+        (1..100).each do  |i|
+          ::Have.create!(:card_name => "Card #{i}", :user => other_user)
+        end
+        click_link 'Users'
+        click_link "haves_user_#{other_user.id}"
+        click_link 'Next'
+        page.should have_content("#{other_user} Cards")
       end
 
     end
@@ -96,7 +107,7 @@ describe "Haves" do
         it "should not allow to edit another user's haves" do
           other_user = create(:admin_grant)
           have = other_user.haves.create!(:card_name => 'Only for Admin')
-          visit "/haves/#{have.id}"
+          visit "/haves/#{have.id}/edit"
           page.should have_content('You are not authorized to access this page.')
         end
 
@@ -127,14 +138,14 @@ describe "Haves" do
 
     describe "index" do
 
-      it "should list everyones haves" do
-        other_user = create(:user_billy)
-        ::Have.create!(:card_name => 'Card 1', :user => other_user)
-        ::Have.create!(:card_name => 'Card 2', :user => @auth.user)
-        click_link 'I Have'
-        page.should have_content('Card 1')
-        page.should have_content('Card 2')
-      end
+      #it "should list everyones haves" do
+      #  other_user = create(:user_billy)
+      #  ::Have.create!(:card_name => 'Card 1', :user => other_user)
+      #  ::Have.create!(:card_name => 'Card 2', :user => @auth.user)
+      #  click_link 'I Have'
+      #  page.should have_content('Card 1')
+      #  page.should have_content('Card 2')
+      #end
 
     end
 

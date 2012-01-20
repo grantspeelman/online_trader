@@ -12,7 +12,7 @@
           <br/>
           <%= link_to "Wants : #{user.wants.count}", user_wants_path(user), id: dom_id(user,:wants) %>
           <br/>
-          Haves : <%= user.haves.count %>
+          <%= link_to "Haves : #{user.haves.count}", user_haves_path(user), id: dom_id(user,:haves) %>
         </div>
       </div>
   <% end %>
