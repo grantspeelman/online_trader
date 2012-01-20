@@ -130,7 +130,7 @@ describe "Wants" do
       #  other_user = create(:user_billy)
       #  Want.create!(:card_name => 'Card 1', :user => other_user)
       #  Want.create!(:card_name => 'Card 2', :user => @auth.user)
-      #  click_link 'My Wants'
+      #  visit 'wants'
       #  page.should have_content('Card 1')
       #  page.should have_content('Card 2')
       #end

@@ -1,7 +1,9 @@
 <% if current_user == @user %>
     <h1>My wants</h1>
-<% else %>
+<% elsif @user %>
     <h1><%= @user.name %> wants</h1>
+<% else %>
+    <h1>Wants</h1>
 <% end %>
 
 
@@ -20,11 +22,20 @@
         <span class="amount"><%= want.amount %></span>
         <span class="card_name"><%= link_to want.card_name, want, id: dom_id(want, :show) %></span>
         </br>
-        <%= link_to 'Edit', edit_want_path(want), id: dom_id(want, :edit) if can? :update, want %>
+        <% if current_user != want.user %>
+            <%= link_to 'Make Offer', '', class: 'btn info small' %>
+        <% end %>
+        <% if current_user == want.user %>
+          <%= link_to 'Find Traders', '', class: 'btn info small'  %>
+        <% end %>
+        <%= link_to 'Edit', edit_want_path(want),
+                    id: dom_id(want, :edit),
+                    class: 'btn small' if can? :update, want %>
         <%= link_to 'Delete', want,
                     confirm: 'Are you sure?',
                     method: :delete,
-                    id: dom_id(want, :delete) if can? :destroy, want %>
+                    id: dom_id(want, :delete),
+                    class: 'btn small' if can? :destroy, want %>
     </div>
   </div>
 <% end %>
