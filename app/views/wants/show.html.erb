@@ -21,8 +21,10 @@
 
 <%= side_nav_link_to 'Add Want', new_want_path if can? :create, Want %>
 <%= side_nav_link_to 'Edit Want', edit_want_path(@want) if can? :update, @want %>
-<%= side_nav_link_to "#{@want.user.name} Wants", user_wants_path(@want.user) if @want.user != current_user %>
-<%= side_nav_link_to 'My Wants', user_wants_path(current_user) %>
+<% if current_user == @want.user %>
+  <%= side_nav_link_to 'Find Traders', haves_path(:card_name => @want.card_name)  %>
+<% end %>
 <% if current_user != @want.user %>
+    <%= side_nav_link_to "#{@want.user.name} Wants", user_wants_path(@want.user) %>
     <%= side_nav_link_to 'Make Offer', "#" %>
 <% end %>

@@ -27,7 +27,7 @@
                   <%= link_to 'The User', user_path(have.user), class: 'btn info small', title: "#{have.user}" %>
               <% end %>
               <% if current_user == have.user %>
-                <%= link_to 'Find Traders', '', class: 'btn info small'  %>
+                <%= link_to 'Find Traders', wants_path(:card_name => have.card_name), class: 'btn info small'  %>
               <% end %>
               <%= link_to 'Edit', edit_have_path(have),
                           id: dom_id(have, :edit),

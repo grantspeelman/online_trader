@@ -29,6 +29,14 @@ describe "Wants" do
         page.should have_content('Card 2')
       end
 
+      it "should search by card_name" do
+        Want.create!(:card_name => 'Card 1', :user => @auth.user)
+        Want.create!(:card_name => 'Card 2', :user => @auth.user)
+        visit wants_path(:card_name => 'Card 1')
+        page.should have_content('Card 1')
+        page.should_not have_content('Card 2')
+      end
+
       it "should allow paging" do
         (1..100).each do  |i|
           Want.create!(:card_name => "Card #{i}", :user => @auth.user)

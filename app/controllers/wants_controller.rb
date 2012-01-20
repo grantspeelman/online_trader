@@ -6,6 +6,7 @@ class WantsController < ApplicationController
   # GET /wants
   # GET /wants.json
   def index
+    @wants = @wants.where(card_name: params[:card_name]) unless params[:card_name].blank?
     @wants = @wants.page(params[:page])
 
     respond_to do |format|

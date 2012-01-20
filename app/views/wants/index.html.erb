@@ -3,7 +3,7 @@
 <% elsif @user %>
     <h1><%= @user.name %> wants</h1>
 <% else %>
-    <h1>Wants</h1>
+    <h1><em><%= params[:card_name] %></em> Wants</h1>
 <% end %>
 
 
