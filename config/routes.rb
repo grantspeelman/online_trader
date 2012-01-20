@@ -2,6 +2,8 @@ YugiohOnlineTrader::Application.routes.draw do
 
 
 
+  resources :trades
+
   resources :users do |u|
     resources :wants, :except => [:show, :edit, :update, :destroy]
     resources :haves, :except => [:show, :edit, :update, :destroy]

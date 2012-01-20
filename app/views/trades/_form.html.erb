@@ -1,0 +1,19 @@
+<%= twitter_bootstrap_form_for(@trade) do |f| %>
+  <% if @trade.errors.any? %>
+    <div class="alert-message block-message error">
+      <strong><%= pluralize(@trade.errors.count, "error") %> prohibited this trade from being saved:</strong>
+      <ul>
+      <% @trade.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.inputs do %>
+
+  <% end %>
+  <%= f.actions do %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
