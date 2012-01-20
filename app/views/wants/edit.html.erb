@@ -4,4 +4,3 @@
 
 <%= side_nav_link_to 'Show Want', @want %>
 <%= side_nav_link_to "#{@want.user.name} Wants", user_wants_path(@want.user) if @want.user != current_user %>
-<%= side_nav_link_to 'My Wants', user_wants_path(current_user) %>
