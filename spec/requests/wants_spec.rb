@@ -124,6 +124,19 @@ describe "Wants" do
       login_with_oauth(@auth)
     end
 
+    describe "index" do
+
+      #it "should list everyones wants" do
+      #  other_user = create(:user_billy)
+      #  Want.create!(:card_name => 'Card 1', :user => other_user)
+      #  Want.create!(:card_name => 'Card 2', :user => @auth.user)
+      #  click_link 'My Wants'
+      #  page.should have_content('Card 1')
+      #  page.should have_content('Card 2')
+      #end
+
+    end
+
     describe "edit" do
 
         it "should allow to edit another user's wants" do
