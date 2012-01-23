@@ -21,10 +21,16 @@
     <div>
       <span class="amount"><%= have.amount %></span>
               <span class="card_name"><%= link_to have.card_name, have, id: dom_id(have, :show) %></span>
+              <% if current_user != have.user %>
+                </br>
+                <span class="user">User : <%= link_to have.user, user_path(have.user), title: "#{have.user}" %></span>
+                <span class="user">You have <%= have.user.trades_for(current_user) %> of his wants</span>
+                <span class="user">This User has <%= have.user.trades_for(current_user) %> of your wants</span>
+              <% end %>
               </br>
               <% if current_user != have.user %>
                   <%= link_to 'Make Offer', '', class: 'btn info small' %>
-                  <%= link_to 'The User', user_path(have.user), class: 'btn info small', title: "#{have.user}" %>
+
               <% end %>
               <% if current_user == have.user %>
                 <%= link_to 'Find Traders', wants_path(:card_name => have.card_name), class: 'btn info small'  %>

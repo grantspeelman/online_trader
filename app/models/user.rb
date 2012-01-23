@@ -30,5 +30,9 @@ class User
     end
   end
 
+  def traders_for
+    1
+  end
+
 end
 
