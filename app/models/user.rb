@@ -30,7 +30,7 @@ class User
     end
   end
 
-  def traders_for
+  def trades_for(user)
     1
   end
 

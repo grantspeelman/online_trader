@@ -24,7 +24,9 @@
               <% if current_user != have.user %>
                 </br>
                 <span class="user">User : <%= link_to have.user, user_path(have.user), title: "#{have.user}" %></span>
+                </br>
                 <span class="user">You have <%= have.user.trades_for(current_user) %> of his wants</span>
+                </br>
                 <span class="user">This User has <%= have.user.trades_for(current_user) %> of your wants</span>
               <% end %>
               </br>
