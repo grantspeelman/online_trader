@@ -12,6 +12,10 @@ FactoryGirl.define do
     association :user, :factory => :user_billy
   end
 
+  factory :user_kim, :class => User do |u|
+      u.name 'Kim Petersen'
+  end
+
   factory :admin_grant, :class => User do |u|
       u.name 'Admin Grant'
       u.role 'admin'

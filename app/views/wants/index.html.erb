@@ -27,8 +27,8 @@
             <%= link_to 'Make Offer', '', class: 'btn info small' %>
             <%= link_to 'The User', user_path(want.user), class: 'btn info small', title: "#{want.user}" %>
         <% end %>
-        <% if current_user == want.user %>
-          <%= link_to "Find Traders #{Have.where(:card_name => want.card_name).count}", haves_path(:card_name => want.card_name), class: 'btn info small'  %>
+        <% if current_user == want.user  %>
+          <%= link_to_if (want.have_count > 0), "Traders #{want.have_count}", haves_path(:card_name => want.card_name), class: 'btn info small'  %>
         <% end %>
         <%= link_to 'Edit', edit_want_path(want),
                     id: dom_id(want, :edit),

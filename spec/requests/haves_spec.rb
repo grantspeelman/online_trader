@@ -63,14 +63,21 @@ describe "Haves" do
         page.should have_content('Admin Card 2')
       end
 
-      it "should to find user's with my wants" do
+      it "should be able to find user's haves with my wants" do
         other_user = create(:admin_grant)
+        user_kim = create(:user_kim)
+        Want.create!(:card_name => 'Super Cool Card', :user => @auth.user)
+        Want.create!(:card_name => 'Awesome Great Card', :user => @auth.user)
         ::Have.create(:card_name => 'Super Cool Card', :user => other_user)
-        ::Have.create(:card_name => 'Awesome Great Card', :user => other_user)
-        click_link 'Users'
-        click_link "haves_user_#{other_user.id}"
-        page.should have_content('Admin Card 1')
-        page.should have_content('Admin Card 2')
+        ::Have.create(:card_name => 'Awesome Great Card', :user => user_kim)
+        ::Have.create(:card_name => 'Crap Card', :user => other_user)
+        ::Have.create(:card_name => 'My Card', :user =>  @auth.user)
+        click_link 'My Wants'
+        click_link 'Find Traders'
+        page.should have_content('Super Cool Card')
+        page.should have_content('Awesome Great Card')
+        page.should_not have_content('Crap Card')
+        page.should_not have_content('My Card')
       end
 
       it "should allow paging of other user's haves" do

@@ -8,8 +8,8 @@ class HavesController < ApplicationController
   def index
 #    @haves = Have.all
     @haves = @haves.where(card_name: params[:card_name]) unless params[:card_name].blank?
+    @haves = @haves.where(:card_name => {"$in" => current_user.want_card_names}) if params[:traders]
     @haves = @haves.page(params[:page])
-
 
     respond_to do |format|
       format.html # index.html.erb

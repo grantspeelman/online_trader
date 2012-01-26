@@ -30,6 +30,10 @@ class User
     end
   end
 
+  def want_card_names
+    wants.only(:card_name).collect{|t|t.card_name}
+  end
+
   def trades_for(user)
     1
   end

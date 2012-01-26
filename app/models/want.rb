@@ -21,5 +21,13 @@ class Want
     Card.by_name(card_name).first
   end
 
+  def haves
+    @haves ||= Have.where(:card_name => card_name)
+  end
+
+  def have_count
+    haves.count
+  end
+
 end
 
