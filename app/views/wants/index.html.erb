@@ -3,11 +3,11 @@
 <% elsif @user %>
     <h1><%= @user.name %> wants</h1>
 <% else %>
-    <h1><em><%= params[:card_name] %></em> Wants</h1>
+    <h1><em><%= params[:card_name] || "Tradable Haves" %></em></h1>
 <% end %>
 
-<% if current_user == @user  %>
-    <%= link_to 'Find Traders', haves_path(:traders => true), class: 'btn info small'  %>
+<% if current_user == @user %>
+    <%= link_to 'Find Traders', haves_path(:traders => true), class: 'btn info small' %>
     <%= link_to 'Export for Duel City',
                 url_for(:format => 'forum'),
                 class: 'btn info small',
@@ -18,35 +18,38 @@
 
 <div class="listing">
 
-<% @wants.each do |want| %>
-  <div class="item want">
-    <% if want.card && want.card.img_url %>
-        <%= image_tag(want.card.img_url, :height => "40") %>
-    <% else %>
-        <%= image_tag("unknowncard.jpg", :height => "40") %>
-    <% end %>
-    <div>
-        <span class="amount"><%= want.amount %></span>
-        <span class="card_name"><%= link_to want.card_name, want, id: dom_id(want, :show) %></span>
-        </br>
-        <% if current_user != want.user %>
-            <%= link_to 'Make Offer', '', class: 'btn info small' %>
-            <%= link_to 'The User', user_path(want.user), class: 'btn info small', title: "#{want.user}" %>
+  <% @wants.each do |want| %>
+      <div class="item want">
+        <% if want.card && want.card.img_url %>
+            <%= image_tag(want.card.img_url, :height => "40") %>
+        <% else %>
+            <%= image_tag("unknowncard.jpg", :height => "40") %>
         <% end %>
-        <% if current_user == want.user  %>
-          <%= link_to_if (want.have_count > 0), "Traders #{want.have_count}", haves_path(:card_name => want.card_name), class: 'btn info small'  %>
-        <% end %>
-        <%= link_to 'Edit', edit_want_path(want),
-                    id: dom_id(want, :edit),
-                    class: 'btn small' if can? :update, want %>
-        <%= link_to 'Delete', want,
-                    confirm: 'Are you sure?',
-                    method: :delete,
-                    id: dom_id(want, :delete),
-                    class: 'btn small' if can? :destroy, want %>
-    </div>
-  </div>
-<% end %>
+        <div>
+          <div class="card_info">
+            <span class="amount"><%= want.amount %></span>
+            <span class="card_name"><%= link_to want.card_name, want, id: dom_id(want, :show) %></span>
+          </div>
+          <% if current_user != want.user %>
+              <%= render :partial => 'shared/user_trade_info', :locals => {:user => want.user} %>
+          <% end %>
+          <% if current_user != want.user %>
+              <%= link_to 'Make Offer', '', class: 'btn info small' %>
+          <% end %>
+          <% if current_user == want.user %>
+              <%= link_to_if (want.have_count > 0), "Traders #{want.have_count}", haves_path(:card_name => want.card_name), class: 'btn info small' %>
+          <% end %>
+          <%= link_to 'Edit', edit_want_path(want),
+                      id: dom_id(want, :edit),
+                      class: 'btn small' if can? :update, want %>
+          <%= link_to 'Delete', want,
+                      confirm: 'Are you sure?',
+                      method: :delete,
+                      id: dom_id(want, :delete),
+                      class: 'btn small' if can? :destroy, want %>
+        </div>
+      </div>
+  <% end %>
 
 </div>
 

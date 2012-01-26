@@ -1,0 +1,6 @@
+<span class="user">User : <%= link_to user, user_path(user), title: "#{user}" %></span>
+</br>
+<span class="user">
+  Tradeable : <%= current_user.wants_for(user).count %> Wants /
+              <%= user.wants_for(current_user).count %> Haves
+</span>

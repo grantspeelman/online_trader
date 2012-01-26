@@ -31,5 +31,11 @@
     margin: 5px;
     border: 1px black groove;
     min-width: 275px;
+    .card_info {
+      height: 45px;
+    }
+    .card_name {
+      font-weight: bolder;
+    }
   }
 }

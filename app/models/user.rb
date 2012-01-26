@@ -34,8 +34,12 @@ class User
     wants.only(:card_name).collect{|t|t.card_name}
   end
 
-  def trades_for(user)
-    1
+  def have_card_names
+    haves.only(:card_name).collect{|t|t.card_name}
+  end
+
+  def wants_for(user)
+    user.wants.where(:card_name => {"$in" => have_card_names})
   end
 
 end

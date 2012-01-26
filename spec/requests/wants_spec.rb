@@ -64,6 +64,23 @@ describe "Wants" do
         page.should have_content('Admin Card 2')
       end
 
+      it "should be able to find user's wants with my haves" do
+        other_user = create(:admin_grant)
+        user_kim = create(:user_kim)
+        ::Have.create!(:card_name => 'Super Cool Card', :user => @auth.user)
+        ::Have.create!(:card_name => 'Awesome Great Card', :user => @auth.user)
+        Want.create(:card_name => 'Super Cool Card', :user => other_user)
+        Want.create(:card_name => 'Awesome Great Card', :user => user_kim)
+        Want.create(:card_name => 'Crap Card', :user => other_user)
+        Want.create(:card_name => 'My Card', :user =>  @auth.user)
+        click_link 'I Have'
+        click_link 'Find Traders'
+        page.should have_content('Super Cool Card')
+        page.should have_content('Awesome Great Card')
+        page.should_not have_content('Crap Card')
+        page.should_not have_content('My Card')
+      end
+
     end
 
     describe "create" do
