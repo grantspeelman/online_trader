@@ -2,15 +2,19 @@ YugiohOnlineTrader::Application.routes.draw do
 
 
 
-  resources :trades
+
 
   resources :users do |u|
+    collection do
+      get 'search'
+    end
     resources :wants, :except => [:show, :edit, :update, :destroy]
     resources :haves, :except => [:show, :edit, :update, :destroy]
   end
 
   resources :haves
   resources :wants
+  resources :trades
 
   resources :cards do
     collection do

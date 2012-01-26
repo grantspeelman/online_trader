@@ -1,7 +1,9 @@
 
 class TradesController < ApplicationController
-  before_filter :login_required
-  load_and_authorize_resource
+  before_filter :login_required, :ign_required
+  before_filter :load_trades, :only => 'index'
+  load_resource :except => 'index'
+  authorize_resource :except => ['index','new','create']
   # GET /trades
   # GET /trades.json
   def index
@@ -45,7 +47,7 @@ class TradesController < ApplicationController
   # POST /trades.json
   def create
 #    @trade = Trade.new(params[:trade])
-
+    @trade.user = current_user
     respond_to do |format|
       if @trade.save
         format.html { redirect_to @trade, notice: 'Trade was successfully created.' }
@@ -84,5 +86,12 @@ class TradesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  protected
+
+  def load_trades
+    @trades = current_user.trades
+  end
+
 end
 

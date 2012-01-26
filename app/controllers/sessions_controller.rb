@@ -14,7 +14,12 @@ class SessionsController < ApplicationController
     self.current_user = @auth.user
 
     flash[:notice] = "Welcome, #{current_user.name}."
-    redirect_to(root_path)
+    if current_user.ign.blank?
+      flash[:error] = "Before using Yu-gi-oh Online Trader you have to set your IGN"
+      redirect_to(edit_user_path(current_user))
+    else
+      redirect_to(root_path)
+    end
   end
 
   def failure

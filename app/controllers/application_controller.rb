@@ -29,6 +29,14 @@ class ApplicationController < ActionController::Base
     false
   end
 
+  def ign_required
+    return true unless current_user.ign.blank?
+    store_location
+    flash[:error] = "Before using Yu-gi-oh Online Trader you have to set your IGN"
+    redirect_to(edit_user_path(current_user))
+    false
+  end
+
   def access_denied
     if request.xhr?
       render(:update) { |page| page.redirect_to(root_path) }

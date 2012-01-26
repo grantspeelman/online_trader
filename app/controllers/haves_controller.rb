@@ -1,6 +1,6 @@
 
 class HavesController < ApplicationController
-  before_filter :login_required
+  before_filter :login_required, :ign_required
   load_and_authorize_resource :user
   load_and_authorize_resource :through => :user, :shallow => true
   # GET /haves

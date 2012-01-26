@@ -3,6 +3,7 @@ class User
   has_many :authorizations
   has_many :wants
   has_many :haves
+  has_many :trades
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
 
@@ -11,12 +12,10 @@ class User
   field :ign, :type => String
   field :timezone
   validates_presence_of :name
+  validates_uniqueness_of :ign, :allow_blank => true
   attr_protected :role
 #  validates_uniqueness_of :name, :email, :case_sensitive => false
 #  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
-  def authorized_with_everything
-    self.authorizations.count == 3
-  end
 
   def authorized_with(provider)
     self.authorizations.where(:provider => provider.to_s).exists?
@@ -40,6 +39,10 @@ class User
 
   def wants_for(user)
     user.wants.where(:card_name => {"$in" => have_card_names})
+  end
+
+  def trades
+    Trade.any_of({trade_with_user_id: id},{user_id: id})
   end
 
 end

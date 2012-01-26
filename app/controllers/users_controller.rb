@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :login_required
-  load_and_authorize_resource
+  load_and_authorize_resource :except => 'search'
   # GET /users
   # GET /users.json
   def index
@@ -10,6 +10,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
+    end
+  end
+
+  def search
+    @ign_names = User.where(:ign => /^#{params[:term]}/i).limit(20).distinct(:ign)
+    respond_to do |format|
+      format.json { render json: @ign_names }
     end
   end
 
