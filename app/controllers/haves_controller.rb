@@ -9,6 +9,12 @@ class HavesController < ApplicationController
 #    @haves = Have.all
     @haves = @haves.where(card_name: params[:card_name]) unless params[:card_name].blank?
     @haves = @haves.where(:card_name => {"$in" => current_user.want_card_names}) if params[:traders]
+    if params[:card_name] || params[:traders]
+      @haves = @haves.order_by([:value,:asc])
+    else
+      @haves = @haves.order_by([:card_name,:asc])
+    end
+
     @haves = @haves.page(params[:page])
 
     respond_to do |format|

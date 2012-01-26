@@ -12,7 +12,6 @@ class Want
 
   attr_protected :user_id
 
-  default_scope desc(:priority)
   scope :by_card_name, ->(name) { where(:card_name => name) }
 
   index "card_name", background: true

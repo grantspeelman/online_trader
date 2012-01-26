@@ -8,6 +8,7 @@ class WantsController < ApplicationController
   def index
     @wants = @wants.where(card_name: params[:card_name]) unless params[:card_name].blank?
     @wants = @wants.page(params[:page])
+    @wants = @wants.order_by([:priority,:desc],[:card_name,:asc])
 
     respond_to do |format|
       format.html # index.html.erb
