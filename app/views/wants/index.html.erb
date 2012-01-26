@@ -7,6 +7,7 @@
 <% end %>
 
 <%= link_to 'Find Traders', haves_path(:traders => true), class: 'btn info small'  %>
+<%= link_to 'Export for Duel City', url_for(:format => 'forum'), class: 'btn info small', target: 'forum_export'  %>
 
 <%= paginate @wants %>
 

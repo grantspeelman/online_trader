@@ -7,12 +7,13 @@ class WantsController < ApplicationController
   # GET /wants.json
   def index
     @wants = @wants.where(card_name: params[:card_name]) unless params[:card_name].blank?
-    @wants = @wants.page(params[:page])
+    @wants = @wants.page(params[:page]) unless params[:format] == 'forum'
     @wants = @wants.order_by([:priority,:desc],[:card_name,:asc])
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @wants }
+      format.forum
     end
   end
 
