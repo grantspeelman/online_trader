@@ -1,8 +1,10 @@
 require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 source 'http://rubygems.org'
-gem 'rails', '3.1.3'
+gem 'rails', '3.2.0'
 gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 gem 'oa-openid'
 gem 'bson_ext'
 gem 'mongoid'
@@ -13,8 +15,8 @@ gem 'kaminari'
 # gem 'thin'
 
 group :assets do
-  gem 'uglifier'
-  gem 'sass-rails'
+  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails', '~> 3.2.3'
 end
 group :development, :test do
   gem 'capybara'
