@@ -6,6 +6,8 @@
     <h1><em><%= params[:card_name] || "Tradable Cards" %></em> </h1>
 <% end %>
 
+<%= link_to 'Export for Duel City', url_for(:format => 'forum'), class: 'btn info small', target: 'forum_export'  %>
+
 <%= paginate @haves %>
 
 <div class="listing">

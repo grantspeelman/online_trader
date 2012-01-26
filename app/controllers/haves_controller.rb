@@ -14,12 +14,12 @@ class HavesController < ApplicationController
     else
       @haves = @haves.order_by([:card_name,:asc])
     end
-
-    @haves = @haves.page(params[:page])
+    @haves = @haves.page(params[:page]) unless params[:format] == 'forum'
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @haves }
+      format.forum
     end
   end
 
