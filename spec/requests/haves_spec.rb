@@ -88,7 +88,7 @@ describe "Haves" do
         click_link 'Users'
         click_link "haves_user_#{other_user.id}"
         click_link 'Next'
-        page.should have_content("#{other_user} Cards")
+        page.should have_content("#{other_user} Haves")
       end
 
     end
