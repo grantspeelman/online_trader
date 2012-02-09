@@ -25,7 +25,7 @@ class User
     if ign.blank?
       name
     else
-      "#{name} (#{ign})"
+      ign
     end
   end
 
@@ -42,7 +42,7 @@ class User
   end
 
   def trades
-    Trade.any_of({trade_with_user_id: id},{user_id: id})
+    Trade.any_of({with_user_id: id},{user_id: id})
   end
 
 end

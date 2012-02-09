@@ -14,7 +14,7 @@ YugiohOnlineTrader::Application.routes.draw do
 
   resources :haves
   resources :wants
-  resources :trades
+  resources :trades, :except => [:destroy]
 
   resources :cards do
     collection do

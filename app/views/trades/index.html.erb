@@ -3,19 +3,10 @@
 <%= paginate @trades %>
 
 <table>
-  <tr>
-
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @trades.each do |trade| %>
   <tr>
-
-    <td><%= link_to 'Show', trade, id: dom_id(trade, :show) %></td>
-    <td><%= link_to 'Edit', edit_trade_path(trade), id: dom_id(trade, :edit) if can? :update, trade %></td>
-    <td><%= link_to 'Delete', trade, confirm: 'Are you sure?', method: :delete, id: dom_id(trade, :delete) if can? :destroy, trade %></td>
+    <td><%= link_to trade, trade, id: dom_id(trade, :show) %></td>
   </tr>
 <% end %>
 </table>

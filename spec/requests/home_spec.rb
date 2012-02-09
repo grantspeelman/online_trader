@@ -18,7 +18,7 @@ describe 'Home' do
       click_link 'I Have'
       page.should have_content("Editing user")
       page.should have_content("Before using Yu-gi-oh Online Trader you have to set your IGN")
-      click_link 'Trading'
+      click_link 'My Trades'
       page.should have_content("Editing user")
       page.should have_content("Before using Yu-gi-oh Online Trader you have to set your IGN")
     end

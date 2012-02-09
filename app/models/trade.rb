@@ -17,23 +17,15 @@ class Trade
   attr_protected :user_id, :with_user_id
 
   def user_card_count
-    user_cards.inject(0) do |non_blanks,text|
-      if text.blank?
-        non_blanks
-      else
-        non_blanks = non_blanks + 1
-      end
-    end
+    card_count(user_cards)
   end
 
   def with_user_cards_count
-    with_user_cards.inject(0) do |non_blanks,text|
-      if text.blank?
-        non_blanks
-      else
-        non_blanks = non_blanks + 1
-      end
-    end
+    card_count(with_user_cards)
+  end
+
+  def to_s
+    "#{user_card_count} #{user} cards for #{with_user_cards_count} #{with_user} cards"
   end
 
   protected
@@ -53,6 +45,18 @@ class Trade
   def check_with_user
     if with_user == user
       errors.add(:with_user_id,'does not exist')
+    end
+  end
+
+  private
+
+  def card_count(c)
+    c.inject(0) do |non_blanks,text|
+      if text.blank?
+        non_blanks
+      else
+        non_blanks += 1
+      end
     end
   end
 
