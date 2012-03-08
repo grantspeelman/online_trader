@@ -6,6 +6,7 @@
 
 <% @trades.each do |trade| %>
   <tr>
+    <td><%= time_ago_in_words trade.updated_at %> old</td>
     <td><%= link_to trade, trade, id: dom_id(trade, :show) %></td>
   </tr>
 <% end %>

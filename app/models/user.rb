@@ -42,7 +42,7 @@ class User
   end
 
   def trades
-    Trade.any_of({with_user_id: id},{user_id: id})
+    Trade.any_of({with_user_id: id},{user_id: id}).desc(:updated_at, :created_at)
   end
 
 end

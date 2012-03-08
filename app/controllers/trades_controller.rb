@@ -3,7 +3,7 @@ class TradesController < ApplicationController
   before_filter :login_required, :ign_required
   before_filter :load_trades, :only => 'index'
   load_resource :except => 'index'
-  authorize_resource :except => ['index','new','create']
+  authorize_resource :except => ['index']
   # GET /trades
   # GET /trades.json
   def index
@@ -75,17 +75,17 @@ class TradesController < ApplicationController
     end
   end
 
-  # DELETE /trades/1
-  # DELETE /trades/1.json
-  def destroy
-#    @trade = Trade.find(params[:id])
-    @trade.destroy
-
-    respond_to do |format|
-      format.html { redirect_to trades_url }
-      format.json { head :ok }
-    end
-  end
+#  # DELETE /trades/1
+#  # DELETE /trades/1.json
+#  def destroy
+##    @trade = Trade.find(params[:id])
+#    @trade.destroy
+#
+#    respond_to do |format|
+#      format.html { redirect_to trades_url }
+#      format.json { head :ok }
+#    end
+#  end
 
   protected
 

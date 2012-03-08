@@ -12,7 +12,7 @@
 <%= twitter_bootstrap_form_for(@trade) do |f| %>
     <div class="row">
 
-      <div class="span6">
+      <div class="span5 trade-block">
         <div class="user_field">
           <% if @trade.new_record? || @trade.user == current_user %>
               <b>You</b>
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="span6">
+      <div class="span5 trade-block">
         <div class="user_field">
           <% if @trade.new_record? %>
               <%= f.text_field :trade_with %><b><%= @trade.with_user_id.nil? %></b>
@@ -55,7 +55,10 @@
           <% end %>
         </div>
       </div>
+
     </div>
+
+
 
     <%= f.actions do %>
         <%= f.submit %>

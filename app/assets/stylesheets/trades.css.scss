@@ -2,8 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.new_trade {
-  .span6 {
+.new_trade, .edit_trade {
+  .trade-block {
     border: 1px solid black;
     .cards_fields {
       input {
@@ -21,7 +21,8 @@
         width: 70px;
       }
       input {
-        margin-left: -40px;
+        margin-left: -60px;
+        width: 120px;
       }
     }
   }

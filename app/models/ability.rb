@@ -11,6 +11,7 @@ class Ability
       can :manage, Have, :user_id => user.id
       can :read, User
       can :update, User, :id => user.id
+      can :create, Trade
       can :manage, Trade do |trade|
         trade.user == user || trade.with_user == user
       end
