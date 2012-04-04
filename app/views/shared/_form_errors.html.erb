@@ -1,0 +1,8 @@
+<div class="alert">
+  <h4 class="alert-heading"><%= pluralize(errors.count, "error") %> prohibited this want from being saved:</h4>
+  <ul>
+  <% errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>

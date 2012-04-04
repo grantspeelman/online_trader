@@ -1,29 +1,21 @@
-<%= twitter_bootstrap_form_for(@have) do |f| %>
-  <% if @have.errors.any? %>
-    <div class="alert-message block-message error">
-      <strong><%= pluralize(@have.errors.count, "error") %> prohibited this have from being saved:</strong>
-      <ul>
-      <% @have.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= simple_form_for(@have) do |f| %>
+    <% if @have.errors.any? %>
+        <%= render :partial => 'shared/form_errors', :locals => {:errors => @have.errors} %>
+    <% end %>
+
+
+    <%= f.input :card_name %>
+
+    <%= f.input :amount, :hint => "This is the amount you have available for trading" %>
+
+    <%= f.input :value,
+                :label => 'Personal Value',
+                :collection => [['Very Low', 1], ['Low', 2], ['Normal', 3], ['High', 4], ['Very High', 5]],
+                :hint => "How value do you hold this card personally" %>
+
+    <div class="form-actions">
+      <%= f.button :submit, class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', haves_path, class: 'btn' %>
     </div>
-  <% end %>
 
-  <%= f.inputs do %>
-
-    <%= f.text_field :card_name %>
-
-    <%= f.number_field :amount do %>
-        <span class="help-block">This is the amount you have available for trading</span>
-    <% end %>
-
-    <%= f.select :value, 'Personal Value', [['Very Low',1], ['Low',2],['Normal',3],['High',4],['Very High',5]] do %>
-        <span class="help-block">How value do you hold this card personally</span>
-        <span class="help-block">This will give other users an indication how easily you will part with this card</span>
-    <% end %>
-  <% end %>
-  <%= f.actions do %>
-    <%= f.submit %>
-  <% end %>
 <% end %>

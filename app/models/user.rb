@@ -10,7 +10,7 @@ class User
   field :name, :type => String
   field :role
   field :ign, :type => String
-  field :timezone
+  field :time_zone
   validates_presence_of :name
   validates_uniqueness_of :ign, :allow_blank => true
   attr_protected :role

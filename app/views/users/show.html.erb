@@ -53,5 +53,5 @@
 <% end %>
 
 
-<%= side_nav_link_to 'Edit User', edit_user_path(@user) if can? :update, @user %>
+<%= side_nav_link_to 'Edit', edit_user_path(@user) if can? :update, @user %>
 <%= side_nav_link_to 'List Users', users_path %>

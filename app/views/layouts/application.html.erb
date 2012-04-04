@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Yugioh Online Trader</title>
-  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="topbar">
-  <div class="fill">
+
+<div class="navbar">
+  <div class="navbar-inner">
     <div class="container-fluid">
       <a class="brand" href="#">Yugioh Online Trader</a>
       <%= render 'shared/navigation' %>
@@ -19,30 +19,31 @@
 
 <div id="main-container" class="container-fluid">
 
-  <div class="sidebar">
-    <ul class="pills pills-vertical">
-      <%= yield :side_nav %>
-    </ul>
-  </div>
+  <div class="row-fluid">
 
-  <div class="content">
-    <%- flash.each do |name, msg| -%>
-        <% name = 'error' if name.to_s == 'alert' %>
-        <div class="alert-message <%= name %> fade in" data-alert="alert">
-          <a class="close" href="#">×</a>
-          <%= msg.to_s %>
-        </div>
-    <%- end -%>
-    <%= yield %>
+    <div class="span2 sidebar">
+      <ul class="nav nav-pills nav-stacked">
+        <%= yield :side_nav %>
+      </ul>
+    </div>
+
+    <div class="span10 content">
+      <%- flash.each do |name, msg| -%>
+          <% name = 'error' if name.to_s == 'alert' %>
+          <div class="alert-message <%= name %> fade in" data-alert="alert">
+            <a class="close" href="#">×</a>
+            <%= msg.to_s %>
+          </div>
+      <%- end -%>
+      <%= yield %>
+    </div>
   </div>
 
 </div>
 
-<br/><br/><br/>
-
-<footer class="fotter">
+<footer class="footer">
   <div class="container-fluid">
-    <ul class="nav">
+    <ul class="nav nav-pills">
       <li> &copy; Grant Speelman 2012</li>
       <li>
         <a href="http://www.yugioh-online.net">
@@ -51,7 +52,7 @@
       </li>
       <li>
         <a href="http://yugioh.wikia.com/wiki/Main_Page">
-            <%= image_tag("http://images3.wikia.nocookie.net/__cb4/yugioh/images/8/89/Wiki-wordmark.png", :height => "25") %>
+          <%= image_tag("http://images3.wikia.nocookie.net/__cb4/yugioh/images/8/89/Wiki-wordmark.png", :height => "25") %>
         </a>
       </li>
       <li>

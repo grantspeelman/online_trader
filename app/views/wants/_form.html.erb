@@ -1,24 +1,15 @@
-<%= twitter_bootstrap_form_for(@want) do |f| %>
+<%= simple_form_for(@want) do |f| %>
   <% if @want.errors.any? %>
-    <div class="alert-message block-message error">
-      <strong><%= pluralize(@want.errors.count, "error") %> prohibited this want from being saved:</strong>
-      <ul>
-      <% @want.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <%= render :partial => 'shared/form_errors', :locals => {:errors => @want.errors} %>
+  <% end %>
+
+    <%= f.input :card_name, :class => 'ui-autocomplete-input', :autocomplete => false %>
+    <%= f.input :amount  %>
+    <%= f.input :priority,
+                :collection => [['Very Low',1], ['Low',2],['Normal',3],['High',4],['Very High',5]],
+                :hint => 'How badly you want this card' %>
+    <div class="form-actions">
+      <%= f.button :submit, class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', wants_path, class: 'btn'  %>
     </div>
-  <% end %>
-
-  <%= f.inputs do %>
-    <%= f.text_field :card_name, 'Card name', :class => 'ui-autocomplete-input', :autocomplete => false %>
-    <%= f.number_field :amount  %>
-    <%= f.select :priority, 'Priority', [['Very Low',1], ['Low',2],['Normal',3],['High',4],['Very High',5]] do %>
-        <span class="help-block">How badly you want this card</span>
-    <% end %>
-  <% end %>
-  <%= f.actions do %>
-    <%= f.submit %>
-  <% end %>
-
 <% end %>

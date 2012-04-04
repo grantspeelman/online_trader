@@ -9,7 +9,8 @@ gem 'omniauth-google'
 gem 'oa-openid'
 gem 'bson_ext'
 gem 'mongoid'
-gem 'twitter_bootstrap_form_for'
+gem 'simple_form'
+gem 'country_select'
 gem 'jquery-rails'
 gem 'cancan'
 gem 'kaminari'
@@ -17,13 +18,14 @@ gem 'kaminari'
 
 group :assets do
   gem 'uglifier', '>= 1.0.3'
-  gem 'sass-rails', '~> 3.2.3'
+  gem 'less-rails-bootstrap'
+#  gem 'sass-rails', '~> 3.2.3'
 end
 group :development, :test do
   gem 'capybara'
   gem 'rspec-rails'
 end
-group  :test do
+group :test do
   gem 'database_cleaner'
   gem 'mongoid-rspec'
   gem 'factory_girl_rails'

@@ -3,7 +3,7 @@
 <% elsif @user %>
     <h1><%= @user %> Haves</h1>
 <% else %>
-    <h1><em><%= params[:card_name] || "Tradable Wants" %></em></h1>
+    <h1><em><%= params[:card_name] || "Everyones Haves" %></em></h1>
 <% end %>
 
 <% if current_user == @user %>
@@ -20,7 +20,6 @@
 
   <% @haves.each do |have| %>
       <div class="item have">
-
         <% if have.card && have.card.img_url %>
             <%= image_tag(have.card.img_url, :height => "40") %>
         <% else %>
@@ -31,24 +30,22 @@
             <span class="amount"><%= have.amount %></span>
             <span class="card_name"><%= link_to have.card_name, have, id: dom_id(have, :show) %></span>
           </div>
-          <% if current_user != have.user %>
-              <%= render :partial => 'shared/user_trade_info', :locals => {:user => have.user} %>
-          <% end %>
-          <% if current_user != have.user %>
-              <%= link_to 'Make Offer', '', class: 'btn info small' %>
-
-          <% end %>
-          <% if current_user == have.user %>
-              <%= link_to_if (have.want_count > 0), "Traders #{have.want_count}", wants_path(:card_name => have.card_name), class: 'btn info small' %>
-          <% end %>
-          <%= link_to 'Edit', edit_have_path(have),
-                      id: dom_id(have, :edit),
-                      class: 'btn small' if can? :update, have %>
-          <%= link_to 'Delete', have,
-                      confirm: 'Are you sure?',
-                      method: :delete,
-                      id: dom_id(have, :delete),
-                      class: 'btn small' if can? :destroy, have %>
+          <%= render :partial => 'shared/user_trade_info', :locals => {:user => have.user} %>
+          <div class="btn-group">
+            <% if current_user != have.user %>
+                <%= link_to 'Make Offer', '', class: 'btn info small' %>
+            <% else %>
+                <%= link_to_if (have.want_count > 0), "Traders #{have.want_count}", wants_path(:card_name => have.card_name), class: 'btn info small' %>
+            <% end %>
+            <%= link_to 'Edit', edit_have_path(have),
+                        id: dom_id(have, :edit),
+                        class: 'btn small' if can? :update, have %>
+            <%= link_to 'Delete', have,
+                        confirm: 'Are you sure?',
+                        method: :delete,
+                        id: dom_id(have, :delete),
+                        class: 'btn small' if can? :destroy, have %>
+          </div>
         </div>
       </div>
   <% end %>
