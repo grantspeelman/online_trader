@@ -69,7 +69,6 @@ describe "Trades" do
         other_user = create(:user_kim)
         click_link 'My Trades'
         click_link 'Add Trade'
-        fill_in 'Trade with', :with => other_user.ign
         fill_in 'trade_user_cards_0', :with => "My Great Card"
         fill_in 'trade_with_user_cards_0', :with => "Great Card I Want"
         click_button 'Create Trade'

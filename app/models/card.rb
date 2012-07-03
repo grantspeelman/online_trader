@@ -1,13 +1,11 @@
 class Card
-  include Mongoid::Document
-  field :name, :type => String
-  field :img_url
+  include DataMapper::Resource
 
-  validates_presence_of :name
-  validates_uniqueness_of :name
+  property :id,    Serial
+  property :name,  String,  required: true, index: true, unique: true
 
-  index "name", background: true, unique: true
-
-  scope :by_name, ->(name) { where(:name => name) }
+  def self.by_name(name)
+    all(:name => name)
+  end
 
 end

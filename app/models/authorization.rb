@@ -1,16 +1,18 @@
 class Authorization
-  include Mongoid::Document
-  belongs_to :user
-  field :uid
-  field :provider
+  include DataMapper::Resource
 
-  validates_presence_of :user_id, :uid, :provider
+  property :id,        Serial
+  property :uid,       String,  :required => true, :unique => :provider
+  property :provider,  String,  :required => true
+
+  belongs_to :user
+
   validates_uniqueness_of :uid, :scope => :provider
 
-  after_destroy :destroy_user
+  after :destroy, :destroy_user_if_last_authorization
 
   def self.find_from_hash(hash)
-    where(:uid => hash[:uid], :provider => hash[:provider]).first
+    first(:uid => hash[:uid], :provider => hash[:provider])
   end
 
   def self.create_from_hash(hash, user = nil)
@@ -20,7 +22,8 @@ class Authorization
 
   protected
 
-  def destroy_user
+  def destroy_user_if_last_authorization
     user.destroy if user && user.authorizations.empty?
   end
+
 end

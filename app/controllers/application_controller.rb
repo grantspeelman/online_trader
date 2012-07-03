@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    @current_user ||= session[:user_id] && User.find(session[:user_id])
+    @current_user ||= session[:user_id] && User.get(session[:user_id])
   end
 
   def user_signed_in?
@@ -26,14 +26,6 @@ class ApplicationController < ActionController::Base
     return true if user_signed_in?
     store_location
     access_denied
-    false
-  end
-
-  def ign_required
-    return true unless current_user.ign.blank?
-    store_location
-    flash[:error] = "Before using Yu-gi-oh Online Trader you have to set your IGN"
-    redirect_to(edit_user_path(current_user))
     false
   end
 

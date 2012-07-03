@@ -1,15 +1,15 @@
 class WantsController < ApplicationController
-  before_filter :login_required, :ign_required
+  before_filter :login_required
   load_and_authorize_resource :user
   load_and_authorize_resource :through => :user, :shallow => true
 
   # GET /wants
   # GET /wants.json
   def index
-    @wants = @wants.where(card_name: params[:card_name]) unless params[:card_name].blank?
-    @wants = @wants.where(:card_name => {"$in" => current_user.have_card_names}) if params[:traders]
+    @wants = @wants.all(card_name: params[:card_name]) unless params[:card_name].blank?
+    @wants = @wants.all(:card_name => current_user.have_card_names) if params[:traders]
     @wants = @wants.page(params[:page]) unless params[:format] == 'forum'
-    @wants = @wants.order_by([:priority,:desc],[:card_name,:asc])
+    @wants = @wants.all(:order => [:value.desc,:card_name.asc])
 
     respond_to do |format|
       format.html # index.html.erb

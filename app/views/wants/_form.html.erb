@@ -5,7 +5,7 @@
 
     <%= f.input :card_name, :class => 'ui-autocomplete-input', :autocomplete => false %>
     <%= f.input :amount  %>
-    <%= f.input :priority,
+    <%= f.input :value,
                 :collection => [['Very Low',1], ['Low',2],['Normal',3],['High',4],['Very High',5]],
                 :hint => 'How badly you want this card' %>
     <div class="form-actions">

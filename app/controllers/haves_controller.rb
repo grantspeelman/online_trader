@@ -1,18 +1,18 @@
 
 class HavesController < ApplicationController
-  before_filter :login_required, :ign_required
+  before_filter :login_required
   load_and_authorize_resource :user
   load_and_authorize_resource :through => :user, :shallow => true
   # GET /haves
   # GET /haves.json
   def index
 #    @haves = Have.all
-    @haves = @haves.where(card_name: params[:card_name]) unless params[:card_name].blank?
-    @haves = @haves.where(:card_name => {"$in" => current_user.want_card_names}) if params[:traders]
+    @haves = @haves.all(card_name: params[:card_name]) unless params[:card_name].blank?
+    @haves = @haves.all(:card_name => current_user.want_card_names) if params[:traders]
     if params[:card_name] || params[:traders]
-      @haves = @haves.order_by([:value,:asc])
+      @haves = @haves.all(:order => :value.asc)
     else
-      @haves = @haves.order_by([:card_name,:asc])
+      @haves = @haves.all(:order => :card_name.asc)
     end
     @haves = @haves.page(params[:page]) unless params[:format] == 'forum'
 

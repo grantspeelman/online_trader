@@ -1,48 +1,41 @@
 class User
-  include Mongoid::Document
-  has_many :authorizations
-  has_many :wants
-  has_many :haves
-  has_many :trades
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  include DataMapper::Resource
+  include DataMapper::MassAssignmentSecurity
 
-  field :name, :type => String
-  field :role
-  field :ign, :type => String
-  field :time_zone
-  validates_presence_of :name
-  validates_uniqueness_of :ign, :allow_blank => true
+  property 'id',        Serial
+  property 'name',      String, required: true
+  property 'role',      String, required: true, default: 'normal_user'
+  property 'time_zone', String
+
+  has n, :authorizations
+  has n, :wants
+  has n, :haves, 'Have'
+  has n, :trades
+
   attr_protected :role
-#  validates_uniqueness_of :name, :email, :case_sensitive => false
-#  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   def authorized_with(provider)
-    self.authorizations.where(:provider => provider.to_s).exists?
+    self.authorizations.all(provider: provider.to_s).count > 0
   end
 
   def to_s
-    if ign.blank?
-      name
-    else
-      ign
-    end
+    name
   end
 
   def want_card_names
-    wants.only(:card_name).collect{|t|t.card_name}
+    wants.collect{|t|t.card_name}
   end
 
   def have_card_names
-    haves.only(:card_name).collect{|t|t.card_name}
+    haves.collect{|t|t.card_name}
   end
 
   def wants_for(user)
-    user.wants.where(:card_name => {"$in" => have_card_names})
+    user.wants.all(card_name: have_card_names)
   end
 
   def trades
-    Trade.any_of({with_user_id: id},{user_id: id}).desc(:updated_at, :created_at)
+    Trade.all(:order => [:updated_at.desc, :created_at.desc])
   end
 
 end

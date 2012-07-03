@@ -1,4 +1,4 @@
-h1. Yugioh Online Trader
+h1. Online Trader
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 

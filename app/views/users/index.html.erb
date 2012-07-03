@@ -8,8 +8,6 @@
       <div class="item user">
         <%= link_to(user.name, user) %>
         <div>
-          IGN : <%= user.ign %>
-          <br/>
           <%= link_to "Wants : #{user.wants.count}", user_wants_path(user), id: dom_id(user,:wants) %>
           <br/>
           <%= link_to "Haves : #{user.haves.count}", user_haves_path(user), id: dom_id(user,:haves) %>

@@ -1,6 +1,6 @@
 
 class TradesController < ApplicationController
-  before_filter :login_required, :ign_required
+  before_filter :login_required
   before_filter :load_trades, :only => 'index'
   load_resource :except => 'index'
   authorize_resource :except => ['index']

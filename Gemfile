@@ -1,20 +1,24 @@
 require 'rbconfig'
-HOST_OS = RbConfig::CONFIG['host_os']
 source 'http://rubygems.org'
-gem 'rails', '3.2.0'
+gem 'rails', '~> 3.2.0'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google'
 gem 'oa-openid'
-gem 'bson_ext'
-gem 'mongoid'
+gem 'dm-rails'
+gem 'dm-postgres-adapter'
+gem 'dm-validations'
+gem 'dm-timestamps'
+gem 'dm-migrations'
+gem 'dm-pagination'
 gem 'simple_form'
 gem 'country_select'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.0.0'
 gem 'cancan'
 gem 'kaminari'
-# gem 'thin'
+gem 'heroku'
+gem 'thin'
 
 group :assets do
   gem 'uglifier', '>= 1.0.3'
@@ -27,11 +31,9 @@ group :development, :test do
 end
 group :test do
   gem 'database_cleaner'
-  gem 'mongoid-rspec'
+#  gem 'mongoid-rspec'
   gem 'factory_girl_rails'
 end
 
-if HOST_OS =~ /linux/i
-  gem 'therubyracer', '>= 0.9.8'
-end
+gem 'therubyracer', '>= 0.9.8'
 

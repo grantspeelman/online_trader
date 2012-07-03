@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-YugiohOnlineTrader::Application.load_tasks
+OnlineTrader::Application.load_tasks
