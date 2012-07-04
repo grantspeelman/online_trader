@@ -65,7 +65,7 @@ class WantsController < ApplicationController
   def update
 
     respond_to do |format|
-      if @want.update_attributes(params[:want])
+      if @want.update(params[:want])
         format.html { redirect_to @want, notice: 'Want was successfully updated.' }
         format.json { head :ok }
       else

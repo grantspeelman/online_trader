@@ -75,7 +75,7 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
 
     respond_to do |format|
-      if @card.update_attributes(params[:card])
+      if @card.update(params[:card])
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
         format.json { head :ok }
       else

@@ -92,7 +92,7 @@ describe "Wants" do
         current_user.wants.count.should == 0
         click_button 'Create Want'
         page.should have_content('Test Card')
-        current_user.wants.by_card_name('Test Card').count.should == 1
+        current_user.wants.all(card_name: 'Test Card').count.should == 1
       end
 
       it "should not allow duplicate creations" do
@@ -133,7 +133,6 @@ describe "Wants" do
         click_link 'My Wants'
         page.should have_content('Delete me')
         click_link "delete_want_#{want.id}"
-        page.driver.browser.switch_to.alert.accept
         page.should have_content('Successfully deleted.')
         page.should_not have_content('Delete me')
       end

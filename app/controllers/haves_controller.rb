@@ -72,7 +72,7 @@ class HavesController < ApplicationController
 #    @have = Have.find(params[:id])
 
     respond_to do |format|
-      if @have.update_attributes(params[:have])
+      if @have.update(params[:have])
         format.html { redirect_to @have, notice: 'Have was successfully updated.' }
         format.json { head :ok }
       else

@@ -11,7 +11,7 @@ gem 'dm-postgres-adapter'
 gem 'dm-validations'
 gem 'dm-timestamps'
 gem 'dm-migrations'
-gem 'dm-pagination'
+gem 'dm-pager'
 gem 'simple_form'
 gem 'country_select'
 gem 'jquery-rails', '~> 2.0.0'
@@ -31,8 +31,8 @@ group :development, :test do
 end
 group :test do
   gem 'database_cleaner'
-#  gem 'mongoid-rspec'
   gem 'factory_girl_rails'
+  gem 'poltergeist'
 end
 
 gem 'therubyracer', '>= 0.9.8'

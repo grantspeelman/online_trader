@@ -102,7 +102,7 @@ describe "Haves" do
         current_user.haves.count.should == 0
         click_button 'Create Have'
         page.should have_content('Test Card')
-        current_user.haves.by_card_name('Test Card').count.should == 1
+        current_user.haves.all(card_name: 'Test Card').count.should == 1
       end
 
       it "should not allow duplicate creations" do
@@ -145,7 +145,6 @@ describe "Haves" do
         click_link 'I Have'
         page.should have_content('Delete me')
         click_link "delete_have_#{have.id}"
-        page.driver.browser.switch_to.alert.accept
         page.should have_content('Successfully deleted.')
         page.should_not have_content('Delete me')
       end

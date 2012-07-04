@@ -65,7 +65,7 @@ class TradesController < ApplicationController
 #    @trade = Trade.find(params[:id])
 
     respond_to do |format|
-      if @trade.update_attributes(params[:trade])
+      if @trade.update(params[:trade])
         format.html { redirect_to @trade, notice: 'Trade was successfully updated.' }
         format.json { head :ok }
       else
