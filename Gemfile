@@ -26,12 +26,12 @@ group :assets do
 #  gem 'sass-rails', '~> 3.2.3'
 end
 group :development, :test do
-  gem 'capybara'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 group :test do
+  gem 'capybara'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
   gem 'poltergeist'
 end
 

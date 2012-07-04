@@ -1,22 +1,19 @@
-<h1>Listing users</h1>
+<%= page_header("Listing users") %>
 
-<%= paginate @users %>
-
-<div class="listing">
-
+<div class="span10">
+  <table class="table-striped">
+    <tbody>
   <% @users.each do |user| %>
-      <div class="item user">
-        <%= link_to(user.name, user) %>
-        <div>
-          <%= link_to "Wants : #{user.wants.count}", user_wants_path(user), id: dom_id(user,:wants) %>
-          <br/>
-          <%= link_to "Haves : #{user.haves.count}", user_haves_path(user), id: dom_id(user,:haves) %>
-        </div>
-      </div>
+    <tr>
+      <td><%= link_to(user.name, user) %></td>
+      <td><%= edit_icon(user) if can?(:update,user) %></td>
+    </tr>
   <% end %>
-
+    </tbody>
+  </table>
+  <%= paginate @users %>
 </div>
 
-<br/>
 
-<%= side_nav_link_to 'Add User', new_user_path if can? :create, User %>
+
+

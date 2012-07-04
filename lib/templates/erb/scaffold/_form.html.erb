@@ -1,21 +1,13 @@
 <%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
-  <%% if @<%= singular_table_name %>.errors.any? %>
-    <div class="alert-message block-message error">
-      <strong><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</strong>
-      <ul>
-      <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
-        <li><%%= msg %></li>
-      <%% end %>
-      </ul>
-    </div>
-  <%% end %>
+  <%%= f.error_notification %>
 
-  <%%= f.inputs do %>
-<% attributes.each do |attribute| -%>
-    <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
-<% end -%>
-  <%% end %>
-  <%%= f.actions do %>
-    <%%= f.submit %>
-  <%% end %>
+  <div class="form-inputs">
+  <%- attributes.each do |attribute| -%>
+    <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> %>
+  <%- end -%>
+  </div>
+
+  <div class="form-actions">
+    <%%= f.button :submit %>
+  </div>
 <%% end %>

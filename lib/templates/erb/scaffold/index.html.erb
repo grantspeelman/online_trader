@@ -1,29 +1,30 @@
 <h1>Listing <%= plural_table_name %></h1>
 
-<%%= paginate @<%= plural_table_name %> %>
-
-<table>
-  <tr>
-<% attributes.each do |attribute| -%>
-    <th><%= attribute.human_name %></th>
-<% end -%>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-  <tr>
-<% attributes.each do |attribute| -%>
-    <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
-<% end -%>
-    <td><%%= link_to 'Show', <%= singular_table_name %>, <%= key_value :id, "dom_id(#{singular_table_name}, :show)" %> %></td>
-    <td><%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), <%= key_value :id, "dom_id(#{singular_table_name}, :edit)" %> if can? :update, <%= singular_table_name %> %></td>
-    <td><%%= link_to 'Delete', <%= singular_table_name %>, <%= key_value :confirm, "'Are you sure?'" %>, <%= key_value :method, ":delete" %>, <%= key_value :id, "dom_id(#{singular_table_name}, :delete)" %> if can? :destroy, <%= singular_table_name %> %></td>
-  </tr>
-<%% end %>
-</table>
-
-<br />
-
 <%%= side_nav_link_to 'Add <%= human_name %>', new_<%= singular_table_name %>_path if can? :create, <%= class_name %>  %>
+
+<div class="span10">
+  <table>
+    <tr>
+  <% attributes.each do |attribute| -%>
+      <th><%= attribute.human_name %></th>
+  <% end -%>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <tr>
+  <% attributes.each do |attribute| -%>
+      <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+  <% end -%>
+      <td><%%= link_to 'Show', <%= singular_table_name %>, <%= key_value :id, "dom_id(#{singular_table_name}, :show)" %> %></td>
+      <td><%%= link_to 'Edit', {action: :edit, id: <%= singular_table_name %>)}, <%= key_value :id, "dom_id(#{singular_table_name}, :edit)" %> if can? :update, <%= singular_table_name %> %></td>
+      <td><%%= link_to 'Delete', {action: :destroy, id: <%= singular_table_name %>)}, <%= key_value :data, "{confirm: 'Are you sure?'}" %>, <%= key_value :method, ":delete" %>, <%= key_value :id, "dom_id(#{singular_table_name}, :delete)" %> if can? :destroy, <%= singular_table_name %> %></td>
+    </tr>
+  <%% end %>
+  </table>
+  <%%= paginate @<%= plural_table_name %> %>
+</div>
+
+

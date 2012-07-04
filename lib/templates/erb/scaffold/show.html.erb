@@ -1,10 +1,13 @@
-<% attributes.each do |attribute| -%>
-<p>
-  <b><%= attribute.human_name %>:</b>
-  <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
-</p>
+<%%= side_nav_link_to 'Edit <%= human_name %>', action: :edit, id: @<%= singular_table_name %> if can? :update, @<%= singular_table_name %> %>
+<%%= side_nav_link_to 'List <%= human_name %>s', action: :index %>
 
-<% end -%>
+<div class="span10">
+  <% attributes.each do |attribute| -%>
+  <p>
+    <b><%= attribute.human_name %>:</b>
+    <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
+  </p>
+  <% end -%>
+</div>
 
-<%%= side_nav_link_to 'Edit <%= human_name %>', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>) if can? :update, @<%= singular_table_name %> %>
-<%%= side_nav_link_to 'List <%= human_name %>s', <%= index_helper %>_path %>
+

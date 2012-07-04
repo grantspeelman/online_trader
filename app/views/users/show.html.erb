@@ -1,52 +1,63 @@
-<h1><%= @user.name %></h1>
+<%= page_header(@user.name) %>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<%= side_nav_link_to 'Edit', edit_user_path(@user) if can? :update, @user %>
+<%= side_nav_link_to 'List Users', users_path %>
+
+
+<div class="span5">
+  <h2>Details</h2>
+
+  <p>
+    <b>Name:</b>
+    <%= @user.name %>
+  </p>
+</div>
 
 <% if @user == current_user %>
+  <div class="span5">
+    <h2>Authorized</h2>
+
     <p>The following services are authorized with this account</p>
 
     <% if current_user.authorized_with(:twitter) %>
-        <label>Twitter</label>
-        <%= image_tag("twitter_32.png") %>
-        <br/>
+      <label>Twitter</label>
+      <%= image_tag("twitter_32.png") %>
+      <br/>
     <% end %>
     <% if current_user.authorized_with(:facebook) %>
-        <label>Facebook</label>
-        <%= image_tag("facebook_32.png") %>
-        <br/>
+      <label>Facebook</label>
+      <%= image_tag("facebook_32.png") %>
+      <br/>
     <% end %>
     <% if current_user.authorized_with(:google) %>
-        <label>Google</label>
-        <%= image_tag("google_32.png") %>
+      <label>Google</label>
+      <%= image_tag("google_32.png") %>
     <% end %>
 
     <p>You can link other services to this account</p>
 
     <% unless current_user.authorized_with(:twitter) %>
-        <label>Twitter</label>
-        <%= link_to(image_tag("twitter_32.png"),
-                    '/auth/twitter',
-                    :title => 'Login with Twitter') %>
-        <br/>
+      <label>Twitter</label>
+      <%= link_to(image_tag("twitter_32.png"),
+                  '/auth/twitter',
+                  :title => 'Login with Twitter') %>
+      <br/>
     <% end %>
     <% unless current_user.authorized_with(:facebook) %>
-        <label>Facebook</label>
-        <%= link_to(image_tag("facebook_32.png"),
-                    '/auth/facebook',
-                    :title => 'Login with Facebook') %>
-        <br/>
+      <label>Facebook</label>
+      <%= link_to(image_tag("facebook_32.png"),
+                  '/auth/facebook',
+                  :title => 'Login with Facebook') %>
+      <br/>
     <% end %>
     <% unless current_user.authorized_with(:google) %>
-        <label>Google</label>
-        <%= link_to(image_tag("google_32.png"),
-                    '/auth/google',
-                    :title => 'Login with Google') %>
+      <label>Google</label>
+      <%= link_to(image_tag("google_32.png"),
+                  '/auth/google',
+                  :title => 'Login with Google') %>
     <% end %>
+  </div>
 <% end %>
 
 
-<%= side_nav_link_to 'Edit', edit_user_path(@user) if can? :update, @user %>
-<%= side_nav_link_to 'List Users', users_path %>
+

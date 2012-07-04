@@ -44,7 +44,7 @@
                         id: dom_id(want, :edit),
                         class: 'btn small' if can? :update, want %>
             <%= link_to 'Delete', want,
-                        confirm: 'Are you sure?',
+                        data: {confirm: 'Are you sure?'},
                         method: :delete,
                         id: dom_id(want, :delete),
                         class: 'btn small' if can? :destroy, want %>

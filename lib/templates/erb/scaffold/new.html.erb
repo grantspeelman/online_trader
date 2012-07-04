@@ -1,5 +1,7 @@
 <h1>New <%= singular_table_name %></h1>
 
-<%%= render 'form' %>
+<div class="span10">
+  <%%= render 'form' %>
+</div>
 
 <%%= side_nav_link_to 'List <%= human_name %>s', <%= index_helper %>_path %>

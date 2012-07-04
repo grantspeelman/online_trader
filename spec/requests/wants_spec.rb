@@ -16,7 +16,6 @@ describe "Wants" do
     describe "index" do
 
       it "should load page" do
-        # Run the generator again with the --webrat flag if you want to use webrat methods/
         click_link 'My Wants'
         page.should have_content('My wants')
       end
@@ -54,15 +53,7 @@ describe "Wants" do
         page.should_not have_content('Admin Card 2')
       end
 
-      it "should allow to list other user's wants" do
-        other_user = create(:admin_grant)
-        Want.create(:card_name => 'Admin Card 1', :user => other_user)
-        Want.create(:card_name => 'Admin Card 2', :user => other_user)
-        click_link 'Users'
-        click_link "wants_user_#{other_user.id}"
-        page.should have_content('Admin Card 1')
-        page.should have_content('Admin Card 2')
-      end
+      it "should allow to list other user's wants"
 
       it "should be able to find user's wants with my haves" do
         other_user = create(:admin_grant)
@@ -150,27 +141,13 @@ describe "Wants" do
 
     describe "index" do
 
-      #it "should list everyones wants" do
-      #  other_user = create(:user_billy)
-      #  Want.create!(:card_name => 'Card 1', :user => other_user)
-      #  Want.create!(:card_name => 'Card 2', :user => @auth.user)
-      #  visit 'wants'
-      #  page.should have_content('Card 1')
-      #  page.should have_content('Card 2')
-      #end
+      it "should list everyones wants"
 
     end
 
     describe "edit" do
 
-        it "should allow to edit another user's wants" do
-          other_user = create(:user_billy)
-          want = other_user.wants.create!(:card_name => 'Only for Admin')
-          click_link 'Users'
-          click_link "wants_user_#{other_user.id}"
-          click_link "edit_want_#{want.id}"
-          page.should_not have_content('You are not authorized to access this page.')
-        end
+        it "should allow to edit another user's wants"
 
     end
 

@@ -10,10 +10,8 @@ require 'capybara/poltergeist'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
-  Capybara.default_driver = :poltergeist
+  Capybara.javascript_driver = :poltergeist
   config.include FactoryGirl::Syntax::Methods
-
-  config.infer_base_class_for_anonymous_controllers = false  
 
   # Clean up the database
   config.before(:suite) do

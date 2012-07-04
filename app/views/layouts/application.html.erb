@@ -8,37 +8,32 @@
 </head>
 <body>
 
-<div class="navbar">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <a class="brand" href="#">Online Trader</a>
-      <%= render 'shared/navigation' %>
-    </div>
-  </div>
-</div>
+<%= render 'shared/navigation' %>
 
-<div id="main-container" class="container-fluid">
+<div id="main-container" class="container">
 
-  <div class="row-fluid">
+  <%= yield :page_header %>
 
+  <%- flash.each do |name, msg| -%>
+      <% name = 'error' if name.to_s == 'alert' %>
+      <div class="alert-message <%= name %> fade in" data-alert="alert">
+        <a class="close" href="#">×</a>
+        <%= msg.to_s %>
+      </div>
+  <%- end -%>
+
+  <div class="row">
+
+    <%= side_nav_link_to 'Back', session['return-to'] unless current_page?(session['return-to']) %>
     <div class="span2 sidebar">
       <ul class="nav nav-pills nav-stacked">
         <%= yield :side_nav %>
       </ul>
     </div>
 
-    <div class="span10 content">
-      <%- flash.each do |name, msg| -%>
-          <% name = 'error' if name.to_s == 'alert' %>
-          <div class="alert-message <%= name %> fade in" data-alert="alert">
-            <a class="close" href="#">×</a>
-            <%= msg.to_s %>
-          </div>
-      <%- end -%>
-      <%= yield %>
-    </div>
-  </div>
+    <%= yield %>
 
+  </div>
 </div>
 <!-- /container -->
 

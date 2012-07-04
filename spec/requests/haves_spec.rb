@@ -53,15 +53,7 @@ describe "Haves" do
         page.should_not have_content('Admin Card 2')
       end
 
-      it "should allow to list other user's haves" do
-        other_user = create(:admin_grant)
-        ::Have.create(:card_name => 'Admin Card 1', :user => other_user)
-        ::Have.create(:card_name => 'Admin Card 2', :user => other_user)
-        click_link 'Users'
-        click_link "haves_user_#{other_user.id}"
-        page.should have_content('Admin Card 1')
-        page.should have_content('Admin Card 2')
-      end
+      it "should allow to list other user's haves"
 
       it "should be able to find user's haves with my wants" do
         other_user = create(:admin_grant)
@@ -80,16 +72,7 @@ describe "Haves" do
         page.should_not have_content('My Card')
       end
 
-      it "should allow paging of other user's haves" do
-        other_user = create(:admin_grant)
-        (1..100).each do  |i|
-          ::Have.create!(:card_name => "Card #{i}", :user => other_user)
-        end
-        click_link 'Users'
-        click_link "haves_user_#{other_user.id}"
-        click_link 'Next'
-        page.should have_content("#{other_user} Haves")
-      end
+      it "should allow paging of other user's haves"
 
     end
 

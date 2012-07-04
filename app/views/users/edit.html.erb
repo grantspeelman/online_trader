@@ -1,6 +1,10 @@
-<h1>Editing user</h1>
-
-<%= render 'form' %>
+<%= page_header("Editing user") %>
 
 <%= side_nav_link_to 'Show User', @user %>
 <%= side_nav_link_to 'List Users', users_path %>
+
+<div class="span10">
+  <%= render 'form' %>
+</div>
+
+

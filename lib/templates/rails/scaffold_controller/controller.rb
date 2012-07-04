@@ -6,6 +6,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # GET <%= route_url %>.json
   def index
 #    @<%= plural_table_name %> = <%= orm_class.all(class_name) %>
+    store_location
     @<%= plural_table_name %> = @<%= plural_table_name %>.page(params[:page])
 
     respond_to do |format|
