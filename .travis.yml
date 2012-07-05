@@ -7,3 +7,9 @@ before_script:
   - psql -c 'create database online_trader_test;' -U postgres
   - bundle exec rake db:automigrate
 script: bundle exec rake spec
+notifications:
+  email:
+    recipients:
+      - grantspeelman+travis@gmail.com
+    on_success: change
+    on_failure: change
