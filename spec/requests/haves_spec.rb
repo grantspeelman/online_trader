@@ -128,6 +128,7 @@ describe "Haves" do
         click_link 'I Have'
         page.should have_content('Delete me')
         click_link "delete_have_#{have.id}"
+        page.driver.browser.switch_to.alert.accept if Capybara.default_driver == :selenium
         page.should have_content('Successfully deleted.')
         page.should_not have_content('Delete me')
       end

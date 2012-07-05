@@ -10,7 +10,13 @@ require 'capybara/poltergeist'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
-  Capybara.javascript_driver = :poltergeist
+  case ENV["CAPYBARA_DRIVER"]
+    when 'poltergeist'
+      Capybara.default_driver = :poltergeist
+    when 'selenium'
+      Capybara.default_driver = :selenium
+  end
+
   config.include FactoryGirl::Syntax::Methods
 
   # Clean up the database

@@ -13,3 +13,7 @@ notifications:
       - grantspeelman+travis@gmail.com
     on_success: change
     on_failure: change
+env:
+  - CAPYBARA_DRIVER=racktest
+  - CAPYBARA_DRIVER=poltergeist
+  - CAPYBARA_DRIVER=selenium

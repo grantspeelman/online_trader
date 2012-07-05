@@ -124,6 +124,7 @@ describe "Wants" do
         click_link 'My Wants'
         page.should have_content('Delete me')
         click_link "delete_want_#{want.id}"
+        page.driver.browser.switch_to.alert.accept if Capybara.default_driver == :selenium
         page.should have_content('Successfully deleted.')
         page.should_not have_content('Delete me')
       end
