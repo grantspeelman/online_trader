@@ -29,6 +29,7 @@ group :test do
   gem 'capybara', '~> 1.1'
   gem 'database_cleaner', '~> 0.8'
   gem 'cypress-on-rails', '~> 1.0'
+  gem 'simplecov', require: false
 end
 
 gem 'therubyracer', '>= 0.9.8'
