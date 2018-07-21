@@ -1,8 +1,5 @@
 development:
-  uri: postgres://localhost/online_trader_development
+  uri: postgres://postgres@postgres-db/online_trader_development
 
 test:
-  uri: postgres://localhost/online_trader_test
-
-production:
-   uri: <= ENV['DATABASE_URL'] %>
+  uri: postgres://postgres@postgres-db/online_trader_test
