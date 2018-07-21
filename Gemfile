@@ -14,7 +14,7 @@ gem 'country_select', '~> 1.0'
 gem 'jquery-rails', '~> 2.0'
 gem 'cancan', '~> 1.6'
 gem 'kaminari'
-gem 'thin'
+gem 'puma', '~> 3.11.0' # last version to support ruby 2.1
 
 group :assets do
   gem 'uglifier', '>= 1.0.3'
@@ -22,11 +22,13 @@ group :assets do
 end
 group :development, :test do
   gem 'rspec-rails', '~> 2.10'
-  gem 'factory_girl_rails', '~> 3.5'
+  gem 'factory_girl', '~> 4.0'
+  gem 'byebug', '~> 8.2'
 end
 group :test do
   gem 'capybara', '~> 1.1'
   gem 'database_cleaner', '~> 0.8'
+  gem 'cypress-on-rails', '~> 1.0'
 end
 
 gem 'therubyracer', '>= 0.9.8'

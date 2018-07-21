@@ -2,21 +2,12 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
-require 'capybara/poltergeist'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
-  case ENV["CAPYBARA_DRIVER"]
-    when 'poltergeist'
-      Capybara.default_driver = :poltergeist
-    when 'selenium'
-      Capybara.default_driver = :selenium
-  end
-
   config.include FactoryGirl::Syntax::Methods
 
   # Clean up the database

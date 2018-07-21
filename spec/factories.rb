@@ -1,6 +1,11 @@
 require 'factory_girl'
 
 FactoryGirl.define do
+  to_create do |instance|
+    if !instance.save
+      raise "Save failed for #{instance.class}: #{instance.errors.full_messages.inspect}"
+    end
+  end
 
   sequence :firstname do |n|
     names = %W(Jacob Sophia Mason Isabella William Emma Jayden Olivia Noah Ava Michael Emily Ethan Abigail
@@ -29,16 +34,26 @@ FactoryGirl.define do
   end
 
   factory :auth_billy, :class => Authorization do |a|
-    a.uid '11111'
-    a.provider 'twitter'
+    a.uid 'billy@email.com'
+    a.provider 'developer'
     association :user, :factory => :user_billy
   end
 
   factory :auth_grant, :class => Authorization do |a|
-    a.uid '22222'
-    a.provider 'facebook'
+    a.uid 'grant@email.com'
+    a.provider 'developer'
     association :user, :factory => :admin_grant
   end
 
+  factory :have do
+    card_name { "Card #{sequence(:card_name)}" }
+    transient do
+      user_uid 'billy@email.com'
+    end
+
+    before(:create) do |have, evaluator|
+      have.user = Authorization.first(uid: evaluator.user_uid).user
+    end
+  end
 end
 

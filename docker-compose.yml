@@ -24,3 +24,18 @@ services:
       - postgres-db
     stdin_open: true
     tty: true
+
+  cypress:
+    build: .
+    environment:
+      RAILS_ENV: test
+    command: bundle exec rails server -p 5002 -b 0.0.0.0 -P /tmp/server.pid
+    volumes:
+      - .:/app
+      - bundle-data:/usr/local/bundle
+    ports:
+      - "5002:5002"
+    depends_on:
+      - postgres-db
+    stdin_open: true
+    tty: true
