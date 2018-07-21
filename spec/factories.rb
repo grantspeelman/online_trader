@@ -45,10 +45,17 @@ FactoryGirl.define do
     association :user, :factory => :admin_grant
   end
 
+  factory :auth, :class => Authorization do |a|
+    sequence(:uid){ |n| "uid#{n}" }
+    a.provider 'developer'
+    user
+  end
+
   factory :have do
-    card_name { "Card #{sequence(:card_name)}" }
+    sequence(:card_name){ |n| "Card #{n}" }
+
     transient do
-      user_uid 'billy@email.com'
+      user_uid { create(:auth).uid }
     end
 
     before(:create) do |have, evaluator|
