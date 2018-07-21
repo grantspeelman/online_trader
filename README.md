@@ -1,5 +1,7 @@
 # Online Trader
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/a9e233125e997a03e374/maintainability)](https://codeclimate.com/github/grantspeelman/online_trader/maintainability)
+
 Build online trading communities
 
 ### Development using Docker
