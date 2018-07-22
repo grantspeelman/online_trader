@@ -1,0 +1,48 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'db/migrate/**/*'
+    - 'db/schema.rb'
+    - 'Vagrantfile'
+    - 'test/features/**/*'
+    - 'node_modules/**/*'
+    - '.git-hooks/**/*'
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/ParameterLists:
+  Max: 7
+  CountKeywordArgs: true
+
+Metrics/BlockLength:
+  Max: 165
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/SymbolProc:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Performance/RedundantMerge:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Rails/Validation:
+  Enabled: false
+
+Rails/Delegate:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false

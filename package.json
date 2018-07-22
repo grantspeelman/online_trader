@@ -1,0 +1,26 @@
+{
+  "name": "online_trader",
+  "version": "0.1.0",
+  "description": "Build online trading communities",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grantspeelman/online_trader.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grantspeelman/online_trader/issues"
+  },
+  "homepage": "https://github.com/grantspeelman/online_trader#readme",
+  "devDependencies": {
+    "cypress": "^3.0.2",
+    "cypress-capybara": "0.0.2"
+  }
+}
