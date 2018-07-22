@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
@@ -11,16 +13,7 @@ class CardsController < ApplicationController
   end
 
   def search
-    @card_names = Card.where(:name => /^#{params[:term]}/i).limit(20).distinct(:name)
-    if @card_names.size < 20
-      @card_names += Card.where(:name => /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:name)
-    end
-    if @card_names.size < 20
-      @card_names += Have.where(:card_name => /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:card_name)
-    end
-    if @card_names.size < 20
-      @card_names += Want.where(:card_name => /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:card_name)
-    end
+    load_card_names
     respond_to do |format|
       format.json { render json: @card_names.uniq }
     end
@@ -63,7 +56,7 @@ class CardsController < ApplicationController
         format.html { redirect_to @card, notice: 'Card was successfully created.' }
         format.json { render json: @card, status: :created, location: @card }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @card.errors, status: :unprocessable_entity }
       end
     end
@@ -79,7 +72,7 @@ class CardsController < ApplicationController
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @card.errors, status: :unprocessable_entity }
       end
     end
@@ -95,5 +88,33 @@ class CardsController < ApplicationController
       format.html { redirect_to cards_url }
       format.json { head :ok }
     end
+  end
+
+  private
+
+  def load_card_names
+    @card_names = Card.where(name: /^#{params[:term]}/i).limit(20).distinct(:name)
+    _load_more_from_cards
+    _load_more_from_haves
+    _load_more_from_wants
+  end
+
+  def _requires_more_card_names?
+    @card_names.size < 20
+  end
+
+  def _load_more_from_wants
+    return unless _requires_more_card_names?
+    @card_names += Want.where(card_name: /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:card_name)
+  end
+
+  def _load_more_from_haves
+    return unless _requires_more_card_names?
+    @card_names += Have.where(card_name: /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:card_name)
+  end
+
+  def _load_more_from_cards
+    return unless _requires_more_card_names?
+    @card_names += Card.where(name: /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:name)
   end
 end

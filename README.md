@@ -4,9 +4,16 @@
 
 Build online trading communities
 
-### Development using Docker
+### Development setup using Docker
 
-First install docker. [Install Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
+setup code analysis 
+
+```bash
+  BUNDLE_GEMFILE=Gemtools bundle install # not recommended to be added to Gemfile
+  overcommit --install && overcommit --sign && overcommit --sign pre-commit
+```
+
+install docker. [Install Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
 
 ```bash
 docker-compose build

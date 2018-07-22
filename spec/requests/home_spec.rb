@@ -1,14 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Home' do
-
-  describe "first login" do
-
-    it "should see home page" do
-      visit "/auth/google"
-      page.should have_content("Home")
+  describe 'first login' do
+    it 'should see home page' do
+      visit '/auth/google'
+      page.should have_content('Home')
     end
-
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User
   include DataMapper::Resource
   include DataMapper::MassAssignmentSecurity
@@ -15,7 +17,7 @@ class User
   attr_protected :role
 
   def authorized_with(provider)
-    self.authorizations.all(provider: provider.to_s).count > 0
+    authorizations.all(provider: provider.to_s).count > 0
   end
 
   def to_s
@@ -23,11 +25,11 @@ class User
   end
 
   def want_card_names
-    wants.collect{|t|t.card_name}
+    wants.collect(&:card_name)
   end
 
   def have_card_names
-    haves.collect{|t|t.card_name}
+    haves.collect(&:card_name)
   end
 
   def wants_for(user)
@@ -35,8 +37,6 @@ class User
   end
 
   def trades
-    Trade.all(:order => [:updated_at.desc, :created_at.desc])
+    @trades ||= Trade.all(order: [:updated_at.desc, :created_at.desc])
   end
-
 end
-

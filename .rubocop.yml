@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.2
   Exclude:
     - 'bin/**/*'
     - 'vendor/**/*'
@@ -9,36 +9,15 @@ AllCops:
     - 'test/features/**/*'
     - 'node_modules/**/*'
     - '.git-hooks/**/*'
+    - 'lib/templates/**/*'
 
 Metrics/LineLength:
-  Max: 120
-
-Metrics/ParameterLists:
-  Max: 7
-  CountKeywordArgs: true
+  Max: 114 # TODO bring down to 100
 
 Metrics/BlockLength:
-  Max: 165
-
-Style/ClassAndModuleChildren:
-  Enabled: false
-
-Style/SymbolProc:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Naming/VariableNumber:
-  Enabled: false
-
-Performance/RedundantMerge:
   Enabled: false
 
 Documentation:
-  Enabled: false
-
-Rails/Validation:
   Enabled: false
 
 Rails/Delegate:
@@ -46,3 +25,9 @@ Rails/Delegate:
 
 Bundler/OrderedGems:
   Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 23 # TODO bring down

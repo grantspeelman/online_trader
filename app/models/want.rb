@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Want
   include DataMapper::Resource
   include DataMapper::MassAssignmentSecurity
@@ -7,14 +9,14 @@ class Want
   property 'amount',    Integer, default: 1, required: true
   property 'value',     Integer, default: 3, required: true
 
-  validates_numericality_of :amount, :greater_than => 0, :only_integer => true
-  validates_numericality_of :value, :greater_than => 0, :less_than => 6, :only_integer => true
+  validates_numericality_of :amount, greater_than: 0, only_integer: true
+  validates_numericality_of :value, greater_than: 0, less_than: 6, only_integer: true
 
   belongs_to :user
   attr_protected :user_id
 
   def by_card_name(name)
-    all(:card_name => name)
+    all(card_name: name)
   end
 
   def card
@@ -22,12 +24,10 @@ class Want
   end
 
   def haves
-    @haves ||= Have.all(:card_name => card_name)
+    @haves ||= Have.all(card_name: card_name)
   end
 
   def have_count
     haves.count
   end
-
 end
-

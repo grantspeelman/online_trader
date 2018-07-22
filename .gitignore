@@ -45,6 +45,7 @@ tmp/*
 /spec/routing
 /spec/views
 /specifications
+/node_modules
 
 # scm revert files
 **.orig
