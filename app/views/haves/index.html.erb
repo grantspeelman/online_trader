@@ -1,4 +1,4 @@
-<% if current_user == @user %>
+<% if current_user.id == @user %>
     <h1>I Have</h1>
 <% elsif @user %>
     <h1><%= @user %> Haves</h1>
@@ -8,10 +8,6 @@
 
 <% if current_user == @user %>
     <%= link_to 'Find Traders', wants_path(:traders => true), class: 'btn info small' %>
-    <%= link_to 'Export for Duel City',
-                url_for(:format => 'forum'),
-                class: 'btn info small',
-                target: 'forum_export' %>
 <% end %>
 
 <%= paginate @haves %>
@@ -20,11 +16,6 @@
 
   <% @haves.each do |have| %>
       <div class="item have">
-        <% if have.card && have.card.img_url %>
-            <%= image_tag(have.card.img_url, :height => "40") %>
-        <% else %>
-            <%= image_tag("unknowncard.jpg", :height => "40") %>
-        <% end %>
         <div>
           <div class="card_info">
             <span class="amount"><%= have.amount %></span>

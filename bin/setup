@@ -4,7 +4,7 @@ require 'fileutils'
 include FileUtils
 
 # path to your application root.
-APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+APP_ROOT = Pathname.new File.expand_path('..', __dir__)
 
 def system!(*args)
   system(*args) || abort("\n== Command #{args} failed ==")
@@ -30,5 +30,5 @@ chdir APP_ROOT do
   system! 'bundle exec rspec'
 
   puts "\n== Setup complete"
-  puts "Start the application by running `docker-compose up`"
+  puts 'Start the application by running `docker-compose up`'
 end

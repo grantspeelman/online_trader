@@ -1,10 +1,19 @@
 # Online Trader
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/a9e233125e997a03e374/maintainability)](https://codeclimate.com/github/grantspeelman/online_trader/maintainability)
+
 Build online trading communities
 
-### Development using Docker
+### Development setup using Docker
 
-First install docker. [Install Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
+setup code analysis 
+
+```bash
+  BUNDLE_GEMFILE=Gemtools bundle install # not recommended to be added to Gemfile
+  overcommit --install && overcommit --sign && overcommit --sign pre-commit
+```
+
+install docker. [Install Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
 
 ```bash
 docker-compose build
@@ -19,6 +28,14 @@ docker-compose run --rm app bin/rake
 # or start a bash console inside docker and run commands
 docker-compose run --rm app bash
 bin/rake
+```
+
+Running cypress
+```bash
+npm install
+
+docker-compose up -d
+node_modules/.bin/cypress open -P spec
 ```
 
 ## Licence

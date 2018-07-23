@@ -1,18 +1,24 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
+  include Pundit
+  alias authorise authorize
+
   protect_from_forgery
 
-  rescue_from CanCan::AccessDenied do |exception|
-      redirect_to root_url, :alert => exception.message
+  rescue_from Pundit::NotAuthorizedError do |_exception|
+    flash.now['alert'] = "Not allow to #{params[:action]} this"
+    render :access_denied, status: 403
   end
 
   protected
 
   def current_user
-    @current_user ||= session[:user_id] && User.get(session[:user_id])
+    @current_user ||= User.get(session[:user_id])
   end
 
   def user_signed_in?
-    !!current_user
+    current_user.present?
   end
 
   helper_method :current_user, :user_signed_in?
@@ -49,6 +55,4 @@ class ApplicationController < ActionController::Base
       session['return-to'] = nil
     end
   end
-
-
 end

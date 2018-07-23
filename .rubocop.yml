@@ -1,0 +1,36 @@
+AllCops:
+  TargetRubyVersion: 2.2
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'db/migrate/**/*'
+    - 'db/schema.rb'
+    - 'Vagrantfile'
+    - 'test/features/**/*'
+    - 'node_modules/**/*'
+    - '.git-hooks/**/*'
+    - 'lib/templates/**/*'
+
+Metrics/LineLength:
+  Max: 114 # TODO bring down to 100
+
+Metrics/MethodLength:
+  Max: 12
+
+Metrics/BlockLength:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Rails/Delegate:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 23 # TODO bring down

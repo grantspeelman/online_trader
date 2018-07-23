@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 OnlineTrader::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -58,12 +60,11 @@ OnlineTrader::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { :host => 'yourhost.com' }
+  config.action_mailer.default_url_options = { host: 'yourhost.com' }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
-
+  config.action_mailer.default charset: 'utf-8'
 end

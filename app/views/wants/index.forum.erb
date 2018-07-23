@@ -1,7 +1,0 @@
-<% @wants.group_by(&:priority).each do |priority, wants| %>
-  [B][U]<%= priority_text priority %> Needs[/U][/B]
-  <% wants.each do |want|  %>
-    <%= want.amount %> X <%= want.card_name %>
-  <% end %>
-    
-<% end %>
