@@ -23,3 +23,10 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add("login", (details) => {
+    cy.visit('/auth/developer')
+    cy.findField('Name').type(details.name)
+    cy.findField('Email').type(details.email)
+    cy.findButton('Sign In').click()
+    cy.contains('Welcome, ' + details.name)
+})

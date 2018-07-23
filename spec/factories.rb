@@ -33,29 +33,40 @@ FactoryGirl.define do
     end
   end
 
-  factory :auth_billy, class: Authorization do |a|
-    a.uid 'billy@email.com'
-    a.provider 'developer'
-    association :user, factory: :user_billy
-  end
-
-  factory :auth_grant, class: Authorization do |a|
-    a.uid 'grant@email.com'
-    a.provider 'developer'
-    association :user, factory: :admin_grant
-  end
-
-  factory :auth, class: Authorization do |a|
+  factory :auth, class: Authorization do
     sequence(:uid) { |n| "uid#{n}" }
-    a.provider 'developer'
-    user
+    provider 'developer'
+
+    factory :auth_billy, class: Authorization do
+      uid 'billy@email.com'
+
+      association :user, factory: :user_billy
+    end
+
+    factory :auth_grant, class: Authorization do
+      uid 'grant@email.com'
+
+      association :user, factory: :admin_grant
+    end
   end
 
   factory :have do
     sequence(:card_name) { |n| "Card #{n}" }
 
     transient do
-      user_uid { create(:auth).uid }
+      user_uid ''
+    end
+
+    before(:create) do |have, evaluator|
+      have.user = Authorization.first(uid: evaluator.user_uid).user
+    end
+  end
+
+  factory :want do
+    sequence(:card_name) { |n| "Card #{n}" }
+
+    transient do
+      user_uid ''
     end
 
     before(:create) do |have, evaluator|

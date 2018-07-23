@@ -1,4 +1,4 @@
-class HavePolicy < ApplicationPolicy
+class WantPolicy < ApplicationPolicy
   def index?
     true
   end

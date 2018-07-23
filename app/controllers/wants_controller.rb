@@ -2,12 +2,13 @@
 
 class WantsController < ApplicationController
   before_filter :login_required
-  load_and_authorize_resource :user
-  load_and_authorize_resource through: :user, shallow: true
 
   # GET /wants
   # GET /wants.json
   def index
+    #    @wants = Want.all
+    authorise(Want)
+    @user = User.get(params[:user_id])
     load_wants
 
     respond_to do |format|
@@ -20,6 +21,8 @@ class WantsController < ApplicationController
   # GET /wants/1
   # GET /wants/1.json
   def show
+    @want = authorise(load_want)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @want }
@@ -29,6 +32,8 @@ class WantsController < ApplicationController
   # GET /wants/new
   # GET /wants/new.json
   def new
+    @want = authorise Want.new
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @want }
@@ -36,11 +41,14 @@ class WantsController < ApplicationController
   end
 
   # GET /wants/1/edit
-  def edit; end
+  def edit
+    @want = authorise(load_want)
+  end
 
   # POST /wants
   # POST /wants.json
   def create
+    @want = authorise Want.new(params[:want])
     @want.user = current_user
 
     respond_to do |format|
@@ -57,6 +65,8 @@ class WantsController < ApplicationController
   # PUT /wants/1
   # PUT /wants/1.json
   def update
+    @want = authorise(load_want)
+
     respond_to do |format|
       if @want.update(params[:want])
         format.html { redirect_to @want, notice: 'Want was successfully updated.' }
@@ -71,10 +81,11 @@ class WantsController < ApplicationController
   # DELETE /wants/1
   # DELETE /wants/1.json
   def destroy
+    @want = authorise(load_want)
     @want.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_wants_url(@want.user), notice: 'Successfully deleted.' }
+      format.html { redirect_to(request.referrer || { action: :index }, notice: 'Successfully deleted.') }
       format.json { head :ok }
     end
   end
@@ -82,8 +93,14 @@ class WantsController < ApplicationController
   private
 
   def load_wants
+    @wants = Want
+    @wants = @wants.all(user_id: params[:user_id]) if params[:user_id].present?
     @wants = @wants.all(card_name: params[:card_name]) unless params[:card_name].blank?
     @wants = @wants.all(card_name: current_user.have_card_names) if params[:traders]
     @wants = @wants.page(params[:page]).all(order: [:value.desc, :card_name.asc])
+  end
+
+  def load_want
+    Want.get!(params[:id])
   end
 end
