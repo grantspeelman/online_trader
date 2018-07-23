@@ -1,6 +1,6 @@
 <%= page_header(@user.name) %>
 
-<%= side_nav_link_to 'Edit', edit_user_path(@user) if can? :update, @user %>
+<%= side_nav_link_to 'Edit', edit_user_path(@user), id: 'edit_user' if can? :update, @user %>
 <%= side_nav_link_to 'List Users', users_path %>
 
 
@@ -10,6 +10,11 @@
   <p>
     <b>Name:</b>
     <%= @user.name %>
+  </p>
+
+  <p>
+    <b>Timezone:</b>
+    <%= @user.time_zone %>
   </p>
 </div>
 
