@@ -1,15 +1,17 @@
-<%= simple_form_for(@want) do |f| %>
-  <% if @want.errors.any? %>
-    <%= render :partial => 'shared/form_errors', :locals => {:errors => @want.errors} %>
-  <% end %>
+<div class="col">
+  <%= simple_form_for(@want) do |f| %>
+    <% if @want.errors.any? %>
+      <%= render :partial => 'form_errors', :locals => {:errors => @want.errors} %>
+    <% end %>
 
-    <%= f.input :card_name, :class => 'ui-autocomplete-input', :autocomplete => false %>
-    <%= f.input :amount  %>
-    <%= f.input :value,
-                :collection => [['Very Low',1], ['Low',2],['Normal',3],['High',4],['Very High',5]],
-                :hint => 'How badly you want this card' %>
-    <div class="form-actions">
-      <%= f.button :submit, class: 'btn btn-primary' %>
-      <%= link_to 'Cancel', wants_path, class: 'btn'  %>
-    </div>
-<% end %>
+      <%= f.input :card_name, :class => 'ui-autocomplete-input', :autocomplete => false %>
+      <%= f.input :amount, as: :integer  %>
+      <%= f.input :value,
+                  :collection => [['Very Low',1], ['Low',2],['Normal',3],['High',4],['Very High',5]],
+                  :hint => 'How badly you want this card' %>
+      <div class="form-actions">
+        <%= f.button :submit, class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', wants_path, class: 'btn btn-secondary'  %>
+      </div>
+  <% end %>
+</div>

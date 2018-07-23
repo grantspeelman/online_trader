@@ -16,10 +16,9 @@ gem 'omniauth', '~> 1.0'
 gem 'puma', '~> 3.11.0' # last version to support ruby 2.1
 gem 'rails', '~> 3.2.0'
 gem 'rake', '~> 11.0'
-gem 'simple_form', '~> 2.0'
+gem 'simple_form', '~> 2.0' # limit by rails 3.2 version
 
 group :assets do
-  gem 'less-rails-bootstrap', '~> 2.0'
   gem 'uglifier', '>= 1.0.3'
 end
 group :development, :test do

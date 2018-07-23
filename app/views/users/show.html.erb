@@ -3,8 +3,7 @@
 <%= side_nav_link_to 'Edit', edit_user_path(@user), id: 'edit_user' if can? :update, @user %>
 <%= side_nav_link_to 'List Users', users_path %>
 
-
-<div class="span5">
+<div class="col-sm">
   <h2>Details</h2>
 
   <p>
@@ -19,7 +18,7 @@
 </div>
 
 <% if @user == current_user %>
-  <div class="span5">
+  <div class="col-sm">
     <h2>Authorized</h2>
 
     <p>The following services are authorized with this account</p>

@@ -1,42 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <title>Online Trader</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
   <%= stylesheet_link_tag "application" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= render 'shared/navigation' %>
+<%= render 'navigation' %>
 
-<div id="main-container" class="container">
-
-  <%= yield :page_header %>
-
-  <%- flash.each do |name, msg| -%>
-      <% name = 'error' if name.to_s == 'alert' %>
-      <div class="alert-message <%= name %> fade in" data-alert="alert">
-        <a class="close" href="#">×</a>
-        <%= msg.to_s %>
-      </div>
-  <%- end -%>
+<main role="main" class="container">
+  <% if flash.present? %>
+    <div class="row">
+      <%- flash.each do |name, msg| -%>
+        <% name = 'info' if name.to_s == 'notice' %>
+        <% name = 'danger' if name.to_s == 'alert' %>
+        <div class="col alert alert-<%= name %>" role="alert">
+          <%= msg.to_s %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <%- end -%>
+    </div>
+  <% end %>
 
   <div class="row">
-
-    <%= side_nav_link_to 'Back', session['return-to'] unless current_page?(session['return-to']) %>
-    <div class="span2 sidebar">
-      <ul class="nav nav-pills nav-stacked">
+    <div class="col-2">
+      <ul class="nav flex-column">
         <%= yield :side_nav %>
       </ul>
     </div>
 
-    <%= yield %>
+    <div class="col-9">
+      <%= yield :page_header %>
 
+      <div class="row">
+        <%= yield %>
+      </div>
+    </div>
   </div>
-</div>
+
+</main>
 <!-- /container -->
 
-
+<%= javascript_include_tag "application" %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 </body>
 </html>

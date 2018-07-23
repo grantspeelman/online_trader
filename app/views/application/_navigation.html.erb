@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="/">Collect and Swap</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsMain" aria-controls="navbarsMain" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsMain">
+    <ul class="navbar-nav mr-auto">
+      <% if user_signed_in? %>
+        <%= main_nav_link('My Account', user_path(current_user)) %>
+        <%= main_nav_link('My Wants', user_wants_path(current_user)) %>
+        <%= main_nav_link('I Have', user_haves_path(current_user)) %>
+        <%= main_nav_link('Users', users_path) %>
+        <%= main_nav_link('All Wants', wants_path) %>
+        <%= main_nav_link('All Haves', haves_path) %>
+        <%= main_nav_link('Logout', logout_path, :method=>'delete') %>
+      <% else %>
+        <%= main_nav_link('Login/Sign up', login_path)  %>
+      <% end %>
+    </ul>
+<!--    <form class="form-inline my-2 my-lg-0">-->
+<!--      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+<!--    </form>-->
+  </div>
+</nav>
