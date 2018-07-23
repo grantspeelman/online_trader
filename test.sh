@@ -10,7 +10,12 @@ sleep 2 # give rails a chance to start up correctly
 
 echo '-- cypress run'
 node_modules/.bin/cypress install
-node_modules/.bin/cypress run -P spec
+if [ -z $CYPRESS_RECORD_KEY ]
+then
+    node_modules/.bin/cypress run -P spec
+else
+    node_modules/.bin/cypress run -P spec --record
+fi
 
 echo '-- stop rails server'
 kill -9 `cat tmp/pids/server.pid`
