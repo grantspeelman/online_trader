@@ -30,6 +30,14 @@ docker-compose run --rm app bash
 bin/rake
 ```
 
+Running cypress
+```bash
+npm install
+
+docker-compose up -d
+node_modules/.bin/cypress open -P spec
+```
+
 ## Licence
 
 Licensed under the [MIT License](LICENCE.md).
