@@ -24,4 +24,8 @@ module ApplicationHelper
             { action: 'edit', id: object },
             html_options.reverse_merge(title: 'Edit', id: dom_id(object, :edit)))
   end
+
+  def can?(action, model)
+    policy(model).public_send("#{action}?".to_sym)
+  end
 end

@@ -65,8 +65,8 @@ describe('Haves', function() {
         ['create', 'have', { id: 1, card_name: 'Duplicate' }],
       ])
 
-      cy.visit("/haves/1/edit")
-      cy.contains('You are not authorized to access this page.')
+      cy.visit("/haves/1/edit", {failOnStatusCode: false})
+      cy.contains('Not allow to edit this')
     })
 
     it('should allow to delete', function() {

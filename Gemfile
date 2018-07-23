@@ -2,7 +2,7 @@
 
 require 'rbconfig'
 source 'http://rubygems.org'
-gem 'cancan', '~> 1.6'
+gem 'pundit'
 gem 'country_select', '~> 1.0'
 gem 'dm-migrations', '~> 1.2'
 gem 'dm-pager', '~> 1.1'

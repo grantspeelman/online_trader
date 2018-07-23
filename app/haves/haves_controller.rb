@@ -2,12 +2,12 @@
 
 class HavesController < ApplicationController
   before_filter :login_required
-  load_and_authorize_resource :user
-  load_and_authorize_resource through: :user, shallow: true
+
   # GET /haves
   # GET /haves.json
   def index
     #    @haves = Have.all
+    authorise(Have)
     load_haves
 
     respond_to do |format|
@@ -20,7 +20,7 @@ class HavesController < ApplicationController
   # GET /haves/1
   # GET /haves/1.json
   def show
-    #    @have = Have.find(params[:id])
+    @have = authorise(load_have)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -31,7 +31,7 @@ class HavesController < ApplicationController
   # GET /haves/new
   # GET /haves/new.json
   def new
-    #    @have = Have.new
+    @have = authorise Have.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,13 +41,14 @@ class HavesController < ApplicationController
 
   # GET /haves/1/edit
   def edit
-    #    @have = Have.find(params[:id])
+    @have = authorise(load_have)
   end
 
   # POST /haves
   # POST /haves.json
   def create
-    #    @have = Have.new(params[:have])
+    @have = authorise Have.new(params[:have])
+    @have.user = current_user
 
     respond_to do |format|
       if @have.save
@@ -63,7 +64,7 @@ class HavesController < ApplicationController
   # PUT /haves/1
   # PUT /haves/1.json
   def update
-    #    @have = Have.find(params[:id])
+    @have = authorise(load_have)
 
     respond_to do |format|
       if @have.update(params[:have])
@@ -79,11 +80,11 @@ class HavesController < ApplicationController
   # DELETE /haves/1
   # DELETE /haves/1.json
   def destroy
-    #    @have = Have.find(params[:id])
+    @have = authorise(load_have)
     @have.destroy
 
     respond_to do |format|
-      format.html { redirect_to haves_url, notice: 'Successfully deleted.' }
+      format.html { redirect_to(request.referrer || {action: :index}, notice: 'Successfully deleted.') }
       format.json { head :ok }
     end
   end
@@ -91,6 +92,8 @@ class HavesController < ApplicationController
   private
 
   def load_haves
+    @haves = Have
+    @haves = @haves.all(user_id: params[:user_id]) if params[:user_id].present?
     @haves = @haves.all(card_name: params[:card_name]) unless params[:card_name].blank?
     @haves = @haves.all(card_name: current_user.want_card_names) if params[:traders]
     @haves = if params[:card_name] || params[:traders]
@@ -99,5 +102,9 @@ class HavesController < ApplicationController
                @haves.all(order: :card_name.asc)
              end
     @haves = @haves.page(params[:page])
+  end
+
+  def load_have
+    Have.get!(params[:id])
   end
 end

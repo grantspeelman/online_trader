@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pundit
+  alias :authorise :authorize
+
   protect_from_forgery
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, alert: exception.message
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    flash.now['alert'] = "Not allow to #{params[:action]} this"
+    render :access_denied, status: 403
   end
 
   protected

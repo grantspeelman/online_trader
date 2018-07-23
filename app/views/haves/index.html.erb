@@ -20,11 +20,6 @@
 
   <% @haves.each do |have| %>
       <div class="item have">
-        <% if have.card && have.card.img_url %>
-            <%= image_tag(have.card.img_url, :height => "40") %>
-        <% else %>
-            <%= image_tag("unknowncard.jpg", :height => "40") %>
-        <% end %>
         <div>
           <div class="card_info">
             <span class="amount"><%= have.amount %></span>
