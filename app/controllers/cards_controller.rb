@@ -93,7 +93,7 @@ class CardsController < ApplicationController
   private
 
   def load_card_names
-    @card_names = Card.where(name: /^#{params[:term]}/i).limit(20).distinct(:name)
+    @card_names = Card.where(name: /^#{sanitize_term}/i).limit(20).distinct(:name)
     _load_more_from_cards
     _load_more_from_haves
     _load_more_from_wants
@@ -105,16 +105,20 @@ class CardsController < ApplicationController
 
   def _load_more_from_wants
     return unless _requires_more_card_names?
-    @card_names += Want.where(card_name: /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:card_name)
+    @card_names += Want.where(card_name: /#{sanitize_term}/i).limit(20 - @card_names.size).distinct(:card_name)
   end
 
   def _load_more_from_haves
     return unless _requires_more_card_names?
-    @card_names += Have.where(card_name: /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:card_name)
+    @card_names += Have.where(card_name: /#{sanitize_term}/i).limit(20 - @card_names.size).distinct(:card_name)
   end
 
   def _load_more_from_cards
     return unless _requires_more_card_names?
-    @card_names += Card.where(name: /#{params[:term]}/i).limit(20 - @card_names.size).distinct(:name)
+    @card_names += Card.where(name: /#{sanitize_term}/i).limit(20 - @card_names.size).distinct(:name)
+  end
+
+  def sanitize_term
+    @sanitize_term ||= params[:term].gsub(/\W/,'')
   end
 end
