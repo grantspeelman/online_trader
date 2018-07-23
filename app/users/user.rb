@@ -12,7 +12,6 @@ class User
   has n, :authorizations
   has n, :wants
   has n, :haves, 'Have'
-  has n, :trades
 
   attr_protected :role
 
@@ -34,9 +33,5 @@ class User
 
   def wants_for(user)
     user.wants.all(card_name: have_card_names)
-  end
-
-  def trades
-    @trades ||= Trade.all(order: [:updated_at.desc, :created_at.desc])
   end
 end

@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
 OnlineTrader::Application.routes.draw do
-  resources :users do |_u|
+  resources :users, except: %i[new create :destroy] do
     collection do
       get 'search'
     end
-    resources :wants, except: %i[show edit update destroy]
-    resources :haves, except: %i[show edit update destroy]
+    resources :wants, only: %i[index]
+    resources :haves, only: %i[index]
   end
 
   resources :haves
   resources :wants
-  resources :trades, except: [:destroy]
 
   resources :cards do
     collection do
