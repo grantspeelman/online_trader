@@ -5,7 +5,7 @@ echo '--- testing rails 3.2'
 export SECRET_TOKEN="blueblahblueblahblueblahblueblahblueblahblueblahblueblahblueblahblueblahblueblah"
 
 echo '-- start rails server'
-bundle exec ./bin/rails server -p 5002 -e test &
+bundle exec ./script/rails server -p 5002 -e test &
 sleep 2 # give rails a chance to start up correctly
 
 echo '-- cypress run'
