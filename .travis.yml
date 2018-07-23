@@ -11,8 +11,6 @@ cache:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y build-essential patch ruby-dev zlib1g-dev liblzma-dev libxml2-dev postgresql-server-dev-all
-
-after_install:
   - npm install
 
 before_script:

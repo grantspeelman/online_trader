@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-#!/usr/bin/env bash
 set -eo pipefail
 
 echo '--- testing rails 3.2'
+export SECRET_TOKEN="blueblahblueblahblueblahblueblahblueblahblueblahblueblahblueblahblueblahblueblah"
 
 echo '-- start rails server'
 bundle exec ./bin/rails server -p 5002 -e test &
