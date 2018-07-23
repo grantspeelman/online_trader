@@ -119,6 +119,6 @@ class CardsController < ApplicationController
   end
 
   def sanitize_term
-    @sanitize_term ||= params[:term].gsub(/\W/,'')
+    @sanitize_term ||= params[:term].gsub(/\W/, '')
   end
 end

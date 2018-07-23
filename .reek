@@ -20,7 +20,7 @@
   RepeatedConditional:
     enabled: false # TODO enable
 TooManyStatements:
-  max_statements: 10
+  max_statements: 12
 UtilityFunction:
   public_methods_only: true
 IrresponsibleModule:

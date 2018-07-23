@@ -14,6 +14,9 @@ AllCops:
 Metrics/LineLength:
   Max: 114 # TODO bring down to 100
 
+Metrics/MethodLength:
+  Max: 12
+
 Metrics/BlockLength:
   Enabled: false
 

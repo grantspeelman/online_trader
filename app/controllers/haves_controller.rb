@@ -8,6 +8,7 @@ class HavesController < ApplicationController
   def index
     #    @haves = Have.all
     authorise(Have)
+    @user = User.get(params[:user_id])
     load_haves
 
     respond_to do |format|
@@ -84,7 +85,7 @@ class HavesController < ApplicationController
     @have.destroy
 
     respond_to do |format|
-      format.html { redirect_to(request.referrer || {action: :index}, notice: 'Successfully deleted.') }
+      format.html { redirect_to(request.referrer || { action: :index }, notice: 'Successfully deleted.') }
       format.json { head :ok }
     end
   end
@@ -96,11 +97,7 @@ class HavesController < ApplicationController
     @haves = @haves.all(user_id: params[:user_id]) if params[:user_id].present?
     @haves = @haves.all(card_name: params[:card_name]) unless params[:card_name].blank?
     @haves = @haves.all(card_name: current_user.want_card_names) if params[:traders]
-    @haves = if params[:card_name] || params[:traders]
-               @haves.all(order: :value.asc)
-             else
-               @haves.all(order: :card_name.asc)
-             end
+    @haves = @haves.all(order: :card_name.asc)
     @haves = @haves.page(params[:page])
   end
 

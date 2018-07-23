@@ -1,4 +1,4 @@
-<% if current_user == @user %>
+<% if current_user.id == @user %>
     <h1>I Have</h1>
 <% elsif @user %>
     <h1><%= @user %> Haves</h1>
@@ -8,10 +8,6 @@
 
 <% if current_user == @user %>
     <%= link_to 'Find Traders', wants_path(:traders => true), class: 'btn info small' %>
-    <%= link_to 'Export for Duel City',
-                url_for(:format => 'forum'),
-                class: 'btn info small',
-                target: 'forum_export' %>
 <% end %>
 
 <%= paginate @haves %>
