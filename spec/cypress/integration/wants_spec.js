@@ -54,10 +54,8 @@ describe('Wants', function() {
   })
 
   it('cannot edit other users wants', function() {
-    cy.appFactories([['create', 'auth_billy', { uid: 'billy@email.com' } ]])
-
     cy.appFactories([
-      ['create', 'want', { id: 1, card_name: 'Duplicate', user_uid: 'billy@email.com'  }],
+      ['create', 'want', { id: 1, card_name: 'Duplicate' }],
     ])
 
     cy.visit("/wants/1/edit", {failOnStatusCode: false})

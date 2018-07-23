@@ -11,7 +11,6 @@ OnlineTrader::Application.routes.draw do
 
   resources :haves
   resources :wants
-  resources :trades, except: [:destroy]
 
   resources :cards do
     collection do
