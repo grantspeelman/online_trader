@@ -1,0 +1,13 @@
+<p class="user">
+  <strong>
+  <% if params[:controller] != 'users' %>
+    <%= link_to user, user_path(user), title: "#{user}", id: dom_id(user) %>
+  <% else %>
+    Tradeable
+  <% end %>
+  :</strong>
+
+    <span title="How many of his wants you have"><%= current_user.wants_for(user).count %> Wants</span>
+    /
+    <span title="How many of his haves you want"><%= user.wants_for(current_user).count %> Haves</span>
+</p>

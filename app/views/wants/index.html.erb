@@ -1,51 +1,40 @@
-<% if current_user == @user %>
-    <h1>My wants</h1>
-<% elsif @user %>
-    <h1><%= @user.name %> wants</h1>
-<% else %>
-    <h1><em><%= params[:card_name] || "Everyones Wants" %></em></h1>
-<% end %>
-
-<% if current_user == @user %>
-    <%= link_to 'Find Traders', haves_path(:traders => true), class: 'btn info small' %>
-<% end %>
+<%= page_header(index_heading) %>
 
 <%= paginate @wants %>
 
-<br clear="all"/>
-
-<div class="listing">
-
-  <% @wants.each do |want| %>
-      <div class="item want">
-        <div>
-          <div class="card_info">
-            <span class="amount"><%= want.amount %></span>
-            <span class="card_name"><%= link_to want.card_name, want, id: dom_id(want, :show) %></span>
-          </div>
-          <%= render :partial => 'shared/user_trade_info', :locals => {:user => want.user} %>
-          <div class="btn-group">
-            <% if current_user != want.user %>
-                <%= link_to 'Make Offer', '', class: 'btn info small' %>
-            <% end %>
-            <% if current_user == want.user %>
-                <%= link_to_if (want.have_count > 0), "Traders #{want.have_count}", haves_path(:card_name => want.card_name), class: 'btn info small' %>
-            <% end %>
-            <%= link_to 'Edit', edit_want_path(want),
-                        id: dom_id(want, :edit),
-                        class: 'btn small' if can? :update, want %>
-            <%= link_to 'Delete', want,
-                        data: {confirm: 'Are you sure?'},
-                        method: :delete,
-                        id: dom_id(want, :delete),
-                        class: 'btn small' if can? :destroy, want %>
-          </div>
+<% @wants.each do |want| %>
+  <div class="col-3-sm">
+    <div class="card">
+      <div class="card-header">
+        <%= link_to want.card_name, want, id: dom_id(want, :show) %>
+        <small><%= want.amount %></small>
+      </div>
+      <div class="card-body">
+        <%= render :partial => 'user_trade_info', :locals => {:user => want.user} %>
+        <div class="btn-group">
+          <% if current_user != want.user %>
+            <a href="#" class="card-link">Make Offer</a>
+          <% end %>
+          <% if current_user == want.user %>
+            <a href="<%= haves_path(:card_name => want.card_name) %>" class="card-link">
+              <%= "Traders #{want.have_count}" %>
+            </a>
+          <% end %>
+          <%= link_to 'Edit', edit_want_path(want),
+                      id: dom_id(want, :edit),
+                      class: 'card-link' if can? :update, want %>
+          <%= link_to 'Delete', want,
+                      data: {confirm: 'Are you sure?'},
+                      method: :delete,
+                      id: dom_id(want, :delete),
+                      class: 'card-link' if can? :destroy, want %>
         </div>
       </div>
-  <% end %>
+    </div>
+  </div>
+<% end %>
 
-</div>
-
+<%= side_nav_link_to 'Find Traders', haves_path(traders: true)  %>
 <%= side_nav_link_to "Add Want", new_want_path if can? :create, Want %>
 
 

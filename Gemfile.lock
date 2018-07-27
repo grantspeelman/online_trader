@@ -42,7 +42,6 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
-    commonjs (0.2.7)
     concurrent-ruby (1.0.5)
     countries (0.9.3)
       currencies (~> 0.4.2)
@@ -105,13 +104,6 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    less (2.3.3)
-      commonjs (~> 0.2.6)
-    less-rails (2.3.3)
-      actionpack (>= 3.1)
-      less (~> 2.3.1)
-    less-rails-bootstrap (2.3.3)
-      less-rails (~> 2.3.1)
     libv8 (3.16.14.19)
     mail (2.5.5)
       mime-types (~> 1.16)
@@ -199,7 +191,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.54)
-    uglifier (4.1.15)
+    uglifier (4.1.16)
       execjs (>= 0.3.0, < 3)
     websocket (1.2.8)
     xpath (0.1.4)
@@ -224,7 +216,6 @@ DEPENDENCIES
   factory_girl (~> 4.0)
   jquery-rails (~> 2.0)
   kaminari
-  less-rails-bootstrap (~> 2.0)
   omniauth (~> 1.0)
   puma (~> 3.11.0)
   pundit

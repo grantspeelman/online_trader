@@ -8,15 +8,33 @@ class HavesController < ApplicationController
   def index
     #    @haves = Have.all
     authorise(Have)
-    @user = User.get(params[:user_id])
     load_haves
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @haves }
-      format.forum
     end
   end
+
+  private
+
+  helper_method :index_heading
+
+  def index_heading
+    if current_user == user
+      'I Have'
+    elsif user
+      "#{user.name} haves"
+    else
+      'Everyones Wants'
+    end
+  end
+
+  def user
+    @user ||= User.get(params[:user_id])
+  end
+
+  public
 
   # GET /haves/1
   # GET /haves/1.json

@@ -1,4 +1,72 @@
-# frozen_string_literal: true
+class SimpleForm::Inputs::Base
+  def error(wrapper_options = nil)
+    error_text if has_errors?
+  end
+
+  def full_error(wrapper_options = nil)
+    full_error_text if options[:error] != false && has_errors?
+  end
+
+  def has_errors?
+    object_with_errors? || object.nil? && has_custom_error?
+  end
+
+  def has_value?
+    object && object.respond_to?(attribute_name) && object.send(attribute_name).present?
+  end
+
+  def valid?
+    !has_errors? && has_value?
+  end
+
+  protected
+
+  def error_text
+    text = has_custom_error? ? options[:error] : errors.send(error_method)
+
+    "#{html_escape(options[:error_prefix])} #{html_escape(text)}".lstrip.html_safe
+  end
+
+  def full_error_text
+    has_custom_error? ? options[:error] : full_errors.send(error_method)
+  end
+
+  def object_with_errors?
+    object && object.respond_to?(:errors) && errors.present?
+  end
+
+  def error_method
+    options[:error_method] || SimpleForm.error_method
+  end
+
+  def errors
+    @errors ||= (errors_on_attribute + errors_on_association).compact
+  end
+
+  def full_errors
+    @full_errors ||= (full_errors_on_attribute + full_errors_on_association).compact
+  end
+
+  def errors_on_attribute
+    object.errors[attribute_name] || []
+  end
+
+  def full_errors_on_attribute
+    object.errors.full_messages_for(attribute_name)
+  end
+
+  def errors_on_association
+    reflection ? object.errors[reflection.name] : []
+  end
+
+  def full_errors_on_association
+    reflection ? object.errors.full_messages_for(reflection.name) : []
+  end
+
+  def has_custom_error?
+    options[:error].is_a?(String)
+  end
+end
 
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
@@ -47,48 +115,8 @@ SimpleForm.setup do |config|
     b.use :error, wrap_with: { tag: :span, class: :error }
   end
 
-  config.wrappers :bootstrap, tag: 'div', class: 'control-group', error_class: 'error' do |b|
-    b.use :html5
-    b.use :placeholder
-    b.use :label
-    b.wrapper tag: 'div', class: 'controls' do |ba|
-      ba.use :input
-      ba.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
-      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
-    end
-  end
-
-  config.wrappers :prepend, tag: 'div', class: 'control-group', error_class: 'error' do |b|
-    b.use :html5
-    b.use :placeholder
-    b.use :label
-    b.wrapper tag: 'div', class: 'controls' do |input|
-      input.wrapper tag: 'div', class: 'input-prepend' do |prepend|
-        prepend.use :input
-      end
-      input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
-      input.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
-    end
-  end
-
-  config.wrappers :append, tag: 'div', class: 'control-group', error_class: 'error' do |b|
-    b.use :html5
-    b.use :placeholder
-    b.use :label
-    b.wrapper tag: 'div', class: 'controls' do |input|
-      input.wrapper tag: 'div', class: 'input-append' do |append|
-        append.use :input
-      end
-      input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
-      input.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
-    end
-  end
-
-  # Wrappers for forms and inputs using the Twitter Bootstrap toolkit.
-  # Check the Bootstrap docs (http://twitter.github.com/bootstrap)
-  # to learn about the different styles for forms and inputs,
-  # buttons and other elements.
-  config.default_wrapper = :bootstrap
+  # The default wrapper to be used by the FormBuilder.
+  config.default_wrapper = :default
 
   # Define the way to render check boxes / radio buttons with labels.
   # Defaults to :nested for bootstrap config.
@@ -159,6 +187,10 @@ SimpleForm.setup do |config|
   # to match as key, and the input type that will be used when the field name
   # matches the regexp as value.
   # config.input_mappings = { /count/ => :integer }
+
+  # Custom wrappers for input types. This should be a hash containing an input
+  # type as key and the wrapper that will be used for all inputs with specified type.
+  # config.wrapper_mappings = { :string => :prepend }
 
   # Default priority for time_zone inputs.
   # config.time_zone_priority = nil

@@ -10,7 +10,7 @@ describe('Users', function() {
       ['create', 'user', { name: 'User 1' }],
       ['create', 'user', { name: 'User 2' }]
     ])
-    cy.findLink('Users').click()
+    cy.visit('/users')
     cy.contains('User 1')
     cy.contains('User 2')
   })
