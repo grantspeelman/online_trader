@@ -18,6 +18,22 @@ class HavesController < ApplicationController
     end
   end
 
+  private
+
+  helper_method :index_heading
+
+  def index_heading
+    if current_user == @user
+      'I Have'
+    elsif @user
+      "#{@user.name} haves"
+    else
+      'Everyones Wants'
+    end
+  end
+
+  public
+
   # GET /haves/1
   # GET /haves/1.json
   def show

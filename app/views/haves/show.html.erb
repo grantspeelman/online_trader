@@ -1,30 +1,27 @@
-<h2><%= @have.card_name %></h2>
+<%= page_header('Have') %>
 
-<p>
-  <b>Card name:</b>
-  <%= @have.card_name %>
-</p>
+<div class="col">
+  <p>
+    <b>Card name:</b>
+    <%= @have.card_name %>
+  </p>
 
+  <p>
+    <b>Amount wanted:</b>
+    <%= @have.amount %>
+  </p>
 
-<p>
-  <b>Amount for Trade:</b>
-  <%= @have.amount %>
-</p>
+  <p>
+    <b>User:</b>
+    <%= link_to @have.user, user_path(@have.user) %>
+  </p>
+</div>
 
-<% unless current_user == @have.user %>
-<p>
-  <b>User :</b>
-  <%= link_to @have.user, user_path(@have.user) %>
-</p>
-<% end %>
-
-
+<%= side_nav_link_to 'Find Traders', wants_path(:card_name => @have.card_name)  %>
 <%= side_nav_link_to 'Add Have', new_have_path if can? :create, Have %>
 <%= side_nav_link_to 'Edit Have', edit_have_path(@have) if can? :update, @have %>
-<% if current_user == @have.user %>
-  <%= side_nav_link_to 'Find Traders', wants_path(:card_name => @have.card_name)  %>
-<% end %>
 <% if current_user != @have.user %>
-    <%= side_nav_link_to "#{@have.user} Cards", user_haves_path(@have.user) %>
-    <%= side_nav_link_to 'Make Offer', "#" %>
+  <%= side_nav_link_to 'Make Offer', "#" %>
+  <%= side_nav_link_to "#{@have.user} Cards", user_haves_path(@have.user) %>
 <% end %>
+

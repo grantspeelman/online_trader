@@ -15,7 +15,7 @@
           <% if current_user != want.user %>
             <a href="#" class="card-link">Make Offer</a>
           <% end %>
-          <% if current_user == want.user && want.have_count > 0 %>
+          <% if current_user == want.user %>
             <a href="<%= haves_path(:card_name => want.card_name) %>" class="card-link">
               <%= "Traders #{want.have_count}" %>
             </a>
@@ -34,6 +34,7 @@
   </div>
 <% end %>
 
+<%= side_nav_link_to 'Find Traders', haves_path(traders: true)  %>
 <%= side_nav_link_to "Add Want", new_want_path if can? :create, Want %>
 
 

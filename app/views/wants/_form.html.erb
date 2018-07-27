@@ -1,8 +1,6 @@
 <div class="col">
   <%= simple_form_for(@want) do |f| %>
-    <% if @want.errors.any? %>
-      <%= render :partial => 'form_errors', :locals => {:errors => @want.errors} %>
-    <% end %>
+    <%= render 'form_errors', errors: @want.errors %>
 
       <%= f.input :card_name, :class => 'ui-autocomplete-input', :autocomplete => false %>
       <%= f.input :amount, as: :integer  %>

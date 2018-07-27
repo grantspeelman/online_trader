@@ -1,4 +1,4 @@
-<%= page_header('New want') %>
+<%= page_header('Want') %>
 
 <div class="col">
   <p>
@@ -17,9 +17,9 @@
   </p>
 </div>
 
+<%= side_nav_link_to 'Find Traders', haves_path(:card_name => @want.card_name)  %>
 <%= side_nav_link_to 'Add Want', new_want_path if can? :create, Want %>
 <%= side_nav_link_to 'Edit Want', edit_want_path(@want) if can? :update, @want %>
-<%= side_nav_link_to 'Find Traders', haves_path(:card_name => @want.card_name)  %>
 <% if current_user != @want.user %>
   <%= side_nav_link_to 'Make Offer', "#" %>
   <%= side_nav_link_to "#{@want.user} Wants", user_wants_path(@want.user) %>
