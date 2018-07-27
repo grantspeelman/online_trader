@@ -8,13 +8,11 @@ class WantsController < ApplicationController
   def index
     #    @wants = Want.all
     authorise(Want)
-    @user = User.get(params[:user_id])
     load_wants
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @wants }
-      format.forum
     end
   end
 
@@ -23,13 +21,17 @@ class WantsController < ApplicationController
   helper_method :index_heading
 
   def index_heading
-    if current_user == @user
+    if current_user == user
       'My wants'
-    elsif @user
-      "#{@user.name} wants"
+    elsif user
+      "#{user.name} wants"
     else
       'Everyones Wants'
     end
+  end
+
+  def user
+    @user ||= User.get(params[:user_id])
   end
 
   public
