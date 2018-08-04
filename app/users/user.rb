@@ -1,19 +1,9 @@
 # frozen_string_literal: true
 
-class User
-  include DataMapper::Resource
-  include DataMapper::MassAssignmentSecurity
-
-  property 'id',        Serial
-  property 'name',      String, required: true
-  property 'role',      String, required: true, default: 'normal_user'
-  property 'time_zone', String
-
-  has n, :authorizations
-  has n, :wants
-  has n, :haves, 'Have'
-
-  attr_protected :role
+class User < Sequel::Model
+  # has n, :authorizations
+  # has n, :wants
+  # has n, :haves, 'Have'
 
   def authorized_with(provider)
     authorizations.all(provider: provider.to_s).count > 0

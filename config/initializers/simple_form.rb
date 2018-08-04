@@ -1,9 +1,9 @@
 class SimpleForm::Inputs::Base
-  def error(wrapper_options = nil)
+  def error(_wrapper_options = nil)
     error_text if has_errors?
   end
 
-  def full_error(wrapper_options = nil)
+  def full_error(_wrapper_options = nil)
     full_error_text if options[:error] != false && has_errors?
   end
 

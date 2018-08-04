@@ -25,10 +25,10 @@ class SessionsController < ApplicationController
   private
 
   def create_auth
-    return nil if (@auth = Authorization.find_from_hash(auth_hash))
+    return nil if (@auth = OAuthAuthentication.find_from_hash(auth_hash))
     # Create a new user or add an auth to existing user, depending on
     # whether there is already a user signed in.
-    @auth = Authorization.create_from_hash(auth_hash, current_user)
+    @auth = OAuthAuthentication.create_from_hash(auth_hash, current_user)
   end
 
   def auth_hash

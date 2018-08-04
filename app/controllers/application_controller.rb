@@ -11,10 +11,6 @@ class ApplicationController < ActionController::Base
     render :access_denied, status: 403
   end
 
-  rescue_from DataMapper::ObjectNotFoundError do |_exception|
-    render :not_found, status: 404
-  end
-
   protected
 
   def current_user

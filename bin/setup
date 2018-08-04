@@ -15,13 +15,9 @@ chdir APP_ROOT do
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
 
-  puts "\n== Create database =="
-  system! 'createdb -U postgres -h postgres-db online_trader_development'
-  system! 'createdb -U postgres -h postgres-db online_trader_test'
-
-  puts "\n== Migrate database =="
-  system! 'bundle exec rake db:automigrate db:seed'
-  system! 'RAILS_ENV=test bundle exec rake db:automigrate'
+  puts "\n== Create and Migrate database =="
+  system! 'bundle exec rake db:create db:migrate db:seed'
+  system! 'RAILS_ENV=test bundle exec rake db:create db:migrate'
 
   puts "\n== Removing old logs and tempfiles =="
   system! 'bundle exec rake log:clear tmp:clear'

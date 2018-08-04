@@ -1,5 +1,7 @@
 development:
-  uri: postgres://postgres@<%= ENV['DB_HOST'] || 'localhost' %>/online_trader_development
+  adapter: postgresql
+  url: postgres://postgres@<%= ENV['DB_HOST'] || 'localhost' %>/online_trader_development
 
 test:
-  uri: postgres://postgres@<%= ENV['DB_HOST'] || 'localhost' %>/online_trader_test
+  adapter: postgresql
+  url: postgres://postgres@<%= ENV['DB_HOST'] || 'localhost' %>/online_trader_test

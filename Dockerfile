@@ -1,5 +1,5 @@
 # 1: Use ruby base:
-FROM ruby:2.1
+FROM ruby:2.3
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get update  -q && \

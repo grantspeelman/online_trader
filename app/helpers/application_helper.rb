@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def main_nav_link(body, url, method: nil)
-    li_class = "nav-item"
+    li_class = 'nav-item'
     li_class += ' active' if current_page?(url)
     content_tag('li', link_to(body, url, method: method, class: 'nav-link'), class: li_class)
   end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 OnlineTrader::Application.routes.draw do
-  resources :users, except: %i[new create :destroy] do
+  resources :users, except: %i[new create destroy] do
     collection do
       get 'search'
     end
