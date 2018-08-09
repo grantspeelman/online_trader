@@ -1,16 +1,21 @@
 # frozen_string_literal: true
-
 OmniAuth.config.test_mode = true
-OmniAuth.config.add_mock(:developer, uid: '11111', info: { name: 'Billy Bob' })
-OmniAuth.config.add_mock(:developer, uid: '22222', info: { name: 'Grant Speelman' })
-OmniAuth.config.add_mock(:developer, uid: '33333', info: { name: 'James Bond' })
+
+OmniAuth.config.mock_auth[:developer] = OmniAuth::AuthHash.new(provider: 'developer',
+                                                               uid: 'grant@email.com')
+
 
 module OauthHelper
-  def login_with_oauth(oauth)
-    visit "/auth/#{oauth.provider}"
+  def current_user
+    OAuthAuthentication.first(provider_uid: 'grant@email.com').user
+  end
+
+  def login
+    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:developer]
+    post "/auth/developer/callback"
   end
 end
 
 RSpec.configure do |config|
-  config.include OauthHelper
+  config.include OauthHelper, type: :request
 end

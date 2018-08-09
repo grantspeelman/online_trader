@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    @current_user ||= User.get(session[:user_id])
+    @current_user ||= User[session[:user_id]]
   end
 
   def user_signed_in?

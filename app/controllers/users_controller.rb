@@ -37,6 +37,6 @@ class UsersController < ApplicationController
   private
 
   def load_user
-    User.get!(params[:id])
+    User.with_pk!(params[:id])
   end
 end

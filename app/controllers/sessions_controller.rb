@@ -34,6 +34,6 @@ class SessionsController < ApplicationController
   def auth_hash
     { provider: request.env['omniauth.auth']['provider'].to_s,
       uid: request.env['omniauth.auth']['uid'].to_s,
-      name: request.env['omniauth.auth']['info']['name'].to_s }
+      name: request.env.dig('omniauth.auth', 'info', 'name').to_s }
   end
 end
