@@ -27,24 +27,23 @@ FactoryBot.define do
     end
     factory :admin_grant do |u|
       u.name 'Grant Speelman'
-      u.role 'admin'
     end
   end
 
   factory :auth, class: OAuthAuthentication do
-    sequence(:uid) { |n| "uid#{n}" }
-    provider 'developer'
+    sequence(:provider_uid) { |n| "uid#{n}" }
+    provider_name 'developer'
 
     association :user, factory: :user
 
     factory :auth_billy, class: OAuthAuthentication do
-      uid 'billy@email.com'
+      provider_uid 'billy@email.com'
 
       association :user, factory: :user_billy
     end
 
     factory :auth_grant, class: OAuthAuthentication do
-      uid 'grant@email.com'
+      provider_uid 'grant@email.com'
 
       association :user, factory: :admin_grant
     end
