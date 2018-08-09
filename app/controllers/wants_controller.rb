@@ -31,7 +31,7 @@ class WantsController < ApplicationController
   end
 
   def user
-    @user ||= User.get(params[:user_id])
+    @user ||= User[params[:user_id]]
   end
 
   public
@@ -112,13 +112,12 @@ class WantsController < ApplicationController
 
   def load_wants
     @wants = Want
-    @wants = @wants.all(user_id: params[:user_id]) if params[:user_id].present?
-    @wants = @wants.all(card_name: params[:card_name]) unless params[:card_name].blank?
-    @wants = @wants.all(card_name: current_user.have_card_names) if params[:traders]
-    @wants = @wants.page(params[:page]).all(order: [:value.desc, :card_name.asc])
+    @wants = @wants.where(user_id: params[:user_id]) if params[:user_id].present?
+    @wants = @wants.where(name: params[:name]) unless params[:name].blank?
+    @wants = @wants.order(:name).paginate(params[:page] || 1, 20)
   end
 
   def load_want
-    Want.get!(params[:id])
+    Want.with_pk!(params[:id])
   end
 end

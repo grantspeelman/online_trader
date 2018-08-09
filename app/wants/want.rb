@@ -1,19 +1,16 @@
 # frozen_string_literal: true
 
-class Want
-  include DataMapper::Resource
-  include DataMapper::MassAssignmentSecurity
+class Want < Sequel::Model
+  many_to_one :user
 
-  property 'id',        Serial
-  property 'card_name', String, required: true, unique: :user_id, index: true
-  property 'amount',    Integer, default: 1, required: true
-  property 'value',     Integer, default: 3, required: true
-
-  validates_numericality_of :amount, greater_than: 0, only_integer: true
-  validates_numericality_of :value, greater_than: 0, less_than: 6, only_integer: true
-
-  belongs_to :user
-  attr_protected :user_id
+  plugin :validation_helpers
+  def validate
+    super
+    validates_presence %i[name]
+    validates_unique :name, scope: :user_id
+    validates_integer :amount
+    validates_operator(:>=, 0, :amount)
+  end
 
   def by_card_name(name)
     all(card_name: name)
@@ -24,7 +21,8 @@ class Want
   end
 
   def haves
-    @haves ||= Have.all(card_name: card_name)
+    ['TODO']
+    # @haves ||= Have.all(card_name: card_name)
   end
 
   def have_count

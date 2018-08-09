@@ -103,6 +103,36 @@ CREATE FUNCTION public.users_set_updated_at() RETURNS trigger
 $$;
 
 
+--
+-- Name: wants_set_created_at(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.wants_set_created_at() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$        BEGIN
+          IF (TG_OP = 'UPDATE') THEN
+            NEW."created_at" := OLD."created_at";
+          ELSIF (TG_OP = 'INSERT') THEN
+            NEW."created_at" := CURRENT_TIMESTAMP;
+          END IF;
+          RETURN NEW;
+        END;
+$$;
+
+
+--
+-- Name: wants_set_updated_at(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.wants_set_updated_at() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$        BEGIN
+          NEW."updated_at" := CURRENT_TIMESTAMP;
+          RETURN NEW;
+        END;
+$$;
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -162,6 +192,20 @@ CREATE TABLE public.users (
 
 
 --
+-- Name: wants; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.wants (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name text DEFAULT ''::text NOT NULL,
+    amount integer DEFAULT 1 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    user_id uuid
+);
+
+
+--
 -- Name: o_auth_authentications id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -193,6 +237,14 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: wants wants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.wants
+    ADD CONSTRAINT wants_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: o_auth_authentications_provider_uid_provider_name_index; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -214,6 +266,13 @@ CREATE TRIGGER set_created_at BEFORE INSERT OR UPDATE ON public.o_auth_authentic
 
 
 --
+-- Name: wants set_created_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER set_created_at BEFORE INSERT OR UPDATE ON public.wants FOR EACH ROW EXECUTE PROCEDURE public.wants_set_created_at();
+
+
+--
 -- Name: users set_updated_at; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -228,11 +287,26 @@ CREATE TRIGGER set_updated_at BEFORE INSERT OR UPDATE ON public.o_auth_authentic
 
 
 --
+-- Name: wants set_updated_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER set_updated_at BEFORE INSERT OR UPDATE ON public.wants FOR EACH ROW EXECUTE PROCEDURE public.wants_set_updated_at();
+
+
+--
 -- Name: o_auth_authentications o_auth_authentications_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.o_auth_authentications
     ADD CONSTRAINT o_auth_authentications_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: wants wants_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.wants
+    ADD CONSTRAINT wants_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
@@ -245,3 +319,5 @@ INSERT INTO "schema_migrations" ("filename") VALUES ('20180803002754_create_user
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180803002754_users_auto_timestamps.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180803011611_create_o_auth_authentications.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180803011612_authentications_auto_timestamps.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20180809131546_create_wants.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20180809131546_wants_auto_timestamps.rb');

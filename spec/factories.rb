@@ -61,15 +61,16 @@ FactoryBot.define do
   #   end
   # end
   #
-  # factory :want do
-  #   sequence(:card_name) { |n| "Card #{n}" }
-  #
-  #   transient do
-  #     user_uid { create(:auth).uid }
-  #   end
-  #
-  #   before(:create) do |have, evaluator|
-  #     have.user = Authorization.first(uid: evaluator.user_uid).user
-  #   end
-  # end
+  factory :want do
+    sequence(:name) { |n| "Card #{n}" }
+    amount { rand(10) + 1 }
+
+    transient do
+      user_id { create(:auth).user_id }
+    end
+
+    before(:create) do |want, evaluator|
+      want.user = OAuthAuthentication.first(user_id: evaluator.user_id).user
+    end
+  end
 end

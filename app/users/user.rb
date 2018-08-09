@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User < Sequel::Model
-  # has n, :authorizations
   # has n, :wants
   # has n, :haves, 'Have'
   one_to_many :authentications, class: OAuthAuthentication

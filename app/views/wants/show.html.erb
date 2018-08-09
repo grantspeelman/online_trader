@@ -2,8 +2,8 @@
 
 <div class="col">
   <p>
-    <b>Card name:</b>
-    <%= @want.card_name %>
+    <b>name:</b>
+    <%= @want.name %>
   </p>
 
   <p>
@@ -17,7 +17,7 @@
   </p>
 </div>
 
-<%= side_nav_link_to 'Find Traders', haves_path(:card_name => @want.card_name)  %>
+<%= side_nav_link_to 'Find Traders', haves_path(:name => @want.name)  %>
 <%= side_nav_link_to 'Add Want', new_want_path if can? :create, Want %>
 <%= side_nav_link_to 'Edit Want', edit_want_path(@want) if can? :update, @want %>
 <% if current_user != @want.user %>
