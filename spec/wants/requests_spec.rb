@@ -4,7 +4,7 @@ RSpec.describe 'Wants', type: :request do
   before { login }
 
   describe '/users/:id/wants GET' do
-    it 'allowed to your own wants' do
+    it 'allowed to view your own wants' do
       want = create(:want, user: current_user)
       get "/users/#{current_user.to_param}/wants"
       expect(response).to be_success

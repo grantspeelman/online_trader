@@ -70,7 +70,7 @@ FactoryBot.define do
     end
 
     before(:create) do |want, evaluator|
-      want.user = OAuthAuthentication.first(user_id: evaluator.user_id).user
+      want.user ||= User[evaluator.user_id]
     end
   end
 end
