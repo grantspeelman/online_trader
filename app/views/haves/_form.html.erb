@@ -2,11 +2,8 @@
   <%= simple_form_for(@have) do |f| %>
     <%= render 'form_errors', errors: @have.errors %>
 
-    <%= f.input :card_name, class: 'ui-autocomplete-input', autocomplete: false %>
-    <%= f.input :amount, as: :integer, hint: 'This is the amount you have available for trading'  %>
-    <%= f.input :value,
-                collection: [['Very Low',1], ['Low',2],['Normal',3],['High',4],['Very High',5]],
-                hint: 'How value do you hold this card personally' %>
+    <%= f.input :name, class: 'ui-autocomplete-input', autocomplete: false %>
+    <%= f.input :amount, as: :integer  %>
     <div class="form-actions">
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= link_to 'Cancel', haves_path, class: 'btn btn-secondary'  %>

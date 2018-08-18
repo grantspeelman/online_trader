@@ -22,16 +22,16 @@ class HavesController < ApplicationController
 
   def index_heading
     if current_user == user
-      'I Have'
+      'My haves'
     elsif user
       "#{user.name} haves"
     else
-      'Everyones Wants'
+      'Everyones Haves'
     end
   end
 
   def user
-    @user ||= User.get(params[:user_id])
+    @user ||= User[params[:user_id]]
   end
 
   public
@@ -112,14 +112,12 @@ class HavesController < ApplicationController
 
   def load_haves
     @haves = Have
-    @haves = @haves.all(user_id: params[:user_id]) if params[:user_id].present?
-    @haves = @haves.all(card_name: params[:card_name]) unless params[:card_name].blank?
-    @haves = @haves.all(card_name: current_user.want_card_names) if params[:traders]
-    @haves = @haves.all(order: :card_name.asc)
-    @haves = @haves.page(params[:page])
+    @haves = @haves.where(user_id: params[:user_id]) if params[:user_id].present?
+    @haves = @haves.where(name: params[:name]) unless params[:name].blank?
+    @haves = @haves.order(:name).paginate(params[:page] || 1, 20)
   end
 
   def load_have
-    Have.get!(params[:id])
+    Have.with_pk!(params[:id])
   end
 end

@@ -1,12 +1,12 @@
 <%= page_header(index_heading) %>
 
-<%= paginate @haves %>
+<%= render 'paginator', records: @haves %>
 
 <% @haves.each do |have| %>
   <div class="col-3-sm">
     <div class="card">
       <div class="card-header">
-        <%= link_to have.card_name, have, id: dom_id(have, :show) %>
+        <%= link_to have.name, have, id: dom_id(have, :show) %>
         <small><%= have.amount %></small>
       </div>
       <div class="card-body">
@@ -16,7 +16,7 @@
             <a href="#" class="card-link">Make Offer</a>
           <% end %>
           <% if current_user == have.user %>
-            <a href="<%= wants_path(:card_name => have.card_name) %>" class="card-link">
+            <a href="<%= haves_path(name: have.name) %>" class="card-link">
               <%= "Traders #{have.want_count}" %>
             </a>
           <% end %>
@@ -34,5 +34,7 @@
   </div>
 <% end %>
 
-<%= side_nav_link_to 'Find Traders', wants_path(traders: true) %>
-<%= side_nav_link_to 'Add Have', new_have_path if can? :create, Have %>
+<%= side_nav_link_to 'Find Traders', wants_path(traders: true)  %>
+<%= side_nav_link_to "Add Want", new_have_path if can? :create, Want %>
+
+

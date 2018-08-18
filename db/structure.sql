@@ -44,6 +44,36 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 
 --
+-- Name: haves_set_created_at(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.haves_set_created_at() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$        BEGIN
+          IF (TG_OP = 'UPDATE') THEN
+            NEW."created_at" := OLD."created_at";
+          ELSIF (TG_OP = 'INSERT') THEN
+            NEW."created_at" := CURRENT_TIMESTAMP;
+          END IF;
+          RETURN NEW;
+        END;
+$$;
+
+
+--
+-- Name: haves_set_updated_at(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.haves_set_updated_at() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$        BEGIN
+          NEW."updated_at" := CURRENT_TIMESTAMP;
+          RETURN NEW;
+        END;
+$$;
+
+
+--
 -- Name: o_auth_authentications_set_created_at(); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -138,6 +168,20 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: haves; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.haves (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name text DEFAULT ''::text NOT NULL,
+    amount integer DEFAULT 1 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    user_id uuid
+);
+
+
+--
 -- Name: o_auth_authentications; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -213,6 +257,14 @@ ALTER TABLE ONLY public.o_auth_authentications ALTER COLUMN id SET DEFAULT nextv
 
 
 --
+-- Name: haves haves_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.haves
+    ADD CONSTRAINT haves_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: o_auth_authentications o_auth_authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -273,6 +325,13 @@ CREATE TRIGGER set_created_at BEFORE INSERT OR UPDATE ON public.wants FOR EACH R
 
 
 --
+-- Name: haves set_created_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER set_created_at BEFORE INSERT OR UPDATE ON public.haves FOR EACH ROW EXECUTE PROCEDURE public.haves_set_created_at();
+
+
+--
 -- Name: users set_updated_at; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -291,6 +350,21 @@ CREATE TRIGGER set_updated_at BEFORE INSERT OR UPDATE ON public.o_auth_authentic
 --
 
 CREATE TRIGGER set_updated_at BEFORE INSERT OR UPDATE ON public.wants FOR EACH ROW EXECUTE PROCEDURE public.wants_set_updated_at();
+
+
+--
+-- Name: haves set_updated_at; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER set_updated_at BEFORE INSERT OR UPDATE ON public.haves FOR EACH ROW EXECUTE PROCEDURE public.haves_set_updated_at();
+
+
+--
+-- Name: haves haves_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.haves
+    ADD CONSTRAINT haves_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
@@ -321,3 +395,5 @@ INSERT INTO "schema_migrations" ("filename") VALUES ('20180803011611_create_o_au
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180803011612_authentications_auto_timestamps.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180809131546_create_wants.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180809131546_wants_auto_timestamps.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20180818040413_create_haves.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20180818040415_haves_auto_timestamps.rb');

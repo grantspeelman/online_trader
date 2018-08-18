@@ -49,18 +49,19 @@ FactoryBot.define do
     end
   end
 
-  # factory :have do
-  #   sequence(:card_name) { |n| "Card #{n}" }
-  #
-  #   transient do
-  #     user_uid { create(:auth).uid }
-  #   end
-  #
-  #   before(:create) do |have, evaluator|
-  #     have.user = Authorization.first(uid: evaluator.user_uid).user
-  #   end
-  # end
-  #
+  factory :have do
+    sequence(:name) { |n| "Card #{n}" }
+    amount { rand(10) + 1 }
+
+    transient do
+      user_id { create(:auth).user_id }
+    end
+
+    before(:create) do |want, evaluator|
+      want.user ||= User[evaluator.user_id]
+    end
+  end
+
   factory :want do
     sequence(:name) { |n| "Card #{n}" }
     amount { rand(10) + 1 }
