@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SimpleForm::Inputs::Base
   def error(_wrapper_options = nil)
     error_text if has_errors?
@@ -12,7 +14,7 @@ class SimpleForm::Inputs::Base
   end
 
   def has_value?
-    object && object.respond_to?(attribute_name) && object.send(attribute_name).present?
+    object&.respond_to?(attribute_name) && object.send(attribute_name).present?
   end
 
   def valid?
@@ -32,7 +34,7 @@ class SimpleForm::Inputs::Base
   end
 
   def object_with_errors?
-    object && object.respond_to?(:errors) && errors.present?
+    object&.respond_to?(:errors) && errors.present?
   end
 
   def error_method

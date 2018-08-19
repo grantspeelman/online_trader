@@ -22,14 +22,8 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
+  - bin/rspec
   - ./test.sh
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
-notifications:
-  email:
-    recipients:
-      - grantspeelman+travis@gmail.com
-    on_success: change
-    on_failure: change

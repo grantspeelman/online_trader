@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OAuthAuthentication < Sequel::Model
   many_to_one :user
 

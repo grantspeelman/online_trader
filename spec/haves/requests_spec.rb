@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Haves', type: :request do
@@ -31,6 +33,14 @@ RSpec.describe 'Haves', type: :request do
       end
     end
 
+    describe 'POST' do
+      specify 'invalid' do
+        post '/haves'
+        expect(response.body).to include('New have')
+        expect(response.status).to eq(400)
+      end
+    end
+
     describe '/:id' do
       let(:have) { create(:have, user: current_user) }
 
@@ -47,6 +57,14 @@ RSpec.describe 'Haves', type: :request do
           get "/haves/#{have.id}/edit"
           expect(response).to be_success
           expect(response.body).to include(have.name)
+        end
+      end
+
+      describe 'PUT' do
+        specify 'invalid' do
+          put "/haves/#{have.id}", have: { name: '' }
+          expect(response.body).to include('Editing have')
+          expect(response.status).to eq(400)
         end
       end
     end

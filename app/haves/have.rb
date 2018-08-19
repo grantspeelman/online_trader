@@ -9,7 +9,11 @@ class Have < Sequel::Model
     validates_presence %i[name]
     validates_unique :name, scope: :user_id
     validates_integer :amount
-    validates_operator(:>=, 0, :amount)
+    validates_operator(:>, 0, :amount) if errors[:amount].empty?
+  end
+
+  def save_if_valid
+    valid? && save
   end
 
   def by_card_name(name)

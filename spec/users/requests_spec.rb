@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'My Account', type: :request do
@@ -34,6 +36,14 @@ RSpec.describe 'My Account', type: :request do
           get "/users/#{create(:user).to_param}/edit"
           expect(response.status).to eq(403)
         end
+      end
+    end
+
+    describe 'GET' do
+      specify do
+        get '/users'
+        expect(response).to be_success
+        expect(response.body).to include('Listing users')
       end
     end
   end

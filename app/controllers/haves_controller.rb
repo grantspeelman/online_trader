@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class HavesController < ApplicationController
   before_filter :login_required
 
@@ -66,17 +64,13 @@ class HavesController < ApplicationController
   # POST /haves
   # POST /haves.json
   def create
-    @have = authorise Have.new(params[:have])
+    @have = authorise Have.new(have_params)
     @have.user = current_user
 
-    respond_to do |format|
-      if @have.save
-        format.html { redirect_to @have, notice: 'Have was successfully created.' }
-        format.json { render json: @have, status: :created, location: @have }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @have.errors, status: :unprocessable_entity }
-      end
+    if @have.save_if_valid
+      redirect_to @have, notice: 'Have was successfully created.'
+    else
+      render 'new', status: 400
     end
   end
 
@@ -84,17 +78,22 @@ class HavesController < ApplicationController
   # PUT /haves/1.json
   def update
     @have = authorise(load_have)
+    @have.set(have_params)
 
-    respond_to do |format|
-      if @have.update(params[:have])
-        format.html { redirect_to @have, notice: 'Have was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @have.errors, status: :unprocessable_entity }
-      end
+    if @have.save_if_valid
+      redirect_to @have, notice: 'Have was successfully updated.'
+    else
+      render 'edit', status: 400
     end
   end
+
+  private
+
+  def have_params
+    params[:have] || {}
+  end
+
+  public
 
   # DELETE /haves/1
   # DELETE /haves/1.json

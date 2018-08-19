@@ -4,7 +4,7 @@ describe('Haves', function() {
   })
 
   beforeEach(() => {
-    cy.appFactories([['create', 'auth_billy', { uid: 'billy@email.com' } ]])
+    cy.appFactories([['create', 'user_billy']])
     cy.visit('/auth/developer')
     cy.findField('Name').type('Billy')
     cy.findField('Email').type('billy@email.com')
@@ -16,18 +16,18 @@ describe('Haves', function() {
 
   it('should list haves', function() {
     cy.appFactories([
-      ['create', 'have', { card_name: 'Card 1', user_uid: 'billy@email.com' }],
-      ['create', 'have', { card_name: 'Card 2', user_uid: 'billy@email.com' }]
+      ['create', 'have', { name: 'Card 1', user_uid: 'billy@email.com' }],
+      ['create', 'have', { name: 'Card 2', user_uid: 'billy@email.com' }]
     ])
     cy.findLink('I Have').click()
     cy.contains('Card 1')
     cy.contains('Card 2')
   })
 
-  it('can create haves', function() {
+  it.only('can create haves', function() {
     cy.findLink('I Have').click()
     cy.findLink('Add Have').click()
-    cy.findField('Card name').type('Test Card')
+    cy.findField('Name').type('Test Card')
     cy.findButton('Create Have').click()
     cy.contains('Have was successfully created.')
     cy.contains('Test Card')

@@ -1,4 +1,6 @@
-<%= page_header("Listing users") %>
+<%= page_header('Listing users') %>
+
+<%= render 'paginator', records: @users %>
 
 <div class="span10">
   <table class="table-striped">
@@ -11,7 +13,6 @@
   <% end %>
     </tbody>
   </table>
-  <%= paginate @users %>
 </div>
 
 

@@ -6,7 +6,7 @@ class User < Sequel::Model
   one_to_many :authentications, class: OAuthAuthentication
 
   def authenticated_with(provider_name)
-    authentications.count(provider_name: provider_name.to_s) > 0
+    authentications.count(provider_name: provider_name.to_s).positive?
   end
 
   def to_s
@@ -23,7 +23,7 @@ class User < Sequel::Model
     # haves.collect(&:card_name)
   end
 
-  def wants_for(user)
+  def wants_for(_user)
     ['TODO']
     # user.wants.all(card_name: have_card_names)
   end
