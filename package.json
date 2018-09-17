@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/grantspeelman/online_trader#readme",
   "devDependencies": {
-    "cypress": "^3.0.2",
+    "cypress": "^3.1.0",
     "cypress-capybara": "0.0.2"
   }
 }

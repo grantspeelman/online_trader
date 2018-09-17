@@ -3,6 +3,9 @@
 class Have < Sequel::Model
   many_to_one :user
 
+  plugin :defaults_setter
+  default_values[:amount] = 1
+
   plugin :validation_helpers
   def validate
     super

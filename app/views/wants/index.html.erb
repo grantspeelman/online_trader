@@ -3,7 +3,7 @@
 <%= render 'paginator', records: @wants %>
 
 <% @wants.each do |want| %>
-  <div class="col-3-sm">
+  <div class="col-3-sm" data-cy="<%= want.name %>">
     <div class="card">
       <div class="card-header">
         <%= link_to want.name, want, id: dom_id(want, :show) %>
@@ -21,12 +21,10 @@
             </a>
           <% end %>
           <%= link_to 'Edit', edit_want_path(want),
-                      id: dom_id(want, :edit),
                       class: 'card-link' if can? :update, want %>
           <%= link_to 'Delete', want,
                       data: {confirm: 'Are you sure?'},
                       method: :delete,
-                      id: dom_id(want, :delete),
                       class: 'card-link' if can? :destroy, want %>
         </div>
       </div>
