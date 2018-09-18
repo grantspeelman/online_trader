@@ -36,7 +36,7 @@ describe('Wants', function() {
     cy.findLink('Add Want').click()
     cy.findField('Name').type('My Card')
     cy.findButton('Create Want').click()
-    cy.contains('name is already taken')
+    cy.contains('name and user_id is already taken')
   })
 
   it('should allow to edit', function() {

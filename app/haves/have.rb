@@ -10,7 +10,7 @@ class Have < Sequel::Model
   def validate
     super
     validates_presence %i[name]
-    validates_unique :name, scope: :user_id
+    validates_unique([:name, :user_id])
     validates_integer :amount
     validates_operator(:>, 0, :amount) if errors[:amount].empty?
   end
@@ -19,17 +19,8 @@ class Have < Sequel::Model
     valid? && save
   end
 
-  def by_card_name(name)
-    all(card_name: name)
-  end
-
-  def card
-    Card.by_name(card_name).first
-  end
-
   def wants
-    ['TODO']
-    # @wants ||= Want.all(card_name: card_name)
+    Want.exclude(user_id: user_id).where(name: name)
   end
 
   def want_count

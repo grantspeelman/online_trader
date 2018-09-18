@@ -20,21 +20,21 @@ FactoryBot.define do
   factory :user, class: User do
     name { "#{FactoryBot.generate(:firstname)} #{FactoryBot.generate(:lastname)}" }
     factory :user_billy do
-      name 'Billy Bob'
+      name { 'Billy Bob'}
       after(:create) do |user, _evaluator|
         OAuthAuthentication.create_from_hash({ uid: 'billy@email.com', provider: 'developer' },
                                              user)
       end
     end
     factory :user_kim do
-      name 'Kim Petersen'
+      name { 'Kim' }
       after(:create) do |user, _evaluator|
         OAuthAuthentication.create_from_hash({ uid: 'kim@email.com', provider: 'developer' },
                                              user)
       end
     end
-    factory :admin_grant do |u|
-      u.name 'Grant Speelman'
+    factory :admin_grant do
+      name { 'Grant' }
       after(:create) do |user, _evaluator|
         OAuthAuthentication.create_from_hash({ uid: 'grant@email.com', provider: 'developer' },
                                              user)
@@ -44,7 +44,7 @@ FactoryBot.define do
 
   factory :auth, class: OAuthAuthentication do
     sequence(:provider_uid) { |n| "uid#{n}" }
-    provider_name 'developer'
+    provider_name { 'developer' }
 
     association :user, factory: :user
   end

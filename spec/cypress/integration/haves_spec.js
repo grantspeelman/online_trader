@@ -36,7 +36,7 @@ describe('Haves', function() {
     cy.findLink('Add Have').click()
     cy.findField('Name').type('My Card')
     cy.findButton('Create Have').click()
-    cy.contains('name is already taken')
+    cy.contains('name and user_id is already taken')
   })
 
   it('should allow to edit', function() {
