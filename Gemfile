@@ -3,19 +3,15 @@
 require 'rbconfig'
 source 'http://rubygems.org'
 gem 'pundit'
-gem 'country_select', '~> 1.0'
-gem 'dm-migrations', '~> 1.2'
-gem 'dm-pager', '~> 1.1'
-gem 'dm-postgres-adapter', '~> 1.2'
-gem 'dm-rails', '~> 1.2'
-gem 'dm-timestamps', '~> 1.2'
-gem 'dm-validations', '~> 1.2'
 gem 'jquery-rails', '~> 2.0'
-gem 'kaminari'
 gem 'omniauth', '~> 1.0'
-gem 'puma', '~> 3.11.0' # last version to support ruby 2.1
+gem 'pg'
+gem 'puma'
 gem 'rails', '~> 3.2.0'
 gem 'rake', '~> 11.0'
+gem 'sequel-rails'
+gem 'sequel_pg', require: 'sequel'
+gem 'sequel_postgresql_triggers'
 gem 'simple_form', '~> 2.0' # limit by rails 3.2 version
 
 group :assets do
@@ -23,14 +19,14 @@ group :assets do
 end
 group :development, :test do
   gem 'byebug', '~> 8.2'
-  gem 'factory_girl', '~> 4.0'
-  gem 'rspec-rails', '~> 2.10'
+  gem 'factory_bot'
+  gem 'rspec-rails'
+  gem 'test-unit' # can maybe remove on later rails and rspec-rails versions
 end
 group :test do
-  gem 'capybara', '~> 1.1'
   gem 'cypress-on-rails', '~> 1.0'
-  gem 'database_cleaner', '~> 0.8'
+  gem 'database_cleaner', '~> 1.0'
   gem 'simplecov', require: false
 end
 
-gem 'therubyracer', '>= 0.9.8'
+gem 'therubyracer', '>= 0.9.8' # can maybe remove on later rails version

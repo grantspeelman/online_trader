@@ -1,12 +1,12 @@
 <%= page_header(index_heading) %>
 
-<%= paginate @wants %>
+<%= render 'paginator', records: @wants %>
 
 <% @wants.each do |want| %>
-  <div class="col-3-sm">
+  <div class="col-3-sm" data-cy="<%= want.name %>">
     <div class="card">
       <div class="card-header">
-        <%= link_to want.card_name, want, id: dom_id(want, :show) %>
+        <%= link_to want.name, want, id: dom_id(want, :show) %>
         <small><%= want.amount %></small>
       </div>
       <div class="card-body">
@@ -16,17 +16,15 @@
             <a href="#" class="card-link">Make Offer</a>
           <% end %>
           <% if current_user == want.user %>
-            <a href="<%= haves_path(:card_name => want.card_name) %>" class="card-link">
+            <a href="<%= haves_path(name: want.name) %>" class="card-link">
               <%= "Traders #{want.have_count}" %>
             </a>
           <% end %>
           <%= link_to 'Edit', edit_want_path(want),
-                      id: dom_id(want, :edit),
                       class: 'card-link' if can? :update, want %>
           <%= link_to 'Delete', want,
                       data: {confirm: 'Are you sure?'},
                       method: :delete,
-                      id: dom_id(want, :delete),
                       class: 'card-link' if can? :destroy, want %>
         </div>
       </div>

@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.1
+  - 2.3
 
 cache:
   directories:
@@ -16,20 +16,14 @@ before_install:
 
 before_script:
   - psql -c 'create database online_trader_test;' -U postgres
-  - bundle exec rake db:automigrate
+  - bundle exec rake db:migrate
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
 script:
+  - bin/rspec
   - ./test.sh
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
-notifications:
-  email:
-    recipients:
-      - grantspeelman+travis@gmail.com
-    on_success: change
-    on_failure: change

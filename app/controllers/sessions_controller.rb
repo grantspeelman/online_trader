@@ -7,11 +7,11 @@ class SessionsController < ApplicationController
     self.current_user = @auth.user
 
     flash[:notice] = "Welcome, #{current_user.name}."
-    redirect_to(root_path)
+    redirect_to(@first_login ? edit_user_path(current_user) : root_path)
   end
 
   def failure
-    flash[:error] = params[:message].humanize || 'Authentication failed'
+    flash[:error] = params[:message]&.humanize || 'Authentication failed'
     redirect_to(login_path)
   end
 
@@ -25,15 +25,16 @@ class SessionsController < ApplicationController
   private
 
   def create_auth
-    return nil if (@auth = Authorization.find_from_hash(auth_hash))
+    return nil if (@auth = OAuthAuthentication.find_from_hash(auth_hash))
+    @first_login = true
     # Create a new user or add an auth to existing user, depending on
     # whether there is already a user signed in.
-    @auth = Authorization.create_from_hash(auth_hash, current_user)
+    @auth = OAuthAuthentication.create_from_hash(auth_hash, current_user)
   end
 
   def auth_hash
     { provider: request.env['omniauth.auth']['provider'].to_s,
       uid: request.env['omniauth.auth']['uid'].to_s,
-      name: request.env['omniauth.auth']['info']['name'].to_s }
+      name: request.env.dig('omniauth.auth', 'info', 'name').to_s }
   end
 end

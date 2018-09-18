@@ -17,26 +17,24 @@ describe('Users', function() {
 
   it('cannot create users', function() {
     cy.visit("/users/new", {failOnStatusCode: false})
-    cy.contains('Not Found')
+    cy.contains('No route matches')
   })
 
   it('should allow to edit own user', function() {
     cy.findLink('My Account').click()
     cy.findLink('edit_user').click()
     cy.findField('Name').type(' MJ')
-    cy.get('#user_time_zone').select('(GMT-11:00) American Samoa')
     cy.findButton('Update User').click()
     cy.contains('User was successfully updated.')
     cy.contains('Bobbie MJ')
-    cy.contains('American Samoa')
   })
 
   it('cannot edit other users', function() {
     cy.appFactories([
-      ['create', 'user', { id: 2 }],
+      ['create', 'user', { id: '88f1b921-8782-4815-b490-c6e36ba5a78a' }],
     ])
 
-    cy.visit("/users/2/edit", {failOnStatusCode: false})
+    cy.visit("/users/88f1b921-8782-4815-b490-c6e36ba5a78a/edit", {failOnStatusCode: false})
     cy.contains('Not allow to edit this')
   })
 })

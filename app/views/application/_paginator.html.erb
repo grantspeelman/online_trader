@@ -1,0 +1,12 @@
+<div class="row">
+  <% if records.prev_page %>
+    <div class="col">
+      <a href="<%= url_for(page: records.prev_page ) %>">Previous</a>
+    </div>
+  <% end %>
+  <% if records.next_page %>
+    <div class="col">
+      <a href="<%= url_for(page: records.next_page ) %>">Next</a>
+    </div>
+  <% end %>
+</div>

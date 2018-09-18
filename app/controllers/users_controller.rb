@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def index
     store_location
     authorise(User)
-    @users = User.all(order: 'name').page(params[:page])
+    @users = User.order(:created_at).paginate(params[:page] || 1, 20)
   end
 
   # GET /users/1
@@ -37,6 +37,6 @@ class UsersController < ApplicationController
   private
 
   def load_user
-    User.get!(params[:id])
+    User.with_pk!(params[:id])
   end
 end

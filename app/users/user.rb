@@ -1,22 +1,12 @@
 # frozen_string_literal: true
 
-class User
-  include DataMapper::Resource
-  include DataMapper::MassAssignmentSecurity
+class User < Sequel::Model
+  # has n, :wants
+  # has n, :haves, 'Have'
+  one_to_many :authentications, class: OAuthAuthentication
 
-  property 'id',        Serial
-  property 'name',      String, required: true
-  property 'role',      String, required: true, default: 'normal_user'
-  property 'time_zone', String
-
-  has n, :authorizations
-  has n, :wants
-  has n, :haves, 'Have'
-
-  attr_protected :role
-
-  def authorized_with(provider)
-    authorizations.all(provider: provider.to_s).count > 0
+  def authenticated_with(provider_name)
+    authentications.count(provider_name: provider_name.to_s).positive?
   end
 
   def to_s
@@ -24,14 +14,17 @@ class User
   end
 
   def want_card_names
-    wants.collect(&:card_name)
+    ['TODO']
+    # wants.collect(&:card_name)
   end
 
   def have_card_names
-    haves.collect(&:card_name)
+    ['TODO']
+    # haves.collect(&:card_name)
   end
 
-  def wants_for(user)
-    user.wants.all(card_name: have_card_names)
+  def wants_for(_user)
+    ['TODO']
+    # user.wants.all(card_name: have_card_names)
   end
 end

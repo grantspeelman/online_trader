@@ -11,14 +11,10 @@ class ApplicationController < ActionController::Base
     render :access_denied, status: 403
   end
 
-  rescue_from DataMapper::ObjectNotFoundError do |_exception|
-    render :not_found, status: 404
-  end
-
   protected
 
   def current_user
-    @current_user ||= User.get(session[:user_id])
+    @current_user ||= User[session[:user_id]]
   end
 
   def user_signed_in?

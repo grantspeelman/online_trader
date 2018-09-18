@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe 'FactoryGirl Lint' do
-  it { FactoryGirl.lint }
+RSpec.describe 'FactoryBot Lint' do
+  it { FactoryBot.lint }
 end

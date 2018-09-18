@@ -7,4 +7,4 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-FactoryGirl.create_list(:user, 25) if User.count <= 1
+FactoryBot.create_list(:user, 25) if User.count <= 1

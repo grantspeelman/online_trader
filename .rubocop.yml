@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.3
   Exclude:
     - 'bin/**/*'
     - 'vendor/**/*'
@@ -10,6 +10,7 @@ AllCops:
     - 'node_modules/**/*'
     - '.git-hooks/**/*'
     - 'lib/templates/**/*'
+    - 'config/initializers/**/*'
 
 Metrics/LineLength:
   Max: 114 # TODO bring down to 100
@@ -34,3 +35,6 @@ Naming/PredicateName:
 
 Metrics/AbcSize:
   Max: 23 # TODO bring down
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

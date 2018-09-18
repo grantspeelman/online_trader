@@ -4,20 +4,14 @@ describe('Haves', function() {
   })
 
   beforeEach(() => {
-    cy.appFactories([['create', 'auth_billy', { uid: 'billy@email.com' } ]])
-    cy.visit('/auth/developer')
-    cy.findField('Name').type('Billy')
-    cy.findField('Email').type('billy@email.com')
-    cy.findButton('Sign In').click()
-    cy.contains('Welcome, Billy Bob')
-
+    cy.login({name: 'Billy', email: 'billy@email.com'})
     cy.visit('/')
   })
 
   it('should list haves', function() {
     cy.appFactories([
-      ['create', 'have', { card_name: 'Card 1', user_uid: 'billy@email.com' }],
-      ['create', 'have', { card_name: 'Card 2', user_uid: 'billy@email.com' }]
+      ['create', 'have', { name: 'Card 1', user_uid: 'billy@email.com' }],
+      ['create', 'have', { name: 'Card 2', user_uid: 'billy@email.com' }]
     ])
     cy.findLink('I Have').click()
     cy.contains('Card 1')
@@ -27,7 +21,7 @@ describe('Haves', function() {
   it('can create haves', function() {
     cy.findLink('I Have').click()
     cy.findLink('Add Have').click()
-    cy.findField('Card name').type('Test Card')
+    cy.findField('Name').type('Test Card')
     cy.findButton('Create Have').click()
     cy.contains('Have was successfully created.')
     cy.contains('Test Card')
@@ -35,24 +29,25 @@ describe('Haves', function() {
 
   it('should prevent duplicates', function() {
     cy.appFactories([
-      ['create', 'have', { card_name: 'My Card', user_uid: 'billy@email.com' }],
+      ['create', 'have', { name: 'My Card', user_uid: 'billy@email.com' }],
     ])
 
     cy.findLink('I Have').click()
     cy.findLink('Add Have').click()
-    cy.findField('Card name').type('My Card')
+    cy.findField('Name').type('My Card')
     cy.findButton('Create Have').click()
-    cy.contains('Card name is already taken')
+    cy.contains('name and user_id is already taken')
   })
 
   it('should allow to edit', function() {
     cy.appFactories([
-      ['create', 'have', { id: 1, card_name: 'Duplicate', user_uid: 'billy@email.com' }],
+      ['create', 'have', { name: 'Duplicate', user_uid: 'billy@email.com' }],
     ])
 
     cy.findLink('I Have').click()
-    cy.findLink('edit_have_1').click()
-    cy.findField('Card name').type('Duplicate 1')
+    cy.get('[data-cy="Duplicate"]').contains('Edit').click()
+    cy.findField('Name').clear()
+    cy.findField('Name').type('Duplicate 1')
     cy.findField('Amount').type('1')
     cy.findButton('Update Have').click()
     cy.contains('Have was successfully updated.')
@@ -61,20 +56,33 @@ describe('Haves', function() {
 
   it('cannot edit other users haves', function() {
     cy.appFactories([
-      ['create', 'have', { id: 1, card_name: 'Duplicate' }],
+      ['create', 'have', { id: '00000000-0000-0000-0000-000000000001', name: 'Duplicate' }],
     ])
 
-    cy.visit("/haves/1/edit", {failOnStatusCode: false})
+    cy.findLink('All Haves').click()
+    cy.get('[data-cy="Duplicate"]').should('not.contain', 'Edit').click()
+
+    cy.visit("/haves/00000000-0000-0000-0000-000000000001/edit", {failOnStatusCode: false})
     cy.contains('Not allow to edit this')
   })
 
   it('should allow to delete', function() {
     cy.appFactories([
-      ['create', 'have', { id: 1, card_name: 'Duplicate', user_uid: 'billy@email.com' }],
+      ['create', 'have', { name: 'Test123', user_uid: 'billy@email.com' }],
     ])
 
     cy.findLink('I Have').click()
-    cy.findLink('delete_have_1').click()
+    cy.get('[data-cy="Test123"]').contains('Delete').click()
     cy.contains('Successfully deleted.')
+  })
+
+  it('cannot delete other users haves', function() {
+    cy.appFactories([
+      ['create', 'have', { name: 'Pichu' }],
+    ])
+
+    cy.findLink('All Haves').click()
+    cy.get('[data-cy="Pichu"]').should('contain', 'Make Offer')
+    cy.get('[data-cy="Pichu"]').should('not.contain', 'Delete')
   })
 })
