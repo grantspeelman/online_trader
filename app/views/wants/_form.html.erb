@@ -1,5 +1,5 @@
 <div class="col">
-  <%= simple_form_for(@want) do |f| %>
+  <%= simple_form_for(@want, html: { novalidate: false }) do |f| %>
     <%= render 'form_errors', errors: @want.errors %>
 
       <%= f.input :name, class: 'ui-autocomplete-input', autocomplete: false, input_html: { required: true } %>

@@ -3,6 +3,9 @@
 class Want < Sequel::Model
   many_to_one :user
 
+  plugin :defaults_setter
+  default_values[:amount] = 1
+
   plugin :validation_helpers
   def validate
     super
@@ -10,6 +13,10 @@ class Want < Sequel::Model
     validates_unique :name, scope: :user_id
     validates_integer :amount
     validates_operator(:>=, 0, :amount)
+  end
+
+  def save_if_valid
+    valid? && save
   end
 
   def by_card_name(name)

@@ -101,10 +101,8 @@ class HavesController < ApplicationController
     @have = authorise(load_have)
     @have.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(request.referrer || { action: :index }, notice: 'Successfully deleted.') }
-      format.json { head :ok }
-    end
+    redirect_to(request.referrer || { action: :index },
+                notice: 'Successfully deleted.')
   end
 
   private

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class WantsController < ApplicationController
   before_filter :login_required
 
@@ -66,17 +64,13 @@ class WantsController < ApplicationController
   # POST /wants
   # POST /wants.json
   def create
-    @want = authorise Want.new(params[:want])
+    @want = authorise Want.new(want_params)
     @want.user = current_user
 
-    respond_to do |format|
-      if @want.save
-        format.html { redirect_to @want, notice: 'Want was successfully created.' }
-        format.json { render json: @want, status: :created, location: @want }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @want.errors, status: :unprocessable_entity }
-      end
+    if @want.save_if_valid
+      redirect_to @want, notice: 'Want was successfully created.'
+    else
+      render 'new', status: 400
     end
   end
 
@@ -84,17 +78,22 @@ class WantsController < ApplicationController
   # PUT /wants/1.json
   def update
     @want = authorise(load_want)
+    @want.set(want_params)
 
-    respond_to do |format|
-      if @want.update(params[:want])
-        format.html { redirect_to @want, notice: 'Want was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @want.errors, status: :unprocessable_entity }
-      end
+    if @want.save_if_valid
+      redirect_to @want, notice: 'Want was successfully updated.'
+    else
+      render 'edit', status: 400
     end
   end
+
+  private
+
+  def want_params
+    params[:want] || {}
+  end
+
+  public
 
   # DELETE /wants/1
   # DELETE /wants/1.json
@@ -102,10 +101,8 @@ class WantsController < ApplicationController
     @want = authorise(load_want)
     @want.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(request.referrer || { action: :index }, notice: 'Successfully deleted.') }
-      format.json { head :ok }
-    end
+    redirect_to(request.referrer || { action: :index },
+                notice: 'Successfully deleted.')
   end
 
   private

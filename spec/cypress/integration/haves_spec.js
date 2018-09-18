@@ -4,13 +4,7 @@ describe('Haves', function() {
   })
 
   beforeEach(() => {
-    cy.appFactories([['create', 'user_billy']])
-    cy.visit('/auth/developer')
-    cy.findField('Name').type('Billy')
-    cy.findField('Email').type('billy@email.com')
-    cy.findButton('Sign In').click()
-    cy.contains('Welcome, Billy Bob')
-
+    cy.login({name: 'Billy', email: 'billy@email.com'})
     cy.visit('/')
   })
 
@@ -84,7 +78,7 @@ describe('Haves', function() {
 
   it('cannot delete other users haves', function() {
     cy.appFactories([
-      ['create', 'have', { id: '00000000-0000-0000-0000-000000000001', name: 'Pichu' }],
+      ['create', 'have', { name: 'Pichu' }],
     ])
 
     cy.findLink('All Haves').click()

@@ -23,4 +23,57 @@ RSpec.describe 'Wants', type: :request do
       expect(response.body).to include(want.name)
     end
   end
+
+  describe '/wants' do
+    describe '/new GET' do
+      it do
+        get '/wants/new'
+        expect(response).to be_success
+        expect(response.body).to include('New want')
+      end
+    end
+
+    describe 'POST' do
+      specify 'invalid' do
+        post '/wants'
+        expect(response.body).to include('New want')
+        expect(response.status).to eq(400)
+      end
+    end
+
+    describe '/:id' do
+      let(:want) { create(:want, user: current_user) }
+
+      describe 'GET' do
+        it do
+          get "/wants/#{want.id}"
+          expect(response).to be_success
+          expect(response.body).to include(want.name)
+        end
+      end
+
+      describe '/edit GET' do
+        it do
+          get "/wants/#{want.id}/edit"
+          expect(response).to be_success
+          expect(response.body).to include(want.name)
+        end
+      end
+
+      describe 'PUT' do
+        specify 'invalid' do
+          put "/wants/#{want.id}", want: { name: '' }
+          expect(response.body).to include('Editing want')
+          expect(response.status).to eq(400)
+        end
+      end
+
+      describe 'DELETE' do
+        specify 'success' do
+          delete "/wants/#{want.id}"
+          expect(response).to redirect_to(wants_path)
+        end
+      end
+    end
+  end
 end

@@ -67,6 +67,13 @@ RSpec.describe 'Haves', type: :request do
           expect(response.status).to eq(400)
         end
       end
+
+      describe 'DELETE' do
+        specify 'success' do
+          delete "/haves/#{have.id}"
+          expect(response).to redirect_to(haves_path)
+        end
+      end
     end
   end
 end
