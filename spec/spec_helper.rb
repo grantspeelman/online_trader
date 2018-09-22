@@ -1,4 +1,8 @@
 # frozen_string_literal: true
+if %w(1 yes enable).include?(ENV['COVERAGE'])
+  require 'simplecov'
+  SimpleCov.start
+end
 
 require File.expand_path('../config/boot', __dir__)
 
