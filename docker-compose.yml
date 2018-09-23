@@ -16,7 +16,6 @@ services:
     build: .
     environment:
       DB_HOST: postgres-db
-      SECRET_TOKEN: 'uisdbfckjsdvpsdnvpsndfowenfoncodncosdicnweonqwelnsodcnisdc'
     command: jruby --dev -G bin/rails server -p 9292 -b 0.0.0.0 -P /tmp/server.pid
     volumes:
       - .:/app
@@ -34,7 +33,6 @@ services:
       CYPRESS: '1'
       RAILS_ENV: test
       DB_HOST: postgres-db
-      SECRET_TOKEN: 'wrwfgvoidnfobvdnfpoivjwrpfvnspdifcjsadncsdaskdhiwuebfsdkocsdc'
     command: jruby --dev -G bin/rails server -p 5002 -b 0.0.0.0 -P /tmp/server.pid
     volumes:
       - .:/app

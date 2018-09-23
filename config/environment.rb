@@ -4,4 +4,4 @@
 require File.expand_path('application', __dir__)
 
 # Initialize the Rails application.
-OnlineTrader::Application.initialize!
+Rails.application.initialize!
