@@ -7,5 +7,6 @@ require 'bundler/setup' if File.exist?(ENV['BUNDLE_GEMFILE'])
 
 if ENV['RAILS_ENV'] == 'test' && %w(1 yes on enabled).include?(ENV['COVERAGE'])
   require 'simplecov'
-  SimpleCov.start 'cypress'
+  SimpleCov.start 'rails'
+  SimpleCov.command_name 'cypress'
 end
