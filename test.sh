@@ -8,7 +8,7 @@ export CYPRESS="1"
 
 echo '-- start rails server'
 bundle exec ./script/rails server -p 5002 -e test &
-sleep 2 # give rails a chance to start up correctly
+sleep 10 # give rails a chance to start up correctly
 
 echo '-- cypress run'
 node_modules/.bin/cypress install
