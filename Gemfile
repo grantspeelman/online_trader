@@ -3,16 +3,16 @@
 require 'rbconfig'
 source 'http://rubygems.org'
 gem 'pundit'
-gem 'jquery-rails', '~> 2.0'
+gem 'jquery-rails'
 gem 'omniauth', '~> 1.0'
 gem 'pg_jruby'
 gem 'jdbc-postgres'
 gem 'puma'
-gem 'rails', '~> 3.2.0'
+gem 'rails', '~> 4.0.0'
 gem 'rake', '~> 11.0'
 gem 'sequel-rails'
 gem 'sequel_postgresql_triggers'
-gem 'simple_form', '~> 2.0' # limit by rails 3.2 version
+gem 'simple_form'
 
 group :assets do
   gem 'uglifier', '>= 1.0.3'

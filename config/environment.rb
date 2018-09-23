@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Load the rails application
+# Load the Rails application.
 require File.expand_path('application', __dir__)
 
-# Initialize the rails application
+# Initialize the Rails application.
 OnlineTrader::Application.initialize!

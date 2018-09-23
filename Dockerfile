@@ -1,5 +1,5 @@
 # 1: Use ruby base:
-FROM jruby:9.2
+FROM jruby:9.1
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get update  -q && \
