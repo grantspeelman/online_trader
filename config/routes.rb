@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 uuid_regex = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
-OnlineTrader::Application.routes.draw do
+Rails.application.routes.draw do
   resources :users, except: %i[new create destroy], constraints: { id: uuid_regex } do
     collection do
       get 'search'
