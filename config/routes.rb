@@ -19,13 +19,13 @@ OnlineTrader::Application.routes.draw do
     end
   end
 
-  match '/auth/:provider/callback', to: 'sessions#create'
-  match '/auth/failure', to: 'sessions#failure'
+  match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  match '/auth/failure', to: 'sessions#failure', via: [:get, :post]
 
-  match '/login', to: 'sessions#new'
-  match '/logout', to: 'sessions#destroy'
+  match '/login', to: 'sessions#new', via: [:get, :post]
+  match '/logout', to: 'sessions#destroy', via: [:delete, :post]
 
-  match '/me', to: 'home#me'
+  match '/me', to: 'home#me', via: [:get, :post]
 
   root to: 'home#index'
 end

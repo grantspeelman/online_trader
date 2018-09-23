@@ -2,7 +2,7 @@
   <%= simple_form_for(@have, html: { novalidate: false }) do |f| %>
     <%= render 'form_errors', errors: @have.errors %>
 
-    <%= f.input :name, class: 'ui-autocomplete-input', autocomplete: false, input_html: { required: true } %>
+    <%= f.input :name, input_html: { required: true, class: 'ui-autocomplete-input', autocomplete: false } %>
     <%= f.input :amount, as: :integer, input_html: { required: true }  %>
     <div class="form-actions">
       <%= f.button :submit, class: 'btn btn-primary' %>
