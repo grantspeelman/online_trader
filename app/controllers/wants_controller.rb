@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WantsController < ApplicationController
   before_action :login_required
 

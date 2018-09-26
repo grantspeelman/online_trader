@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-if %w(1 yes enable).include?(ENV['COVERAGE'])
+
+if %w[1 yes enable].include?(ENV['COVERAGE'])
   require 'simplecov'
   SimpleCov.start 'rails'
 end
