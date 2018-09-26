@@ -62,7 +62,7 @@ RSpec.describe 'Wants', type: :request do
 
       describe 'PUT' do
         specify 'invalid' do
-          put "/wants/#{want.id}", want: { name: '' }
+          put "/wants/#{want.id}", params: { want: { name: '' } }
           expect(response.body).to include('Editing want')
           expect(response.status).to eq(400)
         end

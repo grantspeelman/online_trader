@@ -62,7 +62,7 @@ RSpec.describe 'Haves', type: :request do
 
       describe 'PUT' do
         specify 'invalid' do
-          put "/haves/#{have.id}", have: { name: '' }
+          put "/haves/#{have.id}", params: { have: { name: '' } }
           expect(response.body).to include('Editing have')
           expect(response.status).to eq(400)
         end

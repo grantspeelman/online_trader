@@ -1,5 +1,5 @@
 class HavesController < ApplicationController
-  before_filter :login_required
+  before_action :login_required
 
   # GET /haves
   # GET /haves.json
