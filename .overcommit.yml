@@ -24,14 +24,15 @@ PreCommit:
   RuboCop:
     enabled: true
     on_warn: fail # Treat all warnings as failures
-    install_command: 'gem install rubocop'
+    command: ['bin/rubocop']
+    install_command: 'BUNDLE_GEMFILE=Gemtools bundle install'
 
   Reek:
     enabled: true
     exclude:
       - '.git-hooks/**/*'
-    command: ['reek', 'app', 'spec', 'config']
-    install_command: 'gem install reek'
+    command: ['bin/reek', 'app', 'spec', 'config']
+    install_command: 'BUNDLE_GEMFILE=Gemtools bundle install'
 
 #  Flay:
 #    enabled: true
