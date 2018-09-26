@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_filter :login_required
+  before_action :login_required
 
   # GET /users
   # GET /users.json
