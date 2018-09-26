@@ -9,7 +9,7 @@ RSpec.describe 'Haves', type: :request do
     it 'allowed to view your own haves' do
       have = create(:have, user: current_user)
       get "/users/#{current_user.to_param}/haves"
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response.body).to include('My haves')
       expect(response.body).to include(have.name)
     end
@@ -18,7 +18,7 @@ RSpec.describe 'Haves', type: :request do
       other_user = create(:user)
       have = create(:have, user: other_user)
       get "/users/#{other_user.to_param}/haves"
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response.body).to include("#{other_user.name} haves")
       expect(response.body).to include(have.name)
     end
@@ -28,7 +28,7 @@ RSpec.describe 'Haves', type: :request do
     describe '/new GET' do
       it do
         get '/haves/new'
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.body).to include('New have')
       end
     end
@@ -47,7 +47,7 @@ RSpec.describe 'Haves', type: :request do
       describe 'GET' do
         it do
           get "/haves/#{have.id}"
-          expect(response).to be_success
+          expect(response).to be_successful
           expect(response.body).to include(have.name)
         end
       end
@@ -55,7 +55,7 @@ RSpec.describe 'Haves', type: :request do
       describe '/edit GET' do
         it do
           get "/haves/#{have.id}/edit"
-          expect(response).to be_success
+          expect(response).to be_successful
           expect(response.body).to include(have.name)
         end
       end

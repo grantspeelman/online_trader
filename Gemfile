@@ -19,6 +19,7 @@ gem 'uglifier', '>= 1.0.3', require: false
 group :development, :test do
   gem 'factory_bot'
   gem 'rspec-rails'
+  gem 'listen'
 end
 
 group :test do
