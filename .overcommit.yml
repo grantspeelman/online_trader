@@ -15,6 +15,8 @@
 #
 # Uncomment the following lines to make the configuration take effect.
 
+gemfile: 'Gemtools'
+
 PreCommit:
   ALL:
     requires_files: true
@@ -46,7 +48,8 @@ CommitMsg:
 PrePush:
   Brakeman:
     enabled: true
-    install_command: 'gem install brakeman'
+    command: ['bin/brakeman']
+    install_command: 'BUNDLE_GEMFILE=Gemtools bundle install'
 #
 #  TrailingWhitespace:
 #    enabled: true
