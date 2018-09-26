@@ -24,8 +24,7 @@ before_script:
 script:
   - bin/rspec
   - ./test.sh
-  - BUNDLE_GEMFILE=Gemtools bundle install
-  - BUNDLE_GEMFILE=Gemtools bin/overcommit --run
+  - ./lint.sh
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
