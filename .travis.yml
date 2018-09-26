@@ -13,7 +13,6 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y build-essential patch ruby-dev zlib1g-dev liblzma-dev libxml2-dev postgresql-server-dev-all
   - npm install
-  - BUNDLE_GEMFILE=Gemtools bundle install
 
 before_script:
   - psql -c 'create database online_trader_test;' -U postgres
@@ -25,6 +24,7 @@ before_script:
 script:
   - bin/rspec
   - ./test.sh
+  - BUNDLE_GEMFILE=Gemtools bundle install
   - BUNDLE_GEMFILE=Gemtools bin/overcommit --run
 
 after_script:
