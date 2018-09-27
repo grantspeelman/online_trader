@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-echo '--- install and run overcommit'
+echo '--- install'
 export BUNDLE_GEMFILE=Gemtools
 bundle install
-bundle exec overcommit --run
+
+echo '--- run rubocop'
+bundle exec rubocop
+
+echo '--- run reek'
+bundle exec reek
