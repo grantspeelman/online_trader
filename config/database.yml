@@ -1,5 +1,11 @@
 development:
-  url: jdbc:postgresql://<%= ENV['DB_HOST'] || 'localhost' %>/online_trader_development?user=postgres
+  adapter: postgresql
+  host: <%= ENV.fetch('DB_HOST') %>
+  user: postgres
+  database: online_trader_development
 
 test:
-  url: jdbc:postgresql://<%= ENV['DB_HOST'] || 'localhost' %>/online_trader_test?user=postgres
+  adapter: postgresql
+  host: <%= ENV.fetch('DB_HOST') %>
+  user: postgres
+  database: online_trader_test

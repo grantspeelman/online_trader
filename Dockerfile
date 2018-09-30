@@ -9,8 +9,25 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     postgresql-client \
     nodejs
 
-# 2: We'll set the application path as the working directory
+RUN useradd -m deploy
+
 WORKDIR /app
 
-# 3: add the app's binaries path to $PATH:
 ENV PATH=/app/bin:$PATH
+
+COPY Gemfile* ./
+RUN bundle config --global github.https true
+RUN bundle install -j $(nproc) --retry 5 --no-cache --without development test
+
+COPY . .
+
+RUN NO_DB_CONNECT="1" \
+    RAILS_ENV=production \
+    bundle exec rake assets:precompile
+
+RUN mkdir -p tmp
+RUN chown deploy tmp
+
+USER deploy
+
+CMD jruby -G bin/rails server

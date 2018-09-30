@@ -19,8 +19,10 @@ Dir.chdir APP_ROOT do
   system('bundle check') || system!('bundle install')
 
   puts "\n== Create and Migrate database =="
-  system! 'bundle exec rake db:create db:migrate db:seed'
-  system! 'RAILS_ENV=test bundle exec rake db:create db:migrate'
+  system 'createdb -h $DB_HOST -U postgres online_trader_development'
+  system 'createdb -h $DB_HOST -U postgres online_trader_test'
+  system! 'bundle exec rake db:migrate db:seed'
+  system! 'RAILS_ENV=test bundle exec rake db:migrate'
 
   puts "\n== Removing old logs and tempfiles =="
   system! 'bundle exec rake log:clear tmp:clear'
