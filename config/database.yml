@@ -1,11 +1,11 @@
 development:
   adapter: postgresql
-  host: <%= ENV.fetch('DB_HOST') %>
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
   user: postgres
   database: online_trader_development
 
 test:
   adapter: postgresql
-  host: <%= ENV.fetch('DB_HOST') %>
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
   user: postgres
   database: online_trader_test
