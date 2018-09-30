@@ -24,7 +24,6 @@ before_script:
 script:
   - bin/rspec
   - ./test.sh
-  - ./lint.sh
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
