@@ -25,7 +25,7 @@ RSpec.describe Want, type: :model do
       it 'when new' do
         subject.name = 'name'
         expect(subject).to_not be_valid
-        expect(subject.errors[[:name, :user_id]]).to_not be_empty
+        expect(subject.errors[%i[name user_id]]).to_not be_empty
       end
 
       it 'when updating' do
@@ -34,7 +34,7 @@ RSpec.describe Want, type: :model do
 
         subject.name = 'name'
         expect(subject).to_not be_valid
-        expect(subject.errors[[:name, :user_id]]).to_not be_empty
+        expect(subject.errors[%i[name user_id]]).to_not be_empty
       end
     end
 
@@ -74,7 +74,7 @@ RSpec.describe Want, type: :model do
       create(:have, name: 'Arceus')
       subject.name = 'Greninja'
 
-      expect(subject.haves).to contain_exactly(have1,have2)
+      expect(subject.haves).to contain_exactly(have1, have2)
     end
 
     it 'ignores own haves' do

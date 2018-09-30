@@ -19,6 +19,11 @@
     enabled: false
   RepeatedConditional:
     enabled: false # TODO enable
+"config/initializers":
+  NilCheck:
+    enabled: false
+  TooManyMethods:
+    enabled: false
 TooManyStatements:
   max_statements: 12
 UtilityFunction:

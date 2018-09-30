@@ -20,7 +20,7 @@ FactoryBot.define do
   factory :user, class: User do
     name { "#{FactoryBot.generate(:firstname)} #{FactoryBot.generate(:lastname)}" }
     factory :user_billy do
-      name { 'Billy Bob'}
+      name { 'Billy Bob' }
       after(:create) do |user, _evaluator|
         OAuthAuthentication.create_from_hash({ uid: 'billy@email.com', provider: 'developer' },
                                              user)

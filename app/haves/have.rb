@@ -10,7 +10,7 @@ class Have < Sequel::Model
   def validate
     super
     validates_presence %i[name]
-    validates_unique([:name, :user_id])
+    validates_unique(%i[name user_id])
     validates_integer :amount
     validates_operator(:>, 0, :amount) if errors[:amount].empty?
   end

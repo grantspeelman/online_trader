@@ -7,7 +7,7 @@ OmniAuth.config.mock_auth[:developer] = OmniAuth::AuthHash.new(provider: 'develo
 
 module OauthHelper
   def current_user
-    OAuthAuthentication.first(provider_uid: 'grant@email.com').user
+    @current_user ||= OAuthAuthentication.first(provider_uid: 'grant@email.com').user
   end
 
   def login

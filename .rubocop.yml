@@ -35,6 +35,3 @@ Naming/PredicateName:
 
 Metrics/AbcSize:
   Max: 23 # TODO bring down
-
-Style/FrozenStringLiteralComment:
-  Enabled: false

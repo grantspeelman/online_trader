@@ -20,13 +20,13 @@ Rails.application.routes.draw do
     end
   end
 
-  match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
-  match '/auth/failure', to: 'sessions#failure', via: [:get, :post]
+  match '/auth/:provider/callback', to: 'sessions#create', via: %i[get post]
+  match '/auth/failure', to: 'sessions#failure', via: %i[get post]
 
-  match '/login', to: 'sessions#new', via: [:get, :post]
-  match '/logout', to: 'sessions#destroy', via: [:delete, :post]
+  match '/login', to: 'sessions#new', via: %i[get post]
+  match '/logout', to: 'sessions#destroy', via: %i[delete post]
 
-  match '/me', to: 'home#me', via: [:get, :post]
+  match '/me', to: 'home#me', via: %i[get post]
 
   root to: 'home#index'
 end
