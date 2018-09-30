@@ -1,3 +1,6 @@
+.dockerignore
+.gitignore
+Dockerfile
 config/database.yml
 coverage/*
 node_modules/*

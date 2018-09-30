@@ -1,5 +1,5 @@
 # 1: Use ruby base:
-FROM jruby:9.1
+FROM jruby:9.2
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get update  -q && \
@@ -30,4 +30,4 @@ RUN chown deploy tmp
 
 USER deploy
 
-CMD jruby -G bin/rails server
+CMD jruby -J-Xmx480m -G bin/rails server
