@@ -3,6 +3,7 @@
 class Want < Sequel::Model
   many_to_one :user
 
+  plugin :active_model
   plugin :defaults_setter
   default_values[:amount] = 1
 

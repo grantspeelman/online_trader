@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class User < Sequel::Model
-  # has n, :wants
-  # has n, :haves, 'Have'
+  plugin :active_model
+
   one_to_many :authentications, class: OAuthAuthentication
 
   def authenticated_with(provider_name)
