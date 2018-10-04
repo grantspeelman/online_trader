@@ -2,11 +2,13 @@
 FROM jruby:9.1
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" >> /etc/apt/sources.list.d/pgdg.list && \
     apt-get update  -q && \
     apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
-    postgresql-client \
+    postgresql-client-10 \
     nodejs
 
 RUN useradd -m deploy
@@ -27,6 +29,8 @@ RUN NO_DB_CONNECT="1" \
 
 RUN mkdir -p tmp
 RUN chown deploy tmp
+
+RUN chown -R deploy /usr/local/bundle
 
 USER deploy
 

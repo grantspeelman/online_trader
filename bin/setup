@@ -16,7 +16,7 @@ Dir.chdir APP_ROOT do
 
   puts '== Installing dependencies =='
   system! 'gem install bundler --conservative'
-  system('bundle check') || system!('bundle install')
+  system!('bundle install --with development test')
 
   puts "\n== Create and Migrate database =="
   system 'createdb -h $DB_HOST -U postgres online_trader_development'
