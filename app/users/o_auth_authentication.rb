@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class OAuthAuthentication < Sequel::Model
+  plugin :active_model
+
   many_to_one :user
 
   def self.find_from_hash(hash)

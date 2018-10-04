@@ -1,0 +1,10 @@
+.dockerignore
+.gitignore
+Dockerfile
+config/database.yml
+coverage/*
+node_modules/*
+.git-hooks/*
+tmp/*
+spec/*
+log/*

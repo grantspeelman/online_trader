@@ -10,8 +10,8 @@ gem 'jdbc-postgres'
 gem 'puma'
 gem 'rails', '~> 5.2.0'
 gem 'rake'
-gem 'sequel-rails'
-gem 'sequel_postgresql_triggers'
+gem 'sequel-rails', require: ENV['NO_DB_CONNECT'] != '1'
+gem 'sequel_postgresql_triggers', require: ENV['NO_DB_CONNECT'] != '1'
 gem 'simple_form'
 
 gem 'uglifier', '>= 1.0.3', require: false

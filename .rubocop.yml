@@ -1,11 +1,10 @@
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
   Exclude:
     - 'bin/**/*'
     - 'vendor/**/*'
     - 'db/migrate/**/*'
     - 'db/schema.rb'
-    - 'Vagrantfile'
     - 'test/features/**/*'
     - 'node_modules/**/*'
     - '.git-hooks/**/*'

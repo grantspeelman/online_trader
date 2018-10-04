@@ -7,7 +7,7 @@ export RAILS_ENV=test
 export CYPRESS="1"
 
 echo '-- start rails server'
-bundle exec ./script/rails server -p 5002 -e test &
+bin/rails server -p 5002 -e test &
 sleep 10 # give rails a chance to start up correctly
 
 echo '-- cypress run'
