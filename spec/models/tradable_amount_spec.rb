@@ -53,7 +53,7 @@ RSpec.describe TradableAmount do
   describe 'can be used in sequel queries' do
     it 'can be used find records' do
       want = create(:want, amount: 101)
-      tradable_amount = TradableAmount('101')
+      tradable_amount = TradableAmount.cast('101')
       expect(Want[{ amount: tradable_amount }]).to eq(want)
     end
   end

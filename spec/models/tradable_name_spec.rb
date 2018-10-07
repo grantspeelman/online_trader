@@ -33,7 +33,7 @@ RSpec.describe TradableName do
   describe 'can be used in sequel queries' do
     it 'can be used find records' do
       want = create(:want, name: 'hello')
-      tradable_name = TradableName('hello')
+      tradable_name = TradableName.cast('hello')
       expect(Want[{ name: tradable_name }]).to eq(want)
     end
   end
