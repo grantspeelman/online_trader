@@ -12,4 +12,4 @@ test:
 
 production:
   adapter: postgresql
-  url: <%= ENV.fetch('DATABASE_URL', 'localhost') %>
+  url: <%= ENV.fetch('DATABASE_URL') %>
