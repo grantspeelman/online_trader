@@ -9,5 +9,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       client_options: {
         site: ENV['COGNITO_USER_POOL_SITE']
       },
-      scope: 'nickname phone email openid aws.cognito.signin.user.admin profile'
+      scope: 'email openid aws.cognito.signin.user.admin profile'
 end
