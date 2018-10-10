@@ -6,6 +6,8 @@
 
 Build online trading communities
 
+Running on heroku: https://collect-and-swap.herokuapp.com/
+
 ### Development setup using Docker
 
 setup code analysis 
