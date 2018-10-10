@@ -4,8 +4,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :developer
 
   use OmniAuth::Strategies::CognitoIdP,
-      ENV['CLIENT_ID'],
-      ENV['CLIENT_SECRET'],
+      ENV['COGNITO_CLIENT_ID'],
+      ENV['COGNITO_CLIENT_SECRET'],
       client_options: {
         site: ENV['COGNITO_USER_POOL_SITE']
       },
