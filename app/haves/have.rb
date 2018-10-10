@@ -4,6 +4,11 @@ class Have < Sequel::Model
   many_to_one :user
 
   plugin :active_model
+
+  plugin :attribute_type_cast
+  attribute_type_cast :name, TradableName
+  attribute_type_cast :amount, TradableAmount
+
   plugin :defaults_setter
   default_values[:amount] = 1
 
@@ -14,22 +19,6 @@ class Have < Sequel::Model
     validates_presence %i[name amount]
     validates_non_exceptional %i[name amount]
     validates_unique(%i[name user_id])
-  end
-
-  def name=(val)
-    super(TradableName.cast(val))
-  end
-
-  def name
-    TradableName.cast(super)
-  end
-
-  def amount=(val)
-    super(TradableAmount.cast(val))
-  end
-
-  def amount
-    TradableAmount.cast(super)
   end
 
   def save_if_valid

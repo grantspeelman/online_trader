@@ -25,8 +25,10 @@ RSpec.describe TradableName do
     end
 
     it 'will not accept other class types' do
-      expect { described_class.new(other: true) }.to raise_error(ArgumentError)
-      expect { described_class.new(['not']) }.to raise_error(ArgumentError)
+      aggregate_failures do
+        expect { described_class.new(other: true) }.to raise_error(NoMethodError)
+        expect { described_class.new(['not']) }.to raise_error(NoMethodError)
+      end
     end
   end
 

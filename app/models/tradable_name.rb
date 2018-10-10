@@ -4,7 +4,6 @@ class TradableName
   # @param [String] name
   def initialize(name)
     raise ArgumentError, 'Tradable name cannot be blank' if name.blank?
-    raise ArgumentError, "#{name.inspect} is not a valid Tradable name" unless name.respond_to?(:to_str)
 
     @raw_name = name.to_str.clone.freeze
     freeze
