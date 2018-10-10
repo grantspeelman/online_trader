@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ruby '2.5.1'
+
 require 'rbconfig'
 source 'http://rubygems.org'
 gem 'pundit'
