@@ -17,7 +17,7 @@ services:
     environment:
       DB_HOST: postgres-db
       PORT: '9292'
-    command: jruby --dev -G bin/rails server -b 0.0.0.0 -P /tmp/server.pid
+    command: bin/rails server -b 0.0.0.0 -P /tmp/server.pid
     volumes:
       - .:/app
       - bundle-data:/usr/local/bundle
@@ -35,7 +35,7 @@ services:
       RAILS_ENV: test
       DB_HOST: postgres-db
       PORT: 5002
-    command: jruby --dev -G bin/rails server -b 0.0.0.0 -P /tmp/server.pid
+    command: bin/rails server -b 0.0.0.0 -P /tmp/server.pid
     volumes:
       - .:/app
       - bundle-data:/usr/local/bundle

@@ -6,6 +6,7 @@ if %w[1 yes enable].include?(ENV['COVERAGE'])
 end
 
 require File.expand_path('../config/boot', __dir__)
+require 'active_support/all'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

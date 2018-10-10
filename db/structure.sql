@@ -378,10 +378,10 @@ ALTER TABLE ONLY public.wants
 SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180803000000_enable_uuid_ossp.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180803002754_create_users.rb');
-INSERT INTO "schema_migrations" ("filename") VALUES ('20180803002754_users_auto_timestamps.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20180803002755_users_auto_timestamps.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180803011611_create_o_auth_authentications.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180803011612_authentications_auto_timestamps.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180809131546_create_wants.rb');
-INSERT INTO "schema_migrations" ("filename") VALUES ('20180809131546_wants_auto_timestamps.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20180809131547_wants_auto_timestamps.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180818040413_create_haves.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20180818040415_haves_auto_timestamps.rb');

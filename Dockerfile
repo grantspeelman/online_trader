@@ -1,5 +1,5 @@
 # 1: Use ruby base:
-FROM jruby:9.1
+FROM ruby:2.5
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
@@ -32,6 +32,4 @@ RUN chown deploy tmp
 
 RUN chown -R deploy /usr/local/bundle
 
-USER deploy
-
-CMD jruby -J-Xmx480m -G bin/rails server
+CMD bin/rails server
