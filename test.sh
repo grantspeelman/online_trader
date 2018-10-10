@@ -2,7 +2,6 @@
 set -eo pipefail
 
 echo '--- testing rails 3.2'
-export SECRET_TOKEN="blueblahblueblahblueblahblueblahblueblahblueblahblueblahblueblahblueblahblueblah"
 export RAILS_ENV=test
 export CYPRESS="1"
 
