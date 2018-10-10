@@ -1,18 +1,5 @@
 <h1>Login</h1>
 
-<p>You can login using on of the following services</p>
-
-<label>Twitter : </label>
-<%= link_to(image_tag("twitter_32.png"),
-                      '/auth/developer',
-                      :title => 'Login with Twitter') %>
-<br/>
-<label>Facebook :</label>
-          <%= link_to(image_tag("facebook_32.png"),
-                      '/auth/developer',
-                      :title => 'Login with Facebook') %>
-<br/>
-<label>Google :</label>
-          <%= link_to(image_tag("google_32.png"),
-                      '/auth/developer',
-                      :title => 'Login with Google') %>
+<%= link_to('Login',
+            Rails.env.production? ? '/auth/cognito-idp' : '/auth/developer',
+            title: 'Login') %>
